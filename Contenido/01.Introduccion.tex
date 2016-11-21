@@ -1,0 +1,119 @@
+\section{¿Qué es LaTeX?}\label{que-es-latex}
+
+LaTeX es un
+\href{https://es.m.wikipedia.org/wiki/Lenguaje_de_marcado}{\emph{lenguaje
+de marcado}}, es decir, es una manera de anotar un documento con su
+estructura y formato. Pensad en cuando revisamos un texto, pensamos que
+tal parte debe ir en negrita y que en tal otra hay que cambiar de
+párrafo y escribimos unas notas en el documento para acordarnos. Un
+lenguaje de marcado hace esto de manera ordenada: define diferentes
+marcas para que luego el documento tome el formato adecuado al
+procesarlo. Un ejemplo es el omnipresente
+\href{https://es.m.wikipedia.org/wiki/HTML}{HTML}, como su propio nombre
+(\emph{HyperText Markup Language}) indica. Si no sabéis de lo que hablo
+dad al botón derecho y a \emph{Ver código fuente de la página}, eso que
+veis es esta misma página con etiquetas que le indican al navegador cómo
+la debe mostrar.
+
+Todos los lenguajes de marcado hacen exactamente lo mismo con la
+diferencia de que sus etiquetas son diferentes. Hay montones de ellos,
+cada uno con su campo de aplicación, por ejemplo, HTML está enfocado a
+desarrollar páginas web y LaTeX a escribir \emph{documentos serios} (que
+es como nos gusta a los científicos llamar a lo que escribimos
+nosotros).
+
+¡Pero que no se me echen atrás los no científicos! Cualquiera puede
+beneficiarse de un sistema que permite tener control total sobre sus
+documentos. Yo lo uso hasta para escribir recetas de cocina, aunque con
+truco, como contaré en futuras ediciones de este curso.
+
+\section{Ventajas e inconvenientes}\label{ventajas-e-inconvenientes}
+
+El motivo de usar LaTeX en la ciencia es que al haber sido inicialmente
+ideado por un científico{[}\^{}tex{]}, tuvo en cuenta nuestras
+necesidades. En su momento la principal era escribir ecuaciones
+decentes, hoy en día a pesar de que ese sigue siendo un punto fuerte, yo
+destacaría varias cosas:
+
+\begin{itemize}
+\item
+  Trabajamos en \textbf{texto plano} y generamos el documento en
+  \emph{pdf}/\emph{dvi}: nos podemos ir olvidando de las versiones del
+  programa (¡hola, Word!), nuestra fuente siempre será accesible y
+  siempre podremos leer el documento final. Tiene la ventajas añadidas
+  de que nuestros archivos son ligeros y podemos tenerlos bajo control
+  de versiones, algo que hay que tener en cuenta.
+\item
+  Su \textbf{flexibilidad}: hay tantísimos paquetes hoy en día que se
+  puede hacer de todo. ¿Código multicolor automático?
+  ¡\href{https://www.ctan.org/pkg/listings}{Concedido}! ¿Esquemas
+  eléctricos?
+  ¡\href{http://www.texample.net/tikz/examples/circuitikz/}{Ahí tienes}!
+  ¿La \href{https://www.youtube.com/watch?v=wCyC-K_PnRY}{\emph{Curva del
+  Dragón}}?
+  ¡\href{http://tex.stackexchange.com/questions/230457/drawing-the-dragon-curve\#230504}{Va}!
+\item
+  Su gestión de \textbf{idiomas}: una vez que hemos configurado el tema,
+  no hay problemas con los acentos ni la silabación. Podemos mezclar
+  idiomas locamente sin que se desgracie nada.
+\item
+  Crear \textbf{índices, glosarios, bibliografía} \ldots{}
+  automáticamente y, sobre todo, con facilidad. Hablaremos de ello largo
+  y tendido.
+\item
+  Su cuidado por la \textbf{tipografía}: si hacemos las cosas bien nos
+  podemos olvidar de
+  \href{https://en.wikipedia.org/wiki/Kerning}{\emph{kernings}} chungos,
+  \href{https://es.wikipedia.org/wiki/Viuda_y_hu\%C3\%A9rfana}{líneas
+  viudas y huérfanas} o huecos gigantes en el texto justificado, LaTeX
+  lo gestiona por nosotros.
+\end{itemize}
+
+Esto, por supuesto, viene a cambio de algo:
+
+\begin{itemize}
+\item
+  Hay que \textbf{compilar}: no vemos al momento lo que estamos
+  cambiando. Hay gente que detesta esto, son maneras de trabajar. Si
+  pertenecéis a este grupo echadle un ojo a
+  \href{http://www.lyx.org/}{LyX}, igual os convence.
+\item
+  \textbf{No es intuitivo}: nos vamos a enfrentar a un texto lleno de
+  comandos que en un primer momento nos van a parecer chino. Es así, no
+  nos vamos a engañar. Usando una IDE esto mejora, pero hay que
+  reconocer que ser capaz de hacer un documento decente usando LaTeX
+  tiene su cosa.
+\item
+  La \textbf{documentación}: esto es mi opinión personal, pero la
+  documentación de LaTeX no está pensada para novatos. Encontraréis
+  cursitos básicos con 4 cosas, cursos inabarcables con 5 millones de
+  cosas y respuestas en StackOverflow que os explicarán cómo hacer lo
+  mismo de 15 maneras diferentes y sin que nadie diga por qué. Uno de
+  los profesores que me ``enseñó'' LaTeX a mí cuando tenías una duda te
+  decía que \emph{buscases en Google} pegases lo que te saliese en el
+  documento tuyo y lo fueses cambiando hasta conseguir lo que querías.
+  Ya dije que esos dos pavos eran los dos peores profesores que he
+  tenido en mi vida. Al menos que buscasen en
+  \href{https://duckduckgo.com/api}{DuckDuckGo}.
+\end{itemize}
+
+No os asustéis, si yo he aprendido a manejarme en él (y a amarlo)
+vosotros también podéis ¡y más rápido incluso!
+
+\section{¿Es para mí?}\label{es-para-mi}
+
+Si no tienes miedo de aprender, no te importa tener que esperar a
+compilar para ver el resultado final de tu documento y, sobre todo, si
+quieres escribir un documento formal, sí, lo es.
+
+Si el hecho de pensar en compilar algo te tira para atrás y pasas de
+dedicarle horas de vida a algo cuando con el Writer ya te va bien,
+puedes darme un voto de confianza y seguir algunos \emph{fascículos} de
+este curso, tal vez te cuente alguna cosa interesante.
+
+\section{Bonus}\label{bonus}
+
+¿Qué os parece si os digo que (casi)
+puedo escribir en 
+\href{http://daringfireball.net/projects/markdown/}{Markdown} 
+y conseguir un resultado como de escribir en LaTeX?

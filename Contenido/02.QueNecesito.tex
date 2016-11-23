@@ -1,0 +1,194 @@
+Voy a intentar explicar qué necesitamos para escribir antes de explicar
+la sintaxis. Si no os va la chapa, pasad directamente a la
+recapitulación.
+
+\section{El editor y el compilador}\label{el-editor-y-el-compilador}
+
+Antes de ponernos a hacer nada vamos a diferenciar dos cosas: el
+\emph{editor} y el \emph{compilador}. Algo que para los que andáis en la
+informática es megaevidente para el resto de nosotros oh mortales puede
+suponer un lío bastante gordo.
+
+Yo lo resumo así: puedes escribir tus historias de LaTeX en el Bloc de
+Notas si quieres (\emph{el editor}), luego te buscas la vida para
+convertirlo a algo que un ser humano pueda leer (\emph{el compilador}).
+
+Ahora vamos a liarnos la manta. Resulta que LaTeX son unas macros
+escritas para TeX\footnote{De hecho hay otras llamadas
+  \href{https://en.wikipedia.org/wiki/ConTeXt}{ConTeXt} pero nos vamos a
+  olvidar de ellas.} por lo que tenemos dos lenguajes de marcado que
+además se pueden compilar con diferentes \textbf{compiladores}\footnote{Veréis
+  a lo que yo llamo ``compilador'' por ahí también como \emph{LaTeX
+  engine}}. Aquí tenéis un resumen rápido:
+
+\begin{itemize}
+\item
+  \texttt{tex} y \texttt{latex}: compilan respectivamente TeX y LaTeX a
+  dvi. Para los siguientes el que solo contenga \texttt{tex} compilará
+  TeX y el que contenga \texttt{latex} compilará LaTeX
+\item
+  \texttt{pdftex}/\texttt{pdflatex}: compilan a pdf
+\item
+  \texttt{xetex}/\texttt{xelatex}: compilan a pdf pero tienen la
+  diferencia que gestionan Unicode y pueden usar las fuentes del sistema
+  sin necesidad de configurar nada.
+\item
+  \texttt{luatex}/\texttt{lualatex}: compilan a pdf. La diferencia es
+  que están escritos en \href{http://www.lua.org/}{Lua}, un lenguaje de
+  programación bastante interesante
+\end{itemize}
+
+Bien, ahora que sabemos de compiladores vamos a ver cómo conseguimos
+nosotros tener uno que nos genere los documentos. Aquí entran las
+\textbf{distribuciones} de LaTeX. Una distribución es un conjunto de
+programas y paquetes que nos permiten escribir sin tener que configurar
+todo a mano. Es decir, si instalamos una distribución tendremos los
+compiladores de los que hablábamos antes, un gestor de paquetes y otras
+cosas útiles. De los paquetes hablaremos más adelante, pero de momento
+os puedo decir que las diferentes funcionalidades van en diferentes
+paquetes para que podamos cargar solo las que nos interesen.
+
+Las distribuciones más conocidas son estas:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://www.tug.org/texlive/}{TeXLive}, distribución
+  multiplataforma, la encontramos para GNU/Linux, Windows y MacOS.
+\item
+  \href{https://miktex.org/}{MikTeX}, una distribución específica para
+  Windows
+\end{itemize}
+
+No voy a hablar de la instalación porque está más que documentada y es
+sencillita (especialmente para mis hermanos linuxeros, que la tienen en
+los repositorios).
+
+Como no había suficiente locura, nos quedan los \textbf{editores}. En
+sí, podemos escribir en cualquier programa pero yo personalmente no os
+lo recomiendo. Al menos elegid uno que tenga sintaxis resaltada para que
+no os quedéis birojos intentando descifrar qué es formato y qué
+contenido. Podemos dividir los editores en dos grupos:
+
+\begin{itemize}
+\item
+  \emph{Editores de propósito general}: son los que sirven para escribir
+  en general. Van desde uno simple como
+  \href{https://es.wikipedia.org/wiki/Gedit}{gedit} hasta bestias pardas
+  como \href{http://www.vim.org/}{Vim} o mi muy amado
+  \href{https://www.gnu.org/software/emacs/}{Emacs}. A nada de potente
+  que sea el editor seguramente tendrá un modo o un plugin que nos
+  permita compilar también.
+\item
+  \emph{Editores específicos}
+  (\href{https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado}{IDE}):
+  son los editores desarrollados expresamente para escribir LaTeX. Hay
+  bastantes, yo he usado
+  \href{http://texstudio.sourceforge.net/}{TeXstudio} en Windows y
+  \href{http://kile.sourceforge.net/}{Kile} en GNU/Linux, pero no por
+  una razón particular.
+\end{itemize}
+
+\section{¿Qué me conviene?}\label{quuxe9-me-conviene}
+
+Después de el rollo que os he soltado diréis ¿y ahora qué demonios uso?
+¿Me conviene un IDE o no? Pues a eso no os puedo responder directamente
+porque depende de vuestra manera de trabajar y vuestra experiencia, esto
+es lo que yo me plantearía:
+
+\begin{itemize}
+\item
+  Si ya estáis usando un editor tipo Vim o Emacs, yo miraría su modo o
+  plugin correspondiente antes de nada. Así tendremos las ventajas de
+  usar un editor específico y las de usar un editor general.
+\item
+  Si os gusta tener todo centralizado y darle solo a un botoncillo para
+  que se genere el documento final, un IDE es lo vuestro.
+\item
+  Si os gusta tener todo bajo control, no tenéis miedo de escribir un
+  Makefile y no os apetece instalar otro programa en el ordenador (¡y
+  menos uno con GUI!), podéis escribir en cualquier sitio y escribir las
+  órdenes de compilar a mano. Eso sí, preparaos para leer manuales a
+  mansalva.
+\end{itemize}
+
+Yo tengo que reconocer que soy más de las dos primeras opciones, pero me
+parece justo decir que la tercera también existe y seguro que hay gente
+que la prefiere.
+
+\section{La opción Pandoc}\label{la-opciuxf3n-pandoc}
+
+\href{http://pandoc.org/}{Pandoc} es, aparte del programa con el mejor
+nombre de la historia, un \emph{conversor de documentos}, es decir,
+puede convertir documentos de un formato a otro alegremente. Podemos
+usarlo para no tener que usar un IDE y que se ocupe él de compilarnos el
+documento. Sobre Pandoc hablaremos en el futuro, de momento simplemente
+me vale con que sepáis que existe y no vayáis por ahí diciendo que
+\emph{tengo escribir en Word porque me obliga mi jefe}, tendrás que
+entregarle un \emph{doc}, pero escribirlo lo escribes donde te dé la
+gana, faltaría más.
+
+Como cosa curiosa, resulta que Pandoc usa LaTeX como etapa intermedia
+para pasar de Markdown a pdf con lo que podemos aprovecharnos de la
+sintaxis simple de Markdown y de la potencia de LaTeX simultáneamente.
+Así es como he escrito yo mi tesis, de hecho. La desventaja, claro, es
+que tenemos que saber tanto LaTeX como Markdown.
+
+\section{Recapitulación:}\label{recapitulaciuxf3n}
+
+Resumiendo, para poder escribir cosillas en LaTeX necesitamos:
+
+\begin{itemize}
+\item
+  Un \textbf{editor}, puede ser uno de uso general (como Emacs) o uno
+  específico para LaTeX (como Kile). Si nuestro editor no es capaz de
+  compilar directamente necesitaremos también una terminal.
+\item
+  Una \textbf{distribución} de LaTeX, será diferente según nuestro
+  sistema operativo. La distribución incluirá diferentes compiladores.
+\end{itemize}
+
+Para la \emph{opción Pandoc} necesitamos:
+
+\begin{itemize}
+\tightlist
+\item
+  Pandoc (obviamente)
+\item
+  Un editor cualquiera y una terminal
+\item
+  Una distribución de LaTeX
+\end{itemize}
+
+\section{Referencias}\label{referencias}
+
+\href{http://tex.stackexchange.com/questions/49/what-is-the-difference-between-tex-and-latex}{\emph{What
+is the difference between TeX and LaTeX?} en StackExchange}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Basics\#Compilation}{\emph{LaTeX/compilation}
+en Wikibooks}
+
+\href{https://en.wikipedia.org/wiki/XeTeX}{\emph{XeTeX} en la wiki}
+
+\href{http://www.luatex.org/}{\emph{LuaTeX}}
+
+\href{http://tex.stackexchange.com/questions/126206/why-choose-lualatex-over-xelatex\#126216}{\emph{Why
+choose LuaLaTeX over XeLaTeX?} en StackExchange}
+
+\href{http://tex.stackexchange.com/questions/13593/the-differences-between-tex-engines\#13601}{\emph{The
+differences between TeX engines} en StackExchange}
+
+\href{https://www.sharelatex.com/learn/Choosing_a_LaTeX_Compiler}{\emph{Choosing
+a LaTeX Compiler}}
+
+\href{http://www.tug.org/interest.html\#free}{\emph{Free TeX
+implementations}}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Installation}{\emph{LaTex/Installation}
+en Wikibooks}
+
+\href{https://en.wikipedia.org/wiki/Comparison_of_TeX_editors}{\emph{Comparison
+of TeX editors} en la wiki}
+
+\href{http://www.tex.ac.uk/FAQ-make.html}{\emph{Makefiles for LaTeX
+documents} en \emph{UK List of TeX Frequently Asked Questions}}

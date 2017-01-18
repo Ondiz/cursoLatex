@@ -1,3 +1,7 @@
 # Ignorar archivos de Emacs
 
 *\~
+
+# Ignorar build de Jekyll
+
+_site/

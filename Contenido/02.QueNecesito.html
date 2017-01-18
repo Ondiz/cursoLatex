@@ -1,0 +1,177 @@
+---
+layout: default
+title: LaTeX - ¿Qué necesito?
+---
+
+<p>Voy a intentar explicar qué necesitamos para escribir antes de
+  explicar la sintaxis. Si no os va la chapa, pasad directamente a la
+  recapitulación.</p>
+
+<h1 id="el-editor-y-el-compilador">El editor y el compilador</h1>
+
+<p>Antes de ponernos a hacer nada vamos a diferenciar dos cosas:
+  el <em>editor</em> y el <em>compilador</em>. Algo que para los que
+  andáis en la informática es megaevidente para el resto de nosotros oh
+  mortales puede suponer un lío bastante gordo.</p>
+<p>Yo lo resumo así: puedes escribir tus historias de LaTeX en el Bloc
+  de Notas si quieres (<em>el editor</em>), luego te buscas la vida para
+  convertirlo a algo que un ser humano pueda leer (<em>el
+    compilador</em>).</p>
+<p>Ahora vamos a liarnos la manta. Resulta que LaTeX son unas macros
+  escritas para TeX<a href="#fn1" class="footnoteRef"
+		      id="fnref1"><sup>1</sup></a> por lo que tenemos dos lenguajes de
+  marcado que además se pueden compilar con
+  diferentes <strong>compiladores</strong><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Aquí tenéis un
+  resumen rápido:</p>
+<ul>
+  <li><p><code>tex</code> y <code>latex</code>: compilan respectivamente
+      TeX y LaTeX a dvi. Para los siguientes el que solo
+      contenga <code>tex</code> compilará TeX y el que
+      contenga <code>latex</code> compilará LaTeX</p></li>
+  <li><p><code>pdftex</code>/<code>pdflatex</code>: compilan a
+      pdf</p></li>
+  <li><p><code>xetex</code>/<code>xelatex</code>: compilan a pdf pero
+      tienen la diferencia que gestionan Unicode y pueden usar las fuentes
+      del sistema sin necesidad de configurar nada.</p></li>
+  <li><p><code>luatex</code>/<code>lualatex</code>: compilan a pdf. La
+      diferencia es que están escritos
+      en <a href="http://www.lua.org/">Lua</a>, un lenguaje de programación
+      bastante interesante</p></li>
+</ul>
+<p>Bien, ahora que sabemos de compiladores vamos a ver cómo
+  conseguimos nosotros tener uno que nos genere los documentos. Aquí
+  entran las <strong>distribuciones</strong> de LaTeX. Una distribución
+  es un conjunto de programas y paquetes que nos permiten escribir sin
+  tener que configurar todo a mano. Es decir, si instalamos una
+  distribución tendremos los compiladores de los que hablábamos antes,
+  un gestor de paquetes y otras cosas útiles. De los paquetes hablaremos
+  más adelante, pero de momento os puedo decir que las diferentes
+  funcionalidades van en diferentes paquetes para que podamos cargar
+  solo las que nos interesen.</p>
+<p>Las distribuciones más conocidas son estas:</p>
+<ul>
+  <li><p><a href="http://www.tug.org/texlive/">TeXLive</a>, distribución
+      multiplataforma, la encontramos para GNU/Linux, Windows y
+      MacOS.</p></li>
+  <li><p><a href="https://miktex.org/">MikTeX</a>, una distribución
+      específica para Windows</p></li>
+</ul>
+<p>No voy a hablar de la instalación porque está más que documentada y
+  es sencillita (especialmente para mis hermanos linuxeros, que la
+  tienen en los repositorios).</p>
+<p>Como no había suficiente locura, nos quedan
+  los <strong>editores</strong>. En sí, podemos escribir en cualquier
+  programa pero yo personalmente no os lo recomiendo. Al menos elegid
+  uno que tenga sintaxis resaltada para que no os quedéis birojos
+  intentando descifrar qué es formato y qué contenido. Podemos dividir
+  los editores en dos grupos:</p>
+<ul>
+  <li><p><em>Editores de propósito general</em>: son los que sirven para
+      escribir en general. Van desde uno simple
+      como <a href="https://es.wikipedia.org/wiki/Gedit">gedit</a> hasta
+      bestias pardas como <a href="http://www.vim.org/">Vim</a> o mi muy
+      amado <a href="https://www.gnu.org/software/emacs/">Emacs</a>. A nada
+      de potente que sea el editor seguramente tendrá un modo o un plugin
+      que nos permita compilar también.</p></li>
+  <li><p><em>Editores específicos</em>
+      (<a href="https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado">IDE</a>):
+      son los editores desarrollados expresamente para escribir LaTeX. Hay
+      bastantes, yo he
+      usado <a href="http://texstudio.sourceforge.net/">TeXstudio</a> en
+      Windows y <a href="http://kile.sourceforge.net/">Kile</a> en
+      GNU/Linux, pero no por una razón particular.</p></li>
+</ul>
+
+<h1 id="quuxe9-me-conviene">¿Qué me conviene?</h1>
+
+<p>Después de el rollo que os he soltado diréis ¿y ahora qué demonios
+  uso? ¿Me conviene un IDE o no? Pues a eso no os puedo responder
+  directamente porque depende de vuestra manera de trabajar y vuestra
+  experiencia, esto es lo que yo me plantearía:</p>
+<ul>
+  <li><p>Si ya estáis usando un editor tipo Vim o Emacs, yo miraría su
+      modo o plugin correspondiente antes de nada. Así tendremos las
+      ventajas de usar un editor específico y las de usar un editor
+      general.</p></li>
+  <li><p>Si os gusta tener todo centralizado y darle solo a un
+      botoncillo para que se genere el documento final, un IDE es lo
+      vuestro.</p></li>
+  <li><p>Si os gusta tener todo bajo control, no tenéis miedo de
+      escribir un Makefile y no os apetece instalar otro programa en el
+      ordenador (¡y menos uno con GUI!), podéis escribir en cualquier sitio
+      y escribir las órdenes de compilar a mano. Eso sí, preparaos para leer
+      manuales a mansalva.</p></li>
+</ul>
+<p>Yo tengo que reconocer que soy más de las dos primeras opciones,
+  pero me parece justo decir que la tercera también existe y seguro que
+  hay gente que la prefiere.</p>
+<h1 id="la-opciuxf3n-pandoc">La opción Pandoc</h1>
+<p><a href="http://pandoc.org/">Pandoc</a> es, aparte del programa con
+  el mejor nombre de la historia, un <em>conversor de documentos</em>,
+  es decir, puede convertir documentos de un formato a otro
+  alegremente. Podemos usarlo para no tener que usar un IDE y que se
+  ocupe él de compilarnos el documento. Sobre Pandoc hablaremos en el
+  futuro, de momento simplemente me vale con que sepáis que existe y no
+  vayáis por ahí diciendo que <em>tengo escribir en Word porque me
+    obliga mi jefe</em>, tendrás que entregarle un <em>doc</em>, pero
+  escribirlo lo escribes donde te dé la gana, faltaría más.</p>
+<p>Como cosa curiosa, resulta que Pandoc usa LaTeX como etapa
+  intermedia para pasar de Markdown a pdf con lo que podemos
+  aprovecharnos de la sintaxis simple de Markdown y de la potencia de
+  LaTeX simultáneamente. Así es como he escrito yo mi tesis, de
+  hecho. La desventaja, claro, es que tenemos que saber tanto LaTeX como
+  Markdown.</p>
+
+<h1 id="recapitulacion">Recapitulación:</h1>
+
+<p>Resumiendo, para poder escribir cosillas en LaTeX necesitamos:</p>
+<ul>
+  <li><p>Un <strong>editor</strong>, puede ser uno de uso general (como
+      Emacs) o uno específico para LaTeX (como Kile). Si nuestro editor no
+      es capaz de compilar directamente necesitaremos también una
+      terminal.</p></li>
+  <li><p>Una <strong>distribución</strong> de LaTeX, será diferente
+      según nuestro sistema operativo. La distribución incluirá diferentes
+      compiladores.</p></li>
+</ul>
+<p>Para la <em>opción Pandoc</em> necesitamos:</p>
+<ul>
+  <li><p>Pandoc (obviamente)</p></li>
+  <li><p>Un editor cualquiera y una terminal</p></li>
+  <li><p>Una distribución de LaTeX</p></li>
+</ul>
+
+<h1 id="referencias">Referencias</h1>
+
+<p><a href="http://tex.stackexchange.com/questions/49/what-is-the-difference-between-tex-and-latex"><em>What
+      is the difference between TeX and LaTeX?</em> en StackExchange</a></p>
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Basics#Compilation"><em>LaTeX/compilation</em>
+    en Wikibooks</a></p>
+<p><a href="https://en.wikipedia.org/wiki/XeTeX"><em>XeTeX</em> en la
+    wiki</a></p>
+<p><a href="http://www.luatex.org/"><em>LuaTeX</em></a></p>
+<p><a href="http://tex.stackexchange.com/questions/126206/why-choose-lualatex-over-xelatex#126216"><em>Why
+      choose LuaLaTeX over XeLaTeX?</em> en StackExchange</a></p>
+<p><a href="http://tex.stackexchange.com/questions/13593/the-differences-between-tex-engines#13601"><em>The
+      differences between TeX engines</em> en StackExchange</a></p>
+<p><a href="https://www.sharelatex.com/learn/Choosing_a_LaTeX_Compiler"><em>Choosing
+      a LaTeX Compiler</em></a></p>
+<p><a href="http://www.tug.org/interest.html#free"><em>Free TeX
+      implementations</em></a></p>
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Installation"><em>LaTex/Installation</em>
+    en Wikibooks</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_TeX_editors"><em>Comparison
+      of TeX editors</em> en la wiki</a></p>
+<p><a href="http://www.tex.ac.uk/FAQ-make.html"><em>Makefiles for
+      LaTeX documents</em> en <em>UK List of TeX Frequently Asked
+      Questions</em></a></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn1"><p>De hecho hay otras
+	llamadas <a href="https://en.wikipedia.org/wiki/ConTeXt">ConTeXt</a>
+	pero nos vamos a olvidar de ellas.<a href="#fnref1">↩</a></p></li>
+    <li id="fn2"><p>Veréis a lo que yo llamo “compilador” por ahí también
+	como <em>LaTeX engine</em><a href="#fnref2">↩</a></p></li>
+  </ol>
+</div>

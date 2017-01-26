@@ -1,0 +1,418 @@
+\section{Un documento y sus partes}\label{un-documento-y-sus-partes}
+
+Un documento escrito en LaTeX tiene esta pinta\footnote{Este ejemplo
+  está adaptado del
+  \href{https://github.com/ekaitz-zarraga/programming-notes}{repo de
+  apuntes de programación} de mi señor hermano y mío. Es una versión
+  simplificada.}:
+
+\begin{lstlisting}
+\documentclass[a4paper,10pt]{article}
+
+%%%%%%%%%%%% PREÁMBULO %%%%%%%%%%%%%%%%%%%%%
+
+% Paquetes
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{listings}
+
+% Comandos
+
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Índice de fragmentos de código fuente}
+
+% Opciones
+
+\title{Python 2.*}
+\author{Ondiz Zarraga}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este documento es una pequeña guía de Python 
+\end{abstract}
+
+\tableofcontents
+
+\section{Sobre el lenguaje}
+
+\begin{itemize}
+    \item Interpretado
+    \item Indentación obligatoria
+    \item Distingue mayúsculas - minúsculas
+    \item No hay declaración de variables (\textit{dynamic typing})
+    \item Orientado a objetos  
+    \item Garbage colector: quita los objetos a los que no haga referencia nada
+\end{itemize}
+
+\end{document}
+\end{lstlisting}
+
+El documento tiene dos cosas llamativas:
+
+\begin{itemize}
+\tightlist
+\item
+  Cosas que empiezan por contrabarra, los \textbf{comandos}
+\item
+  Cachos que van entre un \lstinline!\begin! y un \lstinline!\end!, los
+  \textbf{entornos}
+\end{itemize}
+
+Los comandos son la manera en la que nos comunicamos con LaTeX y un
+entorno es el pedazo donde se aplica un formato.
+
+Un entorno superimportante es el entorno \lstinline!document!, ahí
+dentro irá el contenido de nuestro documento. Todo lo que va entre la
+definición de documento (\lstinline!\documentclass!) y el inicio del
+entorno \lstinline!document! se conoce como \textbf{preámbulo} y es
+donde se cargan paquetes (\lstinline!\usepackage!), se definen comandos
+y se establecen opciones.
+
+\section{Nuestro primer documento}\label{nuestro-primer-documento}
+
+Ahora que sabemos cómo es un documento vamos a empezar a escribir uno.
+El documento más básico que podemos hacer es este:
+
+\begin{lstlisting}
+\documentclass{article}
+
+\begin{document}
+Hola
+\end{document}
+\end{lstlisting}
+
+Esto podemos compilarlo con el botoncillo de compilar de nuestro IDE, en
+la terminar o con Pandoc.
+
+Para compilar en la terminal haríamos (imaginemos que nuestro documento
+se llama \lstinline!hola.tex!):
+
+\begin{lstlisting}[language=bash]
+pdflatex hola.tex
+\end{lstlisting}
+
+Evidentemente podéis compilar también con \lstinline!xelatex! de manera
+equivalente. Si quisiéramos utilizar Pandoc tendríamos que hacer lo
+siguiente:
+
+\begin{lstlisting}[language=bash]
+pandoc hola.tex -o hola.pdf
+\end{lstlisting}
+
+En los tres casos el resultado es el mismo excepto porque Pandoc no nos
+deja
+\href{https://ondahostil.wordpress.com/2016/11/17/lo-que-he-aprendido-archivos-auxiliares-de-latex/}{archivos
+auxiliares} por ahí bailando.
+
+¡Ya hemos escrito un documento! Debo reconocer que no es un documento
+demasiado interesante, para hacer algo más chulo tenemos que aprender un
+poco más de sintaxis.
+
+\section{Un poco de sintaxis}\label{un-poco-de-sintaxis}
+
+Para poder escribir un documento un poco más interesante tenemos que
+aprendernos unos pocos comandos, hoy os voy a hablar de algunos
+sencillos para que le vayáis cogiendo el truco, en las siguientes
+entregas entraremos más en detalle.
+
+Antes de nada una cosa, aun no hemos aprendido a establecer las opciones
+de idioma y por lo tanto tendremos problemas en los idiomas con acentos.
+Si queréis poneros a jugar ya, ponedme esto en el preámbulo, justo
+debajo de \lstinline!\documentclass!:
+
+\begin{lstlisting}
+\usepackage[spanish]{babel} % sustituir spanish por el idioma
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\end{lstlisting}
+
+En el futuro lo analizaremos de ello mejor, pero si os interesa, hablé
+de ello
+\href{https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-idiomas-con-acentos-en-latex/}{aquí}.
+
+\subsection{Título, capítulos y
+secciones}\label{tuxedtulo-capuxedtulos-y-secciones}
+
+Una cosa importante de LaTeX es que nos desacopla el contenido del
+documento de su formato. Con esto quiero decir que nosotros le diremos
+cuál es el título del documento y dónde comienzan las secciones y él les
+dará el formato correspondiente según el tipo de documento y las
+opciones que hayamos establecido previamente.
+
+Pongamos por ejemplo los tipos de documento \lstinline!article! y
+\lstinline!book!. Como su nombre indica, el primero se utiliza para
+escribir artículos y el segundo libros. Como LaTeX es muy listo, cuando
+le digamos que escriba el título, para el caso del artículo nos lo
+escribirá en la parte superior de la página con el texto debajo, pero
+para el caso del libro nos creará una portada. Para ambos casos la
+sintaxis es exactamente la misma:
+
+\begin{lstlisting}
+\documentclass{article} % O book
+
+% Definimos el título
+\title{Título del documento}
+
+\begin{document}
+\maketitle % Creamos el título
+\end{document}
+\end{lstlisting}
+
+Del mismo modo, nosotros solo le tenemos que decir el título de la
+sección o el capítulo y él le dará el formato correspondiente. Otra
+diferencia entre las clases \lstinline!article! y \lstinline!book! es
+que \lstinline!article! no tiene capítulos, como es lógico.
+
+Para definir capítulos y secciones utilizamos los comandos
+\lstinline!\chapter! y \lstinline!\section! en el cuerpo del documento,
+es decir, después de \lstinline!\begin{document}!. Por ejemplo:
+
+\begin{lstlisting}
+\chapter{Capítulo numerado}
+\section{Primera sección}
+\subsection{Primera subsección}
+
+\chapter*{Capítulo sin numerar}
+\section*{Sección sin numerar}
+\end{lstlisting}
+
+Como veis, podemos usar los comandos de sección y capítulo con el
+asterisco para que no nos las numere. Otra cosa interesante es el grado
+de anidación, tenemos secciones, subsecciones, subsubsecciones, párrafos
+(\lstinline!\paragraph!) y subpárrafos (\textbackslash{}subparagraph),
+cada uno con su formato definido. La clase \lstinline!book!\footnote{La
+  clase \lstinline!book! no es la única que tiene partes y tal, pero de
+  momento así nos vale.} también tiene por encima de las secciones,
+capítulos y partes (\lstinline!\part!). Más adelante aprenderemos a
+personalizar todos estos formatos porque si hay algo bueno que tiene
+LaTeX es que nos deja cambiar \emph{absolutamente todo} y con relativa
+facilidad (gracias a StackExchange, especialmente).
+
+\subsection{Listas}\label{listas}
+
+Si sois como yo os gustará especialmente este apartado: las listas.
+LaTeX tiene dos tipos de listas: las numeradas y las sin numerar. Son
+respectivamente los entornos \lstinline!enumerate! e
+\lstinline!itemize!. Se usan exactamente igual, así que solo pongo el
+ejemplo de uno de ellos:
+
+\begin{lstlisting}
+\begin{itemize}
+\item Primer ítem
+\item Segundo ítem
+\end{itemize}
+\end{lstlisting}
+
+Lo mejor es que podemos mezclar y anidar estos dos entornos que el
+simbolito y la indentación cambiarán solos sin que nos tengamos que
+preocupar. Por ejemplo,
+
+\begin{lstlisting}
+\begin{enumerate}
+    \item Primer ítem
+    \item Segundo ítem con subítems
+    \begin{itemize}
+        \item Ítem sin numerar
+    \end{itemize}
+    \item Tercer ítem
+\end{enumerate}
+\end{lstlisting}
+
+Quedará así:
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Primer ítem
+\item
+  Segundo ítem con subítems
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ítem sin numerar
+  \end{itemize}
+\item
+  Tercer ítem
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Imágenes}\label{imuxe1genes}
+
+Hoy solo vamos a ver como colocar una única imagen, que lo de las
+imágenes tiene un poco de lío. Lo que debemos saber es lo siguiente:
+
+\begin{itemize}
+\tightlist
+\item
+  Necesitamos llamar al paquete \lstinline!graphicx! en el preámbulo.
+  Para eso escribiremos \lstinline!\usepackage{graphicx}! entre
+  \lstinline!\documentclass! y \lstinline!\begin{document}!
+\item
+  Las imágenes se insertan con el comando
+  \lstinline!\includegraphics[opciones]{ruta}!
+\item
+  Si queremos ponerles un pie de figura y una etiqueta, decidir su
+  posición en la página y demás necesitamos el entorno
+  \lstinline!figure!
+\end{itemize}
+
+Aquí tenemos un ejemplo de cómo insertar una imagen con en el entorno
+\lstinline!figure!:
+
+\begin{lstlisting}
+\begin{figure}[h] % opción de posicionamiento
+    \caption{Pie de imagen}
+    \centering % imagen centrada
+    % Imagen 50% de ancho del texto
+    \includegraphics[width=0.5\textwidth]{ruta_a_la_imagen}
+\end{figure}
+\end{lstlisting}
+
+Una cosa importante de LaTeX son los objetos \emph{flotantes}, es decir,
+los que si no les obligamos, se colocan en el hueco que mejor les venga
+del documento. Esto es lo que nos ocurre con las imágenes al usar el
+entorno \lstinline!figure!. Nos ayuda a que no haya huecos chungos en el
+documento pero a veces junta todas las imágenes en una misma página o al
+final del documento. Para evitar esto tenemos las opciones de
+posicionamiento, de las que hablaremos cuando profundicemos en las
+imágenes.
+
+\subsection{Tablas}\label{tablas}
+
+Para mí las tablas son lo peor de todo LaTeX. Son la cosa menos amigable
+que se puede echar uno a la cara. Con un IDE la cosa mejora, pero
+imaginaros cómo será el tema que la mitad de las veces las creo online
+\href{http://www.tablesgenerator.com/}{aquí} y luego pego el resultado.
+
+Lo que debemos de saber de las tablas es lo siguiente:
+
+\begin{itemize}
+\tightlist
+\item
+  El contenido se especifica con el entorno \lstinline!tabular!.
+  Separemos las celdas con el ampersand y cambiaremos de línea con dos
+  contrabarras.
+\item
+  Si queremos ponerles un pie de tabla y una etiqueta, decidir su
+  posición en la página y demás necesitamos el entorno \lstinline!table!
+\item
+  Si utilizamos el entorno \lstinline!table! la tabla se volverá
+  \emph{flotante}
+\end{itemize}
+
+Aquí tenemos un ejemplo de tabla sencilla:
+
+\begin{lstlisting}
+\begin{table}
+    \begin{tabular}{|ll|}
+      \hline % Separador
+      Columna 1 & Columna 2 \\
+      1         & 2         \\
+      3         & 4         \\
+      \hline
+    \end{tabular}
+    \caption {Pie de tabla}
+\end{table}
+\end{lstlisting}
+
+Al igual que con la imágenes, profundizaremos en las tablas más
+adelante.
+
+\subsection{Ecuaciones}\label{ecuaciones}
+
+Las ecuaciones son la razón por la que mucha gente se pasa a LaTeX. Son
+muy cucas y escribirlas, una vez cogido el callo, no es un infierno (de
+nuevo, ¡hola, Word!). Pero no nos vamos a engañar, al principio es
+\emph{muerte y destrucción}. Hay dos tipos de ecuaciones en LaTeX: las
+que van dentro de la línea y las que tienen línea propia. Las primeras
+van entre signos de dólar y las segundas dentro del entorno
+\lstinline!equation!. Aquí tenemos un ejemplo:
+
+\begin{lstlisting}
+Imaginemos que $a=1$ en la siguiente ecuación:
+\begin{equation}
+ax^2 + 1 = 0
+\end{equation}
+\end{lstlisting}
+
+Del mismo modo que ocurría con las secciones, si utilizamos el asterisco
+la ecuación no estará numerada.
+
+El lío con las ecuaciones es que todo se define con comandos, por
+ejemplo, \lstinline!\frac{numerador}{denominador}! se usa para escribir
+una fracción y \lstinline!\omega! para la letra griega omega. Los que
+uséis un IDE lo tenéis más fácil porque suelen tener una barrita con los
+símbolos más usados, a los demás les tocará investigar.
+
+También tenemos otras herramientas que nos pueden ayudar a escribir
+ecuaciones:
+
+\begin{itemize}
+\item
+  \textbf{Editores online}: son editores con su GUI y tal que nos
+  facilitan la tarea cuando todavía no conocemos los comandos de LaTeX,
+  por ejemplo tenemos
+  \href{http://www.numberempire.com/texequationeditor/equationeditor.php\%22}{Latex
+  Equation Editor} o
+  \href{https://www.latex4technics.com/}{LaTeX4technics}.
+\item
+  \href{http://detexify.kirelabs.org/classify.html}{\textbf{Detexify}}:
+  un cacharro que nos busca el símbolo de LaTeX más parecido a algo que
+  le pintemos.
+\end{itemize}
+
+Las ecuaciones se merecen una entrada propia y la tendrán.
+
+\section{Bonus: opción Markdown}\label{bonus-opciuxf3n-markdown}
+
+Si tenemos instalado Pandoc todo lo que hemos explicado aquí podemos
+conseguirlo escribiendo en Markdown
+(\href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html}{sabor
+Pandoc}) y convirtiendo a pdf. Por ejemplo, podemos meter una imagen
+como:
+
+\begin{lstlisting}
+![Pie de imagen](/ruta){width=0.7 #etiqueta}
+\end{lstlisting}
+
+\section{Referencias}\label{referencias}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Document_Structure}{\emph{LaTeX/Document
+Structure} en Wikibooks}
+
+\href{https://www.sharelatex.com/learn/Environments}{\emph{Environments}
+en ShareLaTeX}
+
+\href{http://www.personal.ceu.hu/tex/environ.htm}{\emph{Latex Standard
+Environments}}
+
+\href{http://texblog.org/2013/02/13/latex-documentclass-options-illustrated/}{\emph{LaTeX
+documentclass options illustrated}}
+
+\href{https://www.sharelatex.com/learn/Sections_and_chapters}{\emph{Sections
+and chapters} en ShareLaTeX}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Tables}{\emph{LaTeX/Tables} en
+Wikibooks}
+
+\href{https://www.sharelatex.com/learn/Inserting_Images}{\emph{Inserting
+images} en ShareLaTeX}
+
+\href{http://osl.ugr.es/CTAN/info/symbols/comprehensive/symbols-a4.pdf}{\emph{The
+Comprehensive LaTeX Symbol List}}
+
+\href{ftp://ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf}{\emph{Short
+Math Guide for LaTeX}}

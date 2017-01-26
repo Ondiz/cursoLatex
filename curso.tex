@@ -1,9 +1,23 @@
-\documentclass[a4paper,11pt]{book}
+\documentclass[a4paper,10pt]{book}
 
-\usepackage[spanish,es-tabla]{babel} 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+% IDIOMA
+
+% Si se compila con pdflatex
+%\usepackage[spanish,es-tabla]{babel} 
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+
+% Idioma para xelatex
+
+\usepackage{polyglossia}
+\setdefaultlanguage{spanish}
+
+% Fuente
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+
+\usepackage{xunicode}
 
 \usepackage{amsmath, amsthm, amssymb}
 
@@ -15,14 +29,36 @@
 
 \hypersetup{unicode=true,
             colorlinks=true,
-            linkcolor=Maroon,
-            citecolor=Blue,
+            linkcolor=Magenta,
+            citecolor=Green,
             urlcolor=Blue,
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 
 \usepackage{listings}
-\lstnewenvironment{code}{\lstset{basicstyle=\small\ttfamily}}{}
+
+% Definiciones de color de http://latexcolor.com/
+
+\definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
+\definecolor{viridian}{rgb}{0.25, 0.51, 0.43}
+\definecolor{midnightblue}{rgb}{0.1, 0.1, 0.44}
+\definecolor{ballblue}{rgb}{0.13, 0.67, 0.8}
+\definecolor{frenchblue}{rgb}{0.0, 0.45, 0.73}
+
+\lstset{basicstyle=\small\ttfamily,
+        breaklines=true,
+        columns=fixed,
+        extendedchars=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        tabsize=2,
+        backgroundcolor=\color{whitesmoke},
+        keywordstyle=\bfseries\color{viridian},
+        identifierstyle=\ttfamily\color{midnightblue},
+        commentstyle=\itshape\color{ballblue},
+        stringstyle=\color{frenchblue},        
+	}
+
+% Listings no acepta UTF8        
 \lstset{literate=%
 {á}{{\'a}}1
 {é}{{\'e}}1
@@ -34,9 +70,20 @@
 {Í}{{\'I}}1
 {Ó}{{\'O}}1
 {Ú}{{\'U}}1
+{ñ}{{\~n}}1
+{ü}{{\"u}}1
+{Ü}{{\"U}}1
 }
 
+\renewcommand{\lstlistingname}{Código}
+
+
 \usepackage{longtable,booktabs}
+% Cambiar nombre de tablas teniendo en cuenta polyglossia
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Tabla}%
+  \renewcommand{\listtablename}{Índice de tablas}%
+}
 
 \usepackage{graphicx,grffile}
 

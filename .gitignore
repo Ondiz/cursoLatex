@@ -1,0 +1,4 @@
+# Ignorar archivos auxiliares de Latex
+
+curso.*
+!curso.tex

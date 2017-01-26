@@ -6,10 +6,10 @@ Un documento escrito en LaTeX tiene esta pinta\footnote{Este ejemplo
   apuntes de programación} de mi señor hermano y mío. Es una versión
   simplificada.}:
 
-\begin{lstlisting}
+\begin{lstlisting}[breaklines]
 \documentclass[a4paper,10pt]{article}
 
-%%%%%%%%%%%% PREÁMBULO %%%%%%%%%%%%%%%%%%%%%
+% PREÁMBULO 
 
 % Paquetes
 
@@ -29,7 +29,7 @@ Un documento escrito en LaTeX tiene esta pinta\footnote{Este ejemplo
 \title{Python 2.*}
 \author{Ondiz Zarraga}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 \maketitle
@@ -57,7 +57,6 @@ Este documento es una pequeña guía de Python
 El documento tiene dos cosas llamativas:
 
 \begin{itemize}
-\tightlist
 \item
   Cosas que empiezan por contrabarra, los \textbf{comandos}
 \item
@@ -231,15 +230,12 @@ Quedará así:
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Primer ítem
 \item
   Segundo ítem con subítems
 
   \begin{itemize}
-  \tightlist
   \item
     Ítem sin numerar
   \end{itemize}
@@ -255,7 +251,6 @@ Hoy solo vamos a ver como colocar una única imagen, que lo de las
 imágenes tiene un poco de lío. Lo que debemos saber es lo siguiente:
 
 \begin{itemize}
-\tightlist
 \item
   Necesitamos llamar al paquete \lstinline!graphicx! en el preámbulo.
   Para eso escribiremos \lstinline!\usepackage{graphicx}! entre
@@ -300,7 +295,6 @@ imaginaros cómo será el tema que la mitad de las veces las creo online
 Lo que debemos de saber de las tablas es lo siguiente:
 
 \begin{itemize}
-\tightlist
 \item
   El contenido se especifica con el entorno \lstinline!tabular!.
   Separemos las celdas con el ampersand y cambiaremos de línea con dos

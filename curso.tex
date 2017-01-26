@@ -1,0 +1,73 @@
+\documentclass[a4paper,11pt]{book}
+
+\usepackage[spanish,es-tabla]{babel} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amsthm, amssymb}
+
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{unicode=true,
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=Blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+
+\usepackage{listings}
+\lstnewenvironment{code}{\lstset{basicstyle=\small\ttfamily}}{}
+\lstset{literate=%
+{á}{{\'a}}1
+{é}{{\'e}}1
+{í}{{\'i}}1
+{ó}{{\'o}}1
+{ú}{{\'u}}1
+{Á}{{\'A}}1
+{É}{{\'E}}1
+{Í}{{\'I}}1
+{Ó}{{\'O}}1
+{Ú}{{\'U}}1
+}
+
+\usepackage{longtable,booktabs}
+
+\usepackage{graphicx,grffile}
+
+\usepackage{parskip}
+
+\title{Curso no convencional de \LaTeX}
+
+\author{Ondiz Zarraga}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\hypersetup{linkcolor=black}
+
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\chapter{Introducción}
+\input{Contenido/01.Introduccion}
+
+\chapter{¿Qué necesito?}
+\input{Contenido/02.QueNecesito}
+
+\chapter{Un documento básico}
+\input{Contenido/03.DocumentoBasico}
+
+% Bibliografía
+
+\end{document}

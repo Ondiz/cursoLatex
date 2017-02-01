@@ -13,7 +13,7 @@ title: LaTeX - Documento básico
   de apuntes de programación</a> de mi señor hermano y mío. Es una
   versión simplificada.</span>:</p>
 
-<pre class="latex"><code>
+{% highlight latex %}
 
 \documentclass[a4paper,10pt]{article}
 
@@ -60,7 +60,7 @@ Este documento es una pequeña guía de Python
 \end{itemize}
 
 \end{document}
-</code></pre>
+{% endhighlight %}
 
 <p>El documento tiene dos cosas llamativas:</p>
 <ul>
@@ -84,27 +84,30 @@ Este documento es una pequeña guía de Python
 <p>Ahora que sabemos cómo es un documento vamos a empezar a escribir
   uno. El documento más básico que podemos hacer es este:</p>
 
-<pre class="latex"><code>
+{% highlight latex %}
+\documentclass{article}
 
-    \documentclass{article}
-
-    \begin{document}
+\begin{document}
     Hola
-    \end{document}
-</code></pre>
+\end{document}
+{% endhighlight %}
 
 <p>Esto podemos compilarlo con el botoncillo de compilar de nuestro
   IDE, en la terminar o con Pandoc.</p>
 <p>Para compilar en la terminal haríamos (imaginemos que nuestro
   documento se llama <code>hola.tex</code>):</p>
 
-<pre class="bash"><code>pdflatex hola.tex</code></pre>
+{% highlight bash %}
+pdflatex hola.tex
+{% endhighlight %}
 
 <p>Evidentemente podéis compilar también con <code>xelatex</code> de
   manera equivalente. Si quisiéramos utilizar Pandoc tendríamos que
   hacer lo siguiente:</p>
 
-<pre class="bash"><code>pandoc hola.tex -o hola.pdf</code></pre>
+{% highlight bash %}
+pandoc hola.tex -o hola.pdf
+{% endhighlight %}
 
 <p>En los tres casos el resultado es el mismo excepto porque Pandoc no
   nos
@@ -127,11 +130,11 @@ Este documento es una pequeña guía de Python
   con acentos. Si queréis poneros a jugar ya, ponedme esto en el
   preámbulo, justo debajo de <code>\documentclass</code>:</p>
 
-<pre class="latex"><code>\usepackage[spanish]{babel} % sustituir spanish por el idioma
-    \usepackage[utf8]{inputenc}
-    \usepackage[T1]{fontenc}
-    \usepackage{lmodern}
-</code></pre>
+{% highlight latex %}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+{% endhighlight %}
 
 <p>En el futuro lo analizaremos de ello mejor, pero si os interesa,
 hablé de
@@ -153,15 +156,17 @@ ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-id
   pero para el caso del libro nos creará una portada. Para ambos casos
   la sintaxis es exactamente la misma:</p>
 
-<pre class="latex"><code>
+
+{% highlight latex %}
 \documentclass{article} % O book
 
 % Definimos el título
 \title{Título del documento}
 
 \begin{document}
-\maketitle % Creamos el título
-\end{document}</code></pre>
+    \maketitle % Creamos el título
+\end{document}
+{% endhighlight %}
 
 <p>Del mismo modo, nosotros solo le tenemos que decir el título de la
   sección o el capítulo y él le dará el formato correspondiente. Otra
@@ -173,13 +178,14 @@ ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-id
   del documento, es decir, después de <code>\begin{document}</code>. Por
   ejemplo:</p>
 
-<pre class="latex"><code>
+{% highlight latex %}
 \chapter{Capítulo numerado}
 \section{Primera sección}
 \subsection{Primera subsección}
 
 \chapter*{Capítulo sin numerar}
-\section*{Sección sin numerar}</code></pre>
+\section*{Sección sin numerar}
+{% endhighlight %}
 
 <p>Como veis, podemos usar los comandos de sección y capítulo con el
   asterisco para que no nos las numere. Otra cosa interesante es el
@@ -205,18 +211,19 @@ ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-id
   e <code>itemize</code>. Se usan exactamente igual, así que solo pongo
   el ejemplo de uno de ellos:</p>
 
-<pre class="latex"><code>
-    \begin{itemize}
+{% highlight latex %}
+\begin{itemize}
     \item Primer ítem
     \item Segundo ítem
-    \end{itemize}
-</code></pre>
+\end{itemize}
+{% endhighlight %}
 
 <p>Lo mejor es que podemos mezclar y anidar estos dos entornos que el
   simbolito y la indentación cambiarán solos sin que nos tengamos que
   preocupar. Por ejemplo,</p>
 
-<pre class="latex"><code>\begin{enumerate}
+{% highlight latex %}
+\begin{enumerate}
     \item Primer ítem
     \item Segundo ítem con subítems
     \begin{itemize}
@@ -224,7 +231,7 @@ ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-id
     \end{itemize}
     \item Tercer ítem
 \end{enumerate}
-</code></pre>
+{% endhighlight %}
 
 <p>Quedará así:</p>
 
@@ -259,14 +266,14 @@ ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-id
 <p>Aquí tenemos un ejemplo de cómo insertar una imagen con en el
   entorno <code>figure</code>:</p>
 
-<pre class="latex"><code>
-    \begin{figure}[h] % opción de posicionamiento
-      \caption{Pie de imagen}
-      \centering % imagen centrada
-      % Imagen 50% de ancho del texto
-      \includegraphics[width=0.5\textwidth]{ruta_a_la_imagen}
-    \end{figure}
-</code></pre>
+{% highlight latex %}
+\begin{figure}[h] % opción de posicionamiento
+    \caption{Pie de imagen}
+    \centering % imagen centrada
+    % Imagen 50% de ancho del texto
+    \includegraphics[width=0.5\textwidth]{ruta_a_la_imagen}
+\end{figure}
+{% endhighlight %}
 
 <p>Una cosa importante de LaTeX son los objetos <em>flotantes</em>, es
   decir, los que si no les obligamos, se colocan en el hueco que mejor
@@ -297,7 +304,8 @@ ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-id
 </ul>
 <p>Aquí tenemos un ejemplo de tabla sencilla:</p>
 
-<pre class="latex"><code>\begin{table}
+{% highlight latex %}
+\begin{table}
     \begin{tabular}{|ll|}
       \hline % Separador
       Columna 1 &amp; Columna 2 \\
@@ -307,7 +315,7 @@ ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-id
     \end{tabular}
     \caption {Pie de tabla}
 \end{table}
-</code></pre>
+{% endhighlight %}
 
 <p>Al igual que con la imágenes, profundizaremos en las tablas más
 adelante.</p>
@@ -322,12 +330,12 @@ adelante.</p>
   línea propia. Las primeras van entre signos de dólar y las segundas
   dentro del entorno <code>equation</code>. Aquí tenemos un ejemplo:</p>
 
-<pre class="latex"><code>
-    Imaginemos que $a=1$ en la siguiente ecuación:
-    \begin{equation}
+{% highlight latex %}
+Imaginemos que $a=1$ en la siguiente ecuación:
+\begin{equation}
     ax^2 + 1 = 0
-    \end{equation}
-</code></pre>
+\end{equation}
+{% endhighlight %}
 
 <p>Del mismo modo que ocurría con las secciones, si utilizamos el
   asterisco la ecuación no estará numerada.</p>
@@ -359,6 +367,7 @@ adelante.</p>
   (<a href="http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html">sabor
     Pandoc</a>) y convirtiendo a pdf. Por ejemplo, podemos meter una
   imagen como:</p>
+
 <pre><code>![Pie de imagen](/ruta){width=0.7 #etiqueta}</code></pre>
 
 <h1 id="referencias">Referencias</h1>

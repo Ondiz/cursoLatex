@@ -2,3 +2,6 @@
 
 curso.*
 !curso.tex
+
+Ejemplos/ecuaciones.*
+!Ejemplos/ecuaciones.tex

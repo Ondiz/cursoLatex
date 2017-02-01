@@ -1,0 +1,30 @@
+\documentclass[a4paper,11pt]{article}
+
+% Preámbulo
+
+\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage[spanish]{babel}
+\usepackage{fontenc}
+\usepackage{lmodern}
+
+% Comandos
+
+\newcommand{\refeq}[1]{Ecuación~\ref{#1}}
+
+% Inicio del documento
+
+\begin{document}
+
+\begin{equation}
+e^{i\pi} + 1 = 0
+\label{eq:euler}
+\end{equation}
+
+Como vemos en la Ecuación \ref{eq:euler}
+
+Como vemos en la \refeq{eq:euler}
+
+\end{document}

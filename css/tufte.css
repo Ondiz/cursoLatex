@@ -142,7 +142,7 @@ section>ol, section>ul { width: 45%;
                          -webkit-padding-start: 5%;
                          -webkit-padding-end: 5%; }
 
-li { padding: 0.5rem 0; }
+/* li { padding: 0.5rem 0; } */
 
 figure { padding: 0;
          border: 0;

@@ -5,3 +5,9 @@
 # Ignorar build de Jekyll
 
 _site/
+
+
+# Ignorar contenido de LaTeX
+
+curso.*
+Ejemplos/

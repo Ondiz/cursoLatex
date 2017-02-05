@@ -1,0 +1,327 @@
+---
+layout: default
+title: LaTeX - Figuras
+---
+
+<h1 id="un-documento-y-sus-partes">Insertando figuras</h1>
+
+<p>Decíamos que para insertar figuras nos hacían falta dos cosas:</p>
+
+<ul>
+  <li><p>El
+    paquete <a href="https://ctan.org/pkg/graphicx"><code>graphicx</code></a><label for="graphicx"
+    class="margin-toggle
+    sidenote-number"></label></span><input type="checkbox"
+    id="graphicx" class="margin-toggle"/><span class="sidenote">El
+    paquete <code>graphicx</code> sustituye al
+    paquete <code>graphics</code> y los ayuda a la hora de meter las
+    imágenes y compilar.</span></p></li>
+<li><p>El
+  comando <code>\includegraphics[opciones]{ruta}</code>. Aprovechamos
+  para aprender que los parámetros obligatorios van entre llaves y los
+  opcionales entre corchetes.</p></li>
+</ul>
+
+<p>Vamos a dividir esta entrada en dos partes: insertar una única figura
+e insertar una figura formada por subfiguras.</p>
+
+<h2>Una sola figura</h2>
+
+<p>Añadir una figura es superfácil. Solo tenemos que hacer:</p>
+
+{% highlight latex %}
+\includegraphics{ruta_a_la_figura}
+{% endhighlight %}
+
+<p>No hace falta ni siquiera que le pongamos la extensión, él buscará la
+imagen correspondiente. Evidentemente, esto tiene un problema: nos
+pondrá la imagen <em>ahí mismo</em> y de su tamaño original. Lo
+primero aun no lo podemos solucionar pero el tamaño podemos ajustarlo
+con las opciones.</p>
+
+<h3>Opciones</h3>
+
+<p>Las opciones son lo que le pasamos al comando entre los corchetes y
+nos permiten controlar cosas de la imagen. Aquí os recopilo las que yo
+uso más:</p>
+
+<ul>
+  <li><p><code>height</code>: la altura que debe tener la figura, escalará
+    el gráfico hasta que tenga esta altura</p></li>
+  <li><p><code>width</code>: la anchura que debe tener la figura, escalará
+    el gráfico hasta que tenga esta anchura</p></li>
+  <li><p><code>scale</code>: cuánto hay que escalar la figura, sobre
+    1 </p></li>
+  <li><p><code>angle</code>: cuánto hay que girar la figura, en grados</p></li>
+</ul>
+
+<p>Por ejemplo, si queremos reducir la figura a la mitad y girarla 90
+grados hacemos:</p>
+
+{% highlight latex %}
+\includegraphics[angle=90, scale=0.5]{ruta_a_la_figura}
+{% endhighlight %}
+
+<p>Es interesante utilizar <code>height</code> y <code>width</code> en
+combinación con
+las <a href="https://en.wikibooks.org/wiki/LaTeX/Lengths">longitudes
+que define LaTeX</a>, por ejemplo, para que una figura tenga la
+anchura del texto haríamos:</p>
+
+{% highlight latex %}
+\includegraphics[width=\textwidth]{ruta_a_la_figura}
+{% endhighlight %}
+
+<p>Podemos modificar también esta longitud, por ejemplo, para que sea un
+70% de la anchura del texto:</p>
+
+{% highlight latex %}
+\includegraphics[width=0.7\textwidth]{ruta_a_la_figura}
+{% endhighlight %}
+
+<p>La ventaja de este sistema es que si cambiamos los márgenes la figura
+se adaptará sola. Ahora vamos a ver cómo gestionamos la posición de la
+figura.</p>
+
+<h3>Figuras flotantes</h3>
+
+<p>En la pasada entrada os hablé de los <em>objetos flotantes</em> y de
+cómo convertíamos una figura en flotante al usar el
+entorno <code>figure</code>. Esto nos permite, aparte de ponerle un
+pie de figura y una referencia, decidir su posición en la hoja.</p>
+
+<p>También tenemos la opción
+de <a href="http://texblog.org/2010/05/13/wrap-text-around-figures-and-tables/">rodear
+la imagen de texto</a> con el entorno <code>wrapfigure</code>, os lo
+dejo de deberes.</p>
+
+<p><b>Posición</b></p>
+
+<p>Cuando digo decidir no digo <em>la versión Word</em> de decidir. LaTex
+de por sí pone las figuras donde mejor quedan (según él) y nosotros le
+damos sugerencias de lo que preferimos. Podemos obligarle a poner las
+figuras en determinado lugar, pero no suele ser muy buena idea, es
+mejor reservar esta opción para los casos extremos.</p>
+
+<p>Esta es la sintaxis:</p>
+
+{% highlight latex %}
+\begin{figure}[posición]
+  \includegraphics[opciones]{ruta}
+\end{figure}
+{% endhighlight %}
+
+<p>La opción <code>posición</code> puede tomar estos valores:</p>
+
+<ul>
+  <li><p><code>h</code> (<em>here</em>), le decimos que ponga la imagen
+    más o menos aquí</p></li>
+  <li><p><code>t</code> (<em>top</em>), preferiblemente en la parte
+    superior de la página</p></li>
+  <li><p><code>b</code> (<em>bottom</em>), preferiblemente en la parte
+    inferior de la página</p></li>
+  <li><p><code>p</code> (<em>page</em>), que junte los objetos flotantes
+    en una página</p></li>
+  <li><p><code>!</code> que ignore sus reglas internas de
+    posicionamiento</p></li>
+  <li><p><code>H</code> que ponga la imagen <em>justo aquí</em>, similar
+    a <code>h!</code> y con muchas papeletas de hacer cosas rarunas</p></li>
+</ul>
+
+<p>Estas opciones se pueden combinar, por ejemplo, <code>tb</code> solo
+probará arriba y abajo. El orden no afecta.</p>
+
+<p>Otra cosa a tener en cuenta es la alineación de la figura. Por defecto
+se alinean a la izquierda, podemos cambiarla con los siguientes
+comandos:</p>
+
+<ul>
+  <li><p><code>\centering</code>: para centrar</p></li>
+  <li><p><a href="http://printwiki.org/Ragged_Left"><code>\raggedleft</code></a>:
+    para alinear a la derecha</p></li>
+  <li><p><code>\raggedright</code>: para alinear a la izquierda</p></li>
+</ul>
+
+<p>que pondríamos dentro del entorno <code>figure</code> antes de
+insertar la imagen:</p>
+
+{% highlight latex %}
+\begin{figure}[posición]
+  \centering
+  \includegraphics[opciones]{ruta}
+\end{figure}
+{% endhighlight %}
+
+<p><b>Pie de figura y referencia</b></p>
+
+<p>Como hemos dicho, el entorno <code>figure</code> nos permite también
+poner un pie de figura y una etiqueta a la figura:</p>
+
+{% highlight latex %}
+\begin{figure}[posición]
+  \includegraphics[opciones]{ruta}
+  \caption{Pie de figura}
+  \label{etiqueta}
+\end{figure}
+{% endhighlight %}
+
+<p>La etiqueta sirve para hacer referencia a la figura en el texto con el
+comando <code>\ref{etiqueta}</code>, por ejemplo:</p>
+
+{% highlight latex %}
+\begin{figure}[h]
+  \includegraphics[scale=0.7]{Figuras/gatos}
+  \caption{Unos gatos molones}
+  \label{fig:gatos}
+\end{figure}
+
+Como se ve en la Figura \ref{fig:gatos}, hay gatos negros y blancos
+{% endhighlight %}
+
+<p>LaTeX nos numerará las figuras correctamente el solito y citará la
+figura correspondiente cuando se lo pidamos.</p>
+
+<p>Una idea inteligente es etiquetar las cosas de manera que luego no nos
+volvamos locos porque no sabemos si una determinada etiqueta hace
+referencia a una ecuación, a una tabla o a un capítulo. Cada uno aquí
+tiene sus maneras, una opción podría ser:</p>
+
+<ul>
+  <li><p><code>fig:</code> para las figuras</p></li>
+  <li><p><code>eq:</code> para las ecuaciones</p></li>
+  <li><p><code>sec:</code> para las secciones</p></li>
+</ul>
+
+<p>Tampoco hay que obsesionarse, claro, mientras seamos coherentes.</p>
+
+<h2>Sobre formatos</h2>
+
+<p>Una última nota antes de pasar a hablar de múltiples figuras. Cuando
+hablábamos de compiladores dijimos que LaTeX se puede compilar
+a <em>dvi</em> y <em>pdf</em> dependiendo de si
+usamos <code>latex</code> o <code>pdflatex</code> (o las otras
+opciones con y sin <code>la</code>). Para las imágenes esto es
+importante: <code>latex</code> solo compilará si las imágenes están en
+formato <em>eps</em>; <code>pdflatex</code>, en cambio,
+acepta <em>pdf</em>, <em>png</em> y <em>jpg</em>.</p>
+
+<p>El caso del formato <em>eps</em> al compilar a <em>pdf</em> es
+especial, técnicamente no metemos la imagen en <em>eps</em>, sino que
+por detrás se llama al
+programa <a href="https://www.ctan.org/pkg/epstopdf"><code>epstopdf</code></a>,
+se convierte a <em>pdf</em> y se inserta. En general se hace solo,
+pero depende del programa, Pandoc, por
+ejemplo, <a href="https://github.com/jgm/pandoc/commit/a9628d0745784f6f99edfca008d64dcffeb74bc8">no
+lo hace</a>. Os lo digo porque tengo compañeros de
+curro <em>convencidísimos</em> de que ellos meten las imágenes
+en <em>eps</em> en sus documentos a pesar de que tienen una carpeta
+llena de <em>pdfs</em> con nombres del
+tipo <code>figure-eps-converted-to.pdf</code>. Y les gritan a los
+otros en plan: <em>¿Pero cómo metes eso en</em> pdf <em>? ¿No ves que
+pierdes calidad?</em></p>
+
+<p>Una cosa interesante de <code>epstopdf</code> es que lo podemos usar
+aparte en la terminal, por ejemplo:</p>
+
+{% highlight bash %}
+epstopdf archivo.eps
+{% endhighlight %}
+
+<p>nos
+creará <code>archivo.pdf</code>. <a href="https://ondahostil.wordpress.com/2016/05/31/lo-que-he-aprendido-bucle-para-pasar-de-eps-a-pdf-en-cmd/">Aquí</a>
+hice un bucle y todo que me convertía todas las imágenes de la
+carpeta.</p>
+
+<h2>La fiesta de las figuras</h2>
+
+<p>Ahora vamos a ver cómo hay que hacer si queremos incluir una figura
+formada por subfiguras, es decir, que un grupo de figuras que van
+juntas y comparten pie de figura. Para esto se usaba primero el
+paquete <code>subfigure</code>,
+luego <a href="http://www.ctan.org/pkg/subfig"><code>subfig</code></a>
+y ahora se supone que debe
+usarse <a href="https://www.ctan.org/pkg/subcaption"><code>subcaption</code></a>. Resulta
+que <code>subfig</code> tiene problemas con <code>hyperref</code> (el
+paquete de hacer hipervínculos) y <code>subcaption</code>
+no. Además, <code>subcaption</code> no es compatible con ninguno de
+los dos anteriores.</p>
+
+<p>El paquete <code>subcaption</code> define el
+entorno <code>subfigure</code>, que se usa a su vez dentro del
+entorno <code>figure</code>. Tiene esta pinta:</p>
+
+{% highlight latex %}
+\begin{subfigure}[posición]{ancho}
+  % Contenido
+\end{subfigure}
+{% endhighlight %}
+
+<p>Dentro del entorno <code>subfigure</code> escribimos exactamente lo
+mismo que pondríamos dentro del entorno <code>figure</code>.</p>
+
+<p>Por ejemplo, si quisiéramos poner dos imágenes en paralelo haríamos
+algo así:</p>
+
+{% highlight latex %}
+\documentclass{article}
+
+% Necesitamos los paquetes graphicx, caption y subcaption
+    \usepackage{graphicx}
+    \usepackage{caption}
+    \usepackage{subcaption}
+
+\begin{document}
+
+    \begin{figure}
+        \centering
+        \begin{subfigure}[h]{0.45\textwidth} 
+            \includegraphics[width=\textwidth]{figura1}
+            \caption{Pie de figura 1}
+            \label{fig:figura1}
+        \end{subfigure}       
+        \begin{subfigure}[h]{0.45\textwidth} 
+            \includegraphics[width=\textwidth]{figura2}
+            \caption{Pie de figura 2}
+            \label{fig:figura2}
+        \end{subfigure}
+
+        \caption{Pie general}
+    \end{figure}
+
+\end{document}
+{% endhighlight %}
+
+<p>Si os fijáis, no hay separación entre el fin del primer
+entorno <code>subfigure</code> y el inicio del segundo, si ahí dejamos
+una línea en blanco, la siguiente figura en lugar de ponerla en
+paralelo la pondrá debajo. Ahí en medio también podemos decirle cómo
+de separadas queremos las figuras, pero para eso necesitamos aprender
+primero cómo funciona el espacio blanco en LaTeX y eso es tema para
+otro día.</p>
+
+<p>De momento tenéis referencias y manuales enlazados para que cambiéis
+las opciones porque, ya sabéis, que si hurgar no se aprende.</p>
+
+<p>¡Espero vuestros comentarios!</p>
+
+<h1>Referencias</h1>
+
+<p><a href="http://ctan.math.utah.edu/ctan/tex-archive/macros/latex/required/graphics/grfguide.pdf"><em>Packages
+      in the <code>graphics</code> bundle</em> (pdf)</a></p>
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics"><em>LaTeX/Importing
+      Graphics</em> en Wikibooks</a></p>
+<p><a href="http://tex.stackexchange.com/questions/1072/which-graphics-formats-can-be-included-in-documents-processed-by-latex-or-pdflat"><em>Which
+      graphics formats can be included in documents processed by latex
+      or pdflatex?</em> en StackExchange</a></p>
+<p><a href="https://www.sharelatex.com/learn/Inserting_Images"><em>Inserting
+      Images</em> en ShareLaTeX</a></p>
+<p><a href="http://tex.stackexchange.com/questions/39017/how-to-influence-the-position-of-float-environments-like-figure-and-table-in-lat"><em>How
+      to influence the position of float environments like figure and
+      table in LaTeX?</em> en StackExchange</a></p>
+<p><a href="http://tex.stackexchange.com/questions/13625/subcaption-vs-subfig-best-package-for-referencing-a-subfigure"><em>subcaption
+      vs. subfig: Best package for referencing a subfigure</em> en
+      StackExchange</a></p>
+
+<div>
+<p> Anterior: <a href="{{ site.github.url }}/Contenido/04.DocumentoBasico.html">Un documento básico</a>, Siguiente: <a href="{{ site.github.url }}/Contenido/05.html">Ecuaciones </a> [<a href="{{ site.github.url }}/">Contenido</a>]</p>
+</div>

@@ -1,0 +1,410 @@
+---
+layout: default
+title: LaTeX - Documento básico
+---
+
+<h1 id="ecuaciones">LaTeX y las ecuaciones</h1>
+
+<p>Siguiendo con el desmenuce de la sintaxis, vamos a hablar de
+ecuaciones, el motivo por el que mucha gente (<em>científicos</em>) se
+pasan a LaTeX.</p>
+
+<p>Como dijimos anteriormente, hay dos tipos de ecuaciones en LaTeX:</p>
+
+<ul>
+  <li><p>las que van <strong>dentro de una línea</strong>, que se escriben
+    entre signos de dólar y se suelen conocer como <em>inline</em></p></li>
+  <li><p>las que tienen <strong>línea propia</strong>, que usan el
+    entorno <code>equation</code> o el atajo<label for="atajo"
+    class="margin-toggle
+    sidenote-number"></label></span><input type="checkbox"
+    id="atajo" class="margin-toggle"/><span class="sidenote">Yo no
+    suelo usar el atajo porque me resulta más difícil de leer, pero,
+    oyes, para gustos colores.</span><code>\[...\]</code> </p></li>
+</ul>
+
+<p>Aquí tenemos un ejemplo usando los dos tipos:</p>
+
+{% highlight latex %}
+\begin{equation}
+e^{i\pi} + 1 = 0
+\end{equation}
+
+donde $i = \sqrt{-1}$
+{% endhighlight %}
+
+<p>Como veis, escribimos las ecuaciones mediante comandos, algo que
+inicialmente parece un atraso pero que cuando cogemos un poco de
+práctica, es terriblemente eficaz. Si estáis usando un editor
+específico, tendréis una barra con los símbolos más usados, es una
+buena forma de empezar con las ecuaciones. Más abajo os hablo de la
+sintaxis más en detalle y doy unos ejemplos.</p>
+
+<p>Al escribir ecuaciones es recomendable cargar los siguientes paquetes:</p>
+
+<ul>
+  <li><p><a href="https://www.ctan.org/pkg/amsmath"><code>amsmath</code></a>
+      (AMS Math), que mejora el comportamiento y el aspecto de las
+      ecuaciones. Nos permite, por ejemplo, añadir un asterisco en el
+      entorno <code>equation</code> para crear ecuaciones sin
+      numerar.</p></li>
+<li><p><a href="https://www.ctan.org/pkg/amsthm"><code>amsthm</code></a>
+    (AMS Theorem), que define los entornos teorema y
+    demostración.</p></li>
+<li><p><code>amssymb</code> (AMS Symbol), que carga a su
+    vez <code>amsfonts</code> e incluye una colección de símbolos
+    matemáticos.</p></li>
+</ul>
+
+<p>Podemos cargarlos todos a la vez añadiendo esta línea
+  al <em>preámbulo</em><label for="preámbulo" class="margin-toggle
+  sidenote-number"></label></span><input type="checkbox"
+  id="preámbulo"
+  class="margin-toggle"/><span class="sidenote">Recordemos:
+  el <em>preámbulo</em> es lo que hay entre la definición del
+  documento (<code>\documentclass</code>) y el inicio del
+  entorno <code>document</code>
+  (<code>\begin{document}</code>).</span>:</p>
+
+{% highlight latex %}
+\usepackage{amsmath, amsthm, amssymb}
+{% endhighlight %}
+
+<p>Ese AMS que precede a todos ellos viene
+de <a href="http://www.ams.org/home/page"><em>American Mathematical
+Society</em></a>, los que originalmente desarrollaron estos paquetes.</p>
+
+<h2>Comandos</h2>
+
+<p>Vamos a ver un poco de sintaxis, pero antes de nada os dejo un par
+de herramientas interesantes sobre todo para los novatillos
+(o <em>Nóbeles</em> que decía mi profe de autoescuela, <em>conductor
+Nóbel</em> (sic)):</p>
+
+<ul>
+  <li><p><strong>Editores de ecuaciones online</strong>: hasta que le
+      vayamos cogiendo el callo a las ecuaciones, aparte de la barrita del
+      IDE tenemos editores online
+      como <a href="http://www.numberempire.com/texequationeditor/equationeditor.php">este</a>
+      o <a href="http://www.numberempire.com/texequationeditor/equationeditor.php">este
+	otro</a> que es más cuco.</p></li>
+  <li><p><strong>Detexify</strong>: si no sabemos cómo se llama un
+    símbolo y, por lo tanto, no podemos buscar su comando
+    tenemos <a href="http://detexify.kirelabs.org/classify.html">Detexify</a>,
+    un cacharro en el que pintamos el símbolo que estamos buscando y nos
+    localiza los más parecidos. Especialmente útil con la típica duda
+    de <em>¿esa letra es xi o chi?</em> o mi favorita <em>¿cómo se llama
+      la R esa gorda de los números reales?</em>. Hacemos el dibujillo y
+    hala.</p></li>
+</ul>
+
+<h3>Símbolos comunes</h3>
+
+<p>Símbolos hay a pilas, os voy a poner unos pocos comandos aquí pero
+lo mejor es que hurguéis.</p>
+
+  <ul>
+    <li><p><em>Sumas, restas y exponenciales</em>: se hacen con el símbolo
+	de toda la vida <code>+</code>, <code>-</code>
+	y <code>^</code></p></li>
+    <li><p><em>Multiplicaciones</em>: aquí hay variedad según los
+	gustos, si queremos el punto usamos el comando <code>\cdot</code> si
+	nos gusta más el aspa usamos <code>\times</code>. Hacedme un favor y
+	no me uséis ni la equis ni el asterisco.</p></li>
+    <li><p><em>Raíces</em>: se hacen con el
+	comando <code>\sqrt{argumento}</code> si son raíces cuadradas y
+	añadiendo el numerito como argumento opcional (es decir, entre
+	corchetes) para cualquier
+	otra <code>\sqrt[raíz]{argumento}</code></p></li>
+    <li><p><em>Integrales</em>: funcionan con el
+	comando <code>\int</code>, si queremos que tengan límites definidos no
+	tenemos más que escribir <code>\int_{inferior}^{superior}</code>. Por
+	ejemplo, esta integral impropia $latex \int_{0}^{\infty}$ se
+	conseguiría así <code>\int_{0}^{\infty}</code>. Si os fijáis las
+	integrales, a diferencia de las raíces, no llevan llaves. Esto ocurre
+	porque la raíz necesita saber cómo de largo es el contenido, la
+	integral es simplemente el chirimbolo.</p></li>
+    <li><p><em>Sumatorios</em>: son como las integrales pero con el
+	comando <code>\sum</code></p></li>
+    <li><p><em>Fraciones</em>: tan sencillas
+	como <code>\frac{numerador}{denominador}</code></p></li>
+  </ul>
+
+<p>Tenéis en las referencias listas de símbolos para que les echéis
+una ojeada si os parece.</p>
+
+<h3>Letras griegas</h3>
+
+<p>Una de las mejores cosas de LaTeX en mi opinión es su método para
+escribir letras griegas, tan sencillo como escribir su nombre en
+minúsculas para la letra en minúscula y ponerle la primera en
+mayúscula para una letra griega en mayúscula. Se entenderá mejor con
+un ejemplo:</p>
+
+<blockquote>
+  <code>\omega</code> crea ω (<em>omega minúscula</em>) y <code>\Omega</code> crea a su vez Ω (<em>omega mayúscula</em>)
+</blockquote>
+
+<h3>Operadores</h3>
+
+<p>Los operadores son las funciones cuyo nombre se escribe en texto,
+como <em>sin</em> o <em>ln</em>. LaTeX tiene algunos de ellos
+definidos y es importante usarlos para que las ecuaciones nos queden
+bien. Va un ejemplo:</p>
+
+{% highlight latex %}
+\sin^2 x + \cos^2 x = 1
+{% endhighlight %}
+
+<p>Que crea:</p>
+
+<p>$$ \sin^2 x + \cos^2 x = 1$$</p>
+
+<h3>Matrices</h3>
+
+<p>Funcionan de manera similar a las tablas (las columnas se separan con
+  el ampersand y se salta de línea con <code>\\</code>), pero usan el
+  entorno <code>matrix</code> y relacionados.</p>
+
+<p>El entorno <code>matrix</code> nos crea una matriz sin
+  delimitadores, tendríamos que añadírselos nosotros. Los
+  entornos <code>pmatrix</code>, <code>vmatrix</code>, <code>Vmatrix</code> <code>bmatrix</code>
+  y <code>Bmatrix</code> nos añaden respectivamente paréntesis,
+  barras<label for="atajo" class="margin-toggle
+  sidenote-number"></label></span><input type="checkbox" id="atajo"
+  class="margin-toggle"/><span class="sidenote">Como las de un
+  determinante</span>, barras <label for="atajo" class="margin-toggle
+  sidenote-number"></label></span><input type="checkbox" id="atajo"
+  class="margin-toggle"/><span class="sidenote">Como las de una
+  norma</span> dobles, corchetes y llaves. Estos entornos que cito
+  centran el contenido, si quisiéramos cambiar la alineación
+  tendríamos que usar su variantes con asterisco y darle un
+  argumento.</p>
+
+<p>Este sería un ejemplo de una matriz sencilla:</p>
+
+{% highlight latex %}
+\begin{equation}
+ \begin{matrix}
+  a & b & c \\
+  d & e & f \\
+  g & h & i
+ \end{matrix}
+\end{equation}
+{% endhighlight %}
+
+<p><strong>Sobre los paréntesis</strong></p>
+
+<p>Si no os apetece (como a mí) memorizar que el <code>pmatrix</code>
+pone un paréntesis y el <code>vmatrix</code> no sé qué, podéis poner
+los delimitadores vosotros según os parezca y usar siempre el
+entorno <code>matrix</code> (es lo que yo hago) pero hay que tener en
+cuenta una cosa, en LaTeX hay dos tipos de paréntesis: los de tamaño
+fijo y los que se adaptan al contenido. Los de tamaño fijo son tal
+cual el símbolo según le damos en el teclado, los adaptativos son
+comandos formados por <code>\left</code> o <code>\right</code>, según
+el lado, más el símbolo. Por ejemplo, <code>\left(</code> nos crea el
+paréntesis adaptativo del lado izquierdo, <code>\right]</code> el
+corchete adaptativo de la derecha y así con todos. Los únicos un poco
+diferentes son los comandos para las llaves, que requieren una barra
+de escape y son respectivamente <code>\left\{</code>
+y <code>\right\}</code></p>
+
+<p>Por ejemplo, para rodear la matriz anterior con corchetes tendríamos
+que hacer lo siguiente:</p>
+
+{% highlight latex %}
+\begin{equation}
+ \left[
+ \begin{matrix}
+  a & b & c \\
+  d & e & f \\
+  g & h & i
+ \end{matrix}
+ \right]
+\end{equation}
+{% endhighlight %}
+
+<h2>Gestión del espacio</h2>
+
+<p>Al igual que con el texto, LaTeX nos gestiona el espacio entre los
+símbolos él solito. En general lo mejor es dejarle hacer, pero hay en
+ocasiones en hay cosas que quedan <em>feas</em> y hay que tocarlas un
+poquito a mano. Los nazis del LaTeX nos dirán que no hay que hacer
+estas cosas, que las decisiones de LaTeX deben ser respetadas. Yo no
+estoy de acuerdo, la cuestión es que las ecuaciones queden a nuestro
+gusto.</p>
+
+<p>Para ello utilizo estos dos chismes, aunque hay muchos más, que no
+son específicos de las ecuaciones pero es donde suelen resultar más
+necesarios:</p>
+
+<ul>
+  <li><p><code>\,</code>: nos genera un espacio en blanco
+  estrecho </p></li>
+  <li><p><code>~</code>: nos crea
+  un <a href="https://es.wikipedia.org/wiki/Espacio_duro"><em>espacio
+  duro</em></a>, es decir, un espacio que impide que se salte de línea
+  en medio. </p></li>
+</ul>
+
+<p>Como tampoco soy una sabia de la tipografía con estos dos me apaño, en
+las referencias tenéis más y mejores explicaciones si os va el tema.</p>
+
+<h2>Referencias cruzadas</h2>
+
+<p>Igual que las imágenes, las ecuaciones también se pueden referenciar
+haciendo uso de los comandos <code>\label</code>
+y <code>\ref</code>. El primero de ellos nos permite darle un nombre
+identificativo a una ecuación y el segundo nos la cita. Al igual que
+ocurría con las figuras, para poder añadir una etiqueta a una ecuación
+es necesario utilizar el entorno <code>equation</code>, no nos vale
+para las ecuaciones <em>inline</em>.</p>
+
+<p>Veamos cómo citaríamos la ecuación del primer ejemplo:</p>
+
+{% highlight latex %}
+\begin{equation}
+e^{i\pi} + 1 = 0
+\label{eq:euler}
+\end{equation}
+
+Como vemos en la Ecuación \ref{eq:euler}
+{% endhighlight %}
+
+<p>Que nos daría este resultado:</p>
+
+<hr />
+
+<p>
+$$ e^{i\pi} + 1 = 0$$
+Como vemos en la Ecuación 1
+</p>
+<hr />
+
+<p>Añadir <code>eq:</code> a la etiqueta no es necesario pero nos
+  facilita el trabajo al no tener las etiquetas para las figuras, las
+  secciones y demás elementos mezclados.</p>
+
+<p>También podemos definir un comando para que nos añada la
+  palabra <em>Ecuación</em> al número. Os voy a decir cómo lo haríamos
+  aunque todavía no sepamos crear comandos para que veáis que es
+  sencillito<label for="atajo" class="margin-toggle
+  sidenote-number"></label></span><input type="checkbox" id="atajo"
+  class="margin-toggle"/><span class="sidenote">Creo que hay una
+  manera mejor de hacer de definir este comando pero no me acuerdo y
+  soy completamente incapaz de encontrarlo.</span>:</p>
+
+{% highlight latex %}
+% Estructura \newcommand{\nombre}[nº args]{Descripción}
+
+\newcommand{\refeq}[1]{Ecuación~\ref{#1}}
+{% endhighlight %}
+
+<p>Esto mismo lo consigue el
+comando <a href="https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing#The_hyperref_package"><code>\autoref</code>
+del paquete <code>hyperref</code></a> con la ventaja de que nos pone
+la palabra correcta en todos los casos, ya sean tablas, figuras o
+ecuaciones sin necesidad de definir un comando para cada uno.</p>
+
+<h2>Grupos de ecuaciones</h2>
+
+<p>Otro tema interesante es poder escribir un grupo de ecuaciones que
+comparta la misma etiqueta. Esto es posible (¡como todo en LaTeX!)
+gracias a diferentes entornos aunque yo solo voy a hablar de mi
+favorito: <code>align</code> del paquete <code>amsmath</code>. Nos
+permite crear un sistema de ecuaciones que alineará según el símbolo
+que marquemos con un ampersand. Por ejemplo, las 3 leyes de la
+termodinámica quedarían así, alineadas según el símbolo de igual:</p>
+
+{% highlight latex %}
+\begin{align}
+ \Delta U &= Q -W \\
+ \delta S &= T \mathrm{d}S \\
+ S &= \mathrm{k_B}\ln\Omega
+\end{align}
+{% endhighlight %}
+
+<hr />
+<p>$$
+\begin{align}
+ \Delta U &= Q -W \\
+ \delta S &= T \mathrm{d}S \\
+ S &= \mathrm{k_B}\ln\Omega
+\end{align}
+$$</p>
+<hr />
+
+<p>Al igual que hacíamos en el entorno <code>equation</code>,
+con <code>align</code> también podemos añadir una etiqueta o usar el
+asterisco para que no nos numere la ecuación.</p>
+
+<h2>Formato</h2>
+
+<p>Evidentemente, LaTeX nos permite adaptar el formato de nuestras
+ecuaciones a nuestros gustos o exigencias externas (véase formato de
+revistas científicas, normas ISO …). Un formato muy típico es el
+siguiente:</p>
+
+<ul>
+  <li><p><em>Cursiva para las variables</em>: LaTeX nos lo hace por
+  defecto</p></p></li>
+  <li><p><em>Operadores y constantes rectos</em>: para los operadores
+  del propio LaTeX como <code>\sin</code> o <code>\log</code> no
+  tenemos que hacer nada, los endereza de por sí. Para el resto
+  tenemos dos opciones: usar <code>\mathrm</code> o definirlos como
+  operadores en el preámbulo con <code>\DeclareMathOperator</code> del
+  paquete <code>amsmath</code>. De esto último hablaremos más
+  adelante, pero como sé que sois ansiosos os pongo cómo se
+  haría:</p></li>
+</ul>
+
+{% highlight latex %}
+\usepackage{amsmath}
+\DeclareMathOperator{\comando}{descripción}
+{% endhighlight %}
+
+<ul>
+  <li><p><em>Matrices y vectores en negrita</em>: para ello usaremos
+      \mathbf para las letras y \boldsymbol para los símbolos o letras
+      griegas.</p></li>
+</ul>
+
+<p>Un ejemplo con todos ellos podría ser la definición de la matriz de
+rigidez para el método de los elementos finitos (me sale el ingeniero
+mecánico interior):</p>
+
+{% highlight latex %}
+\begin{equation}
+\mathbf{K}=\int_V \mathbf{B}^\intercal \mathbf{D B}\mathrm{d}x \mathrm{d}y \mathrm{d}z
+\end{equation}
+{% endhighlight %}
+
+<p>que quedaría algo de este estilo:</p>
+
+<p>$$\mathbf{K}=\int_V \mathbf{B}^\intercal \mathbf{D B}\mathrm{d}x \mathrm{d}y \mathrm{d}z$$</p>
+
+
+<h2>Referencias</h2>
+
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics"><em>LaTeX/Mathematics</em> en WikiBooks</a></p>
+
+<p><a href="https://www.sharelatex.com/learn/List_of_Greek_letters_and_math_symbols"><em>List of Greek letters and math symbols</em> en ShareLaTeX</a></p>
+
+<p><a href="http://latex.wikia.com/wiki/Matrix_environments"><em>Matrix environments</em> en LaTeX Wiki</a></p>
+
+<p><a href="https://www.sharelatex.com/learn/Brackets_and_Parentheses"><em>Brackets and Parentheses</em> en ShareLaTeX</a></p>
+
+<p><a href="https://www.sharelatex.com/learn/Operators"><em>Operators</em> en ShareLaTeX</a></p>
+
+<p><a href="//tex.stackexchange.com/questions/74353/what-commands-are-there-for-horizontal-spacing#74354*"><em>What commands are there for horizontal spacing?</em> en StackExchange</a></p>
+
+<p><a href="http://www.colorado.edu/physics/phys4610/phys4610_sp15/PHYS4610_sp15/Home_files/LaTeXSymbols.pdf"><em>Lista de símbolos matemáticos</em> (pdf)</a></p>
+
+<p><a href="http://tex.stackexchange.com/questions/32100/what-does-each-ams-package-do"><em>What does each AMS package do?</em> en StackExchange</a></p>
+
+<p><a href="http://moser-isi.ethz.ch/docs/typeset_equations.pdf"><em>How to typeset equations in LaTeX</em> (pdf)</a></p>
+
+<div>
+<p> Anterior: <a href="{{ site.github.url }}/Contenido/04.Imágenes.html">Insertando figuras</a>, Siguiente: <a href="{{ site.github.url }}/Contenido/06.html">X</a> [<a href="{{ site.github.url }}/">Contenido</a>]</p>
+</div>

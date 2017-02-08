@@ -6,7 +6,7 @@ Un documento escrito en LaTeX tiene esta pinta\footnote{Este ejemplo
   apuntes de programación} de mi señor hermano y mío. Es una versión
   simplificada.}:
 
-\begin{lstlisting}[caption=Ejemplo de documento escrito con \LaTeX]
+\begin{lstlisting}[language={[latex]tex}, caption={Ejemplo de documento escrito con \LaTeX}]
 
 \documentclass[a4paper,10pt]{article}
 
@@ -80,7 +80,7 @@ y se establecen opciones.
 Ahora que sabemos cómo es un documento vamos a empezar a escribir uno.
 El documento más básico que podemos hacer es este:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \documentclass{article}
 
 \begin{document}
@@ -127,7 +127,7 @@ de idioma y por lo tanto tendremos problemas en los idiomas con acentos.
 Si queréis poneros a jugar ya, ponedme esto en el preámbulo, justo
 debajo de \lstinline!\documentclass!:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \usepackage[spanish]{babel} % sustituir spanish por el idioma
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -155,7 +155,7 @@ escribirá en la parte superior de la página con el texto debajo, pero
 para el caso del libro nos creará una portada. Para ambos casos la
 sintaxis es exactamente la misma:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \documentclass{article} % O book
 
 % Definimos el título
@@ -175,7 +175,7 @@ Para definir capítulos y secciones utilizamos los comandos
 \lstinline!\chapter! y \lstinline!\section! en el cuerpo del documento,
 es decir, después de \lstinline!\begin{document}!. Por ejemplo:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \chapter{Capítulo numerado}
 \section{Primera sección}
 \subsection{Primera subsección}
@@ -204,10 +204,10 @@ respectivamente los entornos \lstinline!enumerate! e
 \lstinline!itemize!. Se usan exactamente igual, así que solo pongo el
 ejemplo de uno de ellos:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \begin{itemize}
-\item Primer ítem
-\item Segundo ítem
+  \item Primer ítem
+  \item Segundo ítem
 \end{itemize}
 \end{lstlisting}
 
@@ -215,7 +215,7 @@ Lo mejor es que podemos mezclar y anidar estos dos entornos que el
 simbolito y la indentación cambiarán solos sin que nos tengamos que
 preocupar. Por ejemplo,
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \begin{enumerate}
     \item Primer ítem
     \item Segundo ítem con subítems
@@ -268,7 +268,7 @@ imágenes tiene un poco de lío. Lo que debemos saber es lo siguiente:
 Aquí tenemos un ejemplo de cómo insertar una imagen con en el entorno
 \lstinline!figure!:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \begin{figure}[h] % opción de posicionamiento
     \caption{Pie de imagen}
     \centering % imagen centrada
@@ -310,7 +310,7 @@ Lo que debemos de saber de las tablas es lo siguiente:
 
 Aquí tenemos un ejemplo de tabla sencilla:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \begin{table}
     \begin{tabular}{|ll|}
       \hline % Separador
@@ -336,7 +336,7 @@ que van dentro de la línea y las que tienen línea propia. Las primeras
 van entre signos de dólar y las segundas dentro del entorno
 \lstinline!equation!. Aquí tenemos un ejemplo:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 Imaginemos que $a=1$ en la siguiente ecuación:
 \begin{equation}
 ax^2 + 1 = 0

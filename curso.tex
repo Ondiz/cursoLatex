@@ -1,31 +1,46 @@
 \documentclass[a4paper,10pt]{book}
 
+\usepackage{ifxetex,ifluatex}
+
 % IDIOMA
 
-% Si se compila con pdflatex
-%\usepackage[spanish,es-tabla]{babel} 
-%\usepackage[utf8]{inputenc}
-%\usepackage[T1]{fontenc}
-%\usepackage{lmodern}
-
-% Idioma para xelatex
-
-\usepackage{polyglossia}
-\setdefaultlanguage{spanish}
-
-% Fuente
-\usepackage{fontspec}
-\setmainfont{DejaVu Serif}
-
-\usepackage{xunicode}
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{spanish}
+  % Fuente
+  \usepackage{fontspec}
+  \setmainfont{DejaVu Serif}
+  
+  % Tabla en lugar de cuadro, listings como código
+  \addto\captionsspanish{%
+  \renewcommand{\tablename}{Tabla}%
+  \renewcommand{\listtablename}{Índice de tablas}%
+  }
+  
+\else
+  \usepackage[spanish,es-tabla]{babel}
+  \usepackage[utf8]{inputenc} 
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
 
 \usepackage{amsmath, amsthm, amssymb}
 
+% Mejora el aspecto del documento
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-\usepackage{hyperref}
+
+% Hipervínculos
+
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
 
 \hypersetup{unicode=true,
             colorlinks=true,
@@ -45,7 +60,8 @@
 \definecolor{ballblue}{rgb}{0.13, 0.67, 0.8}
 \definecolor{frenchblue}{rgb}{0.0, 0.45, 0.73}
 
-\lstset{basicstyle=\small\ttfamily,
+\lstset{	
+	basicstyle=\small\ttfamily,
         breaklines=true,
         columns=fixed,
         extendedchars=true,
@@ -75,15 +91,9 @@
 {Ü}{{\"U}}1
 }
 
-\renewcommand{\lstlistingname}{Código}
-
+\addto\captionsspanish{\renewcommand{\lstlistingname}{Código}}
 
 \usepackage{longtable,booktabs}
-% Cambiar nombre de tablas teniendo en cuenta polyglossia
-\addto\captionsspanish{%
-  \renewcommand{\tablename}{Tabla}%
-  \renewcommand{\listtablename}{Índice de tablas}%
-}
 
 \usepackage{graphicx,grffile}
 
@@ -116,5 +126,8 @@
 \input{Contenido/03.DocumentoBasico}
 
 % Bibliografía
+
+% \bibliographystyle{plain}
+%\bibliography{bib}
 
 \end{document}

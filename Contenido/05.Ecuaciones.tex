@@ -1,0 +1,385 @@
+Siguiendo con el desmenuce de la sintaxis, vamos a hablar de ecuaciones,
+el motivo por el que mucha gente (\emph{científicos}) se pasan a LaTeX.
+Como dijimos el otro día, hay dos tipos de ecuaciones en LaTeX:
+
+\begin{itemize}
+\item
+  las que van \textbf{dentro de una línea}, que se escriben entre signos
+  de dólar y se suelen conocer como \emph{inline}
+\item
+  las que tienen \textbf{línea propia}, que usan el entorno
+  \lstinline!equation! o el atajo\footnote{Yo no suelo usar el atajo
+    porque me resulta más difícil de leer, pero, oyes, para gustos
+    colores.} \lstinline!\[...\]!
+\end{itemize}
+
+Aquí tenemos un ejemplo usando los dos tipos:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{equation}
+
+  e^{i\pi} + 1 = 0
+
+\end{equation}
+
+donde $i =\sqrt{-1}$
+\end{lstlisting}
+
+Como veis, escribimos las ecuaciones mediante comandos, algo que
+inicialmente parece un atraso pero que cuando cogemos un poco de
+práctica, es terriblemente eficaz. Si estáis usando un editor
+específico, tendréis una barra con los símbolos más usados, es una buena
+forma de empezar con las ecuaciones. Más abajo os hablo de la sintaxis
+más en detalle y doy unos ejemplos. Al escribir ecuaciones es
+recomendable cargar los siguientes paquetes:
+
+\begin{itemize}
+\item
+  \href{https://www.ctan.org/pkg/amsmath}{\lstinline!amsmath!} (AMS
+  Math), que mejora el comportamiento y el aspecto de las ecuaciones.
+  Nos permite, por ejemplo, añadir un asterisco en el entorno
+  \lstinline!equation! para crear ecuaciones sin numerar.
+\item
+  \href{https://www.ctan.org/pkg/amsthm}{\lstinline!amsthm!} (AMS
+  Theorem), que define los entornos teorema y demostración.
+\item
+  \lstinline!amssymb! (AMS Symbol), que carga a su vez
+  \lstinline!amsfonts! e incluye una colección de símbolos matemáticos.
+\end{itemize}
+
+Podemos cargarlos todos a la vez añadiendo esta línea al
+\emph{preámbulo}\footnote{Recordemos: el \emph{preámbulo} es lo que hay entre la
+definición del documento (\lstinline!\\documentclass!) y el inicio del entorno
+\lstinline!document! (\lstinline!\\begin\{document\}!).}:
+
+\begin{lstlisting}[language={[latex]tex}]
+\usepackage{amsmath, amsthm, amssymb}
+\end{lstlisting}
+
+Ese AMS que precede a todos ellos viene de
+\href{http://www.ams.org/home/page}{\emph{American Mathematical
+Society}}, los que originalmente desarrollaron estos paquetes.
+
+\section{Comandos}\label{sec:comandos}
+
+Vamos a ver un poco de sintaxis, pero antes de nada os dejo un par de
+herramientas interesantes sobre todo para los novatillos (o
+\emph{Nóbeles} que decía mi profe de autoescuela, \emph{conductor Nóbel}
+(sic)):
+
+\begin{itemize}
+\item
+  \textbf{Editores de ecuaciones online}: hasta que le vayamos cogiendo
+  el callo a las ecuaciones, aparte de la barrita del IDE tenemos
+  editores online como
+  \href{http://www.numberempire.com/texequationeditor/equationeditor.php}{este}
+  o
+  \href{http://www.numberempire.com/texequationeditor/equationeditor.php}{este
+  otro} que es más cuco.
+\item
+  \textbf{Detexify}: si no sabemos cómo se llama un símbolo y, por lo
+  tanto, no podemos buscar su comando tenemos
+  \href{http://detexify.kirelabs.org/classify.html}{Detexify}, un
+  cacharro en el que pintamos el símbolo que estamos buscando y nos
+  localiza los más parecidos. Especialmente útil con la típica duda de
+  \emph{¿esa letra es xi o chi?} o mi favorita \emph{¿cómo se llama la R
+  esa gorda de los números reales?}. Hacemos el dibujillo y hala.
+\end{itemize}
+
+\subsection{Símbolos comunes}\label{sec:simbolos}
+
+Símbolos hay a pilas, os voy a poner unos pocos comandos aquí pero lo
+mejor es que hurguéis.
+
+\begin{itemize}
+\item
+  \emph{Sumas, restas y exponenciales}: se hacen con el símbolo de toda
+  la vida \lstinline!+!, \lstinline!-! y \lstinline!^!
+\item
+  \emph{Multiplicaciones}: aquí hay variedad según los gustos, si
+  queremos el punto usamos el comando \lstinline!\cdot! si nos gusta más
+  el aspa usamos \lstinline!\times!. Hacedme un favor y no me uséis ni
+  la equis ni el asterisco.
+\item
+  \emph{Raíces}: se hacen con el comando \lstinline!\sqrt{argumento}! si
+  son raíces cuadradas y añadiendo el numerito como argumento opcional
+  (es decir, entre corchetes) para cualquier otra
+  \lstinline!\sqrt[raíz]{argumento}!
+\item
+  \emph{Integrales}: funcionan con el comando \lstinline!\int!, si
+  queremos que tengan límites definidos no tenemos más que escribir
+  \lstinline!\int_{inferior}^{superior}!. Por ejemplo, esta integral
+  impropia \(\int_{0}^{\infty}\) se conseguiría así
+  \lstinline!\int_{0}^{\infty}!. Si os fijáis las integrales, a
+  diferencia de las raíces, no llevan llaves. Esto ocurre porque la raíz
+  necesita saber cómo de largo es el contenido, la integral es
+  simplemente el chirimbolo.
+\item
+  \emph{Sumatorios}: son como las integrales pero con el comando
+  \lstinline!\sum!
+\item
+  \emph{Fraciones}: tan sencillas como
+  \lstinline!\frac{numerador}{denominador}!
+\end{itemize}
+
+Tenéis en las referencias listas de símbolos para que les echéis una
+ojeada si os parece.
+
+\subsection{Letras griegas}\label{sec:letrasGriegas}
+
+Una de las mejores cosas de LaTeX en mi opinión es su método para
+escribir letras griegas, tan sencillo como escribir su nombre en
+minúsculas para la letra en minúscula y ponerle la primera en mayúscula
+para una letra griega en mayúscula. Se entenderá mejor con un ejemplo:
+
+\begin{quote}
+\lstinline!\omega! crea ω (\emph{omega minúscula}) y \lstinline!\Omega!
+crea a su vez Ω (\emph{omega mayúscula})
+\end{quote}
+
+\subsection{Operadores}\label{sec:operadores}
+
+Los operadores son las funciones cuyo nombre se escribe en texto, como
+\emph{sin} o \emph{ln}. LaTeX tiene algunos de ellos definidos y es
+importante usarlos para que las ecuaciones nos queden bien. Va un
+ejemplo:
+
+\begin{lstlisting}[language={[latex]tex}]
+\sin^2 x + \cos^2 x = 1
+\end{lstlisting}
+
+Que crea: 
+
+\begin{equation*}
+\sin^2 x + \cos^2 x = 1 
+\end{equation*}
+
+\subsection{Matrices}\label{sec:matrices}
+
+Funcionan de manera similar a las tablas (las columnas se separan con el
+ampersand y se salta de línea con \lstinline!\\!), pero usan el entorno
+\lstinline!matrix! y relacionados. El entorno \lstinline!matrix! nos
+crea una matriz sin delimitadores, tendríamos que añadírselos nosotros.
+Los entornos \lstinline!pmatrix!, \lstinline!vmatrix!,
+\lstinline!Vmatrix! \lstinline!bmatrix! y \lstinline!Bmatrix! nos añaden
+respectivamente paréntesis, barras\footnote{Como las de un determinante},
+barras\footnote{Como las de una norma} dobles, corchetes y llaves. Estos
+entornos que cito centran el contenido, si quisiéramos cambiar la
+alineación tendríamos que usar su variantes con asterisco y darle un
+argumento. Este sería un ejemplo de una matriz sencilla:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{equation}
+  \begin{matrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i \\
+  \end{matrix}
+\end{equation}
+\end{lstlisting}
+
+\subsubsection{Sobre los paréntesis}\label{sec:parentesis}
+
+Si no os apetece (como a mí) memorizar que el \lstinline!pmatrix! pone
+un paréntesis y el \lstinline!vmatrix! no sé qué, podéis poner los
+delimitadores vosotros según os parezca y usar siempre el entorno
+\lstinline!matrix! (es lo que yo hago) pero hay que tener en cuenta una
+cosa, en LaTeX hay dos tipos de paréntesis: los de tamaño fijo y los que
+se adaptan al contenido. Los de tamaño fijo son tal cual el símbolo
+según le damos en el teclado, los adaptativos son comandos formados por
+\lstinline!\left! o \lstinline!\right!, según el lado, más el símbolo.
+Por ejemplo, \lstinline!\left(! nos crea el paréntesis adaptativo del
+lado izquierdo, \lstinline!\right]! el corchete adaptativo de la derecha
+y así con todos. Los únicos un poco diferentes son los comandos para las
+llaves, que requieren una barra de escape y son respectivamente
+\lstinline!\left\{! y \lstinline!\right\}! Por ejemplo, para rodear la
+matriz anterior con corchetes tendríamos que hacer lo siguiente:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{equation}
+  \left[
+  \begin{matrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i \\
+  \end{matrix}
+  \right]
+\end{equation}
+\end{lstlisting}
+
+\section{Gestión del espacio}\label{sec:espacio}
+
+Al igual que con el texto, LaTeX nos gestiona el espacio entre los
+símbolos él solito. En general lo mejor es dejarle hacer, pero hay en
+ocasiones en hay cosas que quedan \emph{feas} y hay que tocarlas un
+poquito a mano. Los nazis del LaTeX nos dirán que no hay que hacer estas
+cosas, que las decisiones de LaTeX deben ser respetadas. Yo no estoy de
+acuerdo, la cuestión es que las ecuaciones queden a nuestro gusto. Para
+ello utilizo estos dos chismes, aunque hay muchos más, que no son
+específicos de las ecuaciones pero es donde suelen resultar más
+necesarios:
+
+\begin{itemize}
+\item
+  \lstinline!\,!: nos genera un espacio en blanco estrecho
+\item
+  \lstinline!~!: nos crea un
+  \href{https://es.wikipedia.org/wiki/Espacio_duro}{\emph{espacio
+  duro}}, es decir, un espacio que impide que se salte de línea en
+  medio.
+\end{itemize}
+
+Como tampoco soy una sabia de la tipografía con estos dos me apaño, en
+las referencias tenéis más y mejores explicaciones si os va el tema.
+
+\section{Referencias cruzadas}\label{sec:refCruzadas}
+
+Igual que las imágenes, las ecuaciones también se pueden referenciar
+haciendo uso de los comandos \lstinline!\label! y \lstinline!\ref!. El
+primero de ellos nos permite darle un nombre identificativo a una
+ecuación y el segundo nos la cita. Al igual que ocurría con las figuras,
+para poder añadir una etiqueta a una ecuación es necesario utilizar el
+entorno \lstinline!equation!, no nos vale para las ecuaciones
+\emph{inline}. Veamos cómo citaríamos la ecuación del primer ejemplo:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{equation}
+  e^{i\pi} + 1 = 0
+  \label{eq:euler}
+\end{equation}
+
+Como vemos en la Ecuación \ref{eq:euler}
+\end{lstlisting}
+
+Que nos daría este resultado:
+
+\begin{equation*} 
+  e^{i\pi} + 1 = 0
+\end{equation*}
+
+Como vemos en la Ecuación 1
+
+Añadir \lstinline!eq:! a la etiqueta no es necesario pero nos facilita
+el trabajo al no tener las etiquetas para las figuras, las secciones y
+demás elementos mezclados. También podemos definir un comando para que
+nos añada la palabra \emph{Ecuación} al número. Os voy a decir cómo lo
+haríamos aunque todavía no sepamos crear comandos para que veáis que es
+sencillito\footnote{Creo que hay una manera mejor de hacer de definir
+  este comando pero no me acuerdo y soy completamente incapaz de
+  encontrarlo.}:
+
+\begin{lstlisting}[language={[latex]tex}]
+% Estructura \newcommand{\nombre}[nºargs]{Descripción}
+\newcommand{\refeq}[1]{Ecuación~\ref{#1}}
+\end{lstlisting}
+
+Esto mismo lo consigue el comando
+\href{https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing\#The_hyperref_package}{\lstinline!\\autoref!
+del paquete \lstinline!hyperref!} con la ventaja de que nos pone la
+palabra correcta en todos los casos, ya sean tablas, figuras o
+ecuaciones sin necesidad de definir un comando para cada uno.
+
+\section{Grupos de ecuaciones}\label{sec:gruposEc}
+
+Otro tema interesante es poder escribir un grupo de ecuaciones que
+comparta la misma etiqueta. Esto es posible (¡como todo en LaTeX!)
+gracias a diferentes entornos aunque yo solo voy a hablar de mi
+favorito: \lstinline!align! del paquete \lstinline!amsmath!. Nos permite
+crear un sistema de ecuaciones que alineará según el símbolo que
+marquemos con un ampersand. Por ejemplo, las 3 leyes de la termodinámica
+quedarían así, alineadas según el símbolo de igual:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{align}
+  \Delta U &= Q -W \\
+  \delta S &= T \mathrm{d}S \\
+  S &=\mathrm{k_B}\ln\Omega
+\end{align}
+\end{lstlisting}
+
+\begin{align*}
+  \Delta U &= Q -W \\
+  \delta S &= T \mathrm{d}S \\
+  S &=\mathrm{k_B}\ln\Omega
+\end{align*}
+
+Al igual que hacíamos en el entorno \lstinline!equation!, con
+\lstinline!align! también podemos añadir una etiqueta o usar el
+asterisco para que no nos numere la ecuación.
+
+\section{Formato}\label{sec:formato}
+
+Evidentemente, LaTeX nos permite adaptar el formato de nuestras
+ecuaciones a nuestros gustos o exigencias externas (véase formato de
+revistas científicas, normas ISO \ldots{}). Un formato muy típico es el
+siguiente:
+
+\begin{itemize}
+\item
+  \emph{Cursiva para las variables}: LaTeX nos lo hace por defecto
+\item
+  \emph{Operadores y constantes rectos}: para los operadores del propio
+  LaTeX como \lstinline!\sin! o \lstinline!\log! no tenemos que hacer
+  nada, los endereza de por sí. Para el resto tenemos dos opciones: usar
+  \lstinline!\mathrm! o definirlos como operadores en el preámbulo con
+  \lstinline!\DeclareMathOperator! del paquete \lstinline!amsmath!. De
+  esto último hablaremos más adelante, pero como sé que sois ansiosos os
+  pongo cómo se haría:
+\end{itemize}
+
+\begin{lstlisting}[language={[latex]tex}]
+\usepackage{amsmath}
+\DeclareMathOperator{\comando}{descripción}
+\end{lstlisting}
+
+\begin{itemize}
+\item
+  \emph{Matrices y vectores en negrita}: para ello usaremos
+  \lstinline!\mathbf! para las letras y \lstinline!\boldsymbol! para los
+  símbolos o letras griegas.
+\end{itemize}
+
+Un ejemplo con todos ellos podría ser la definición de la matriz de
+rigidez para el método de los elementos finitos (me sale el ingeniero
+mecánico interior):
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{equation}
+  \mathbf{K}=\int_V \mathbf{B}^\intercal \mathbf{D B}\mathrm{d}x\mathrm{d}y \mathrm{d}z
+\end{equation}
+\end{lstlisting}
+
+que quedaría algo de este estilo:
+
+\begin{equation*}
+  \mathbf{K}=\int_V \mathbf{B}^\intercal\mathbf{D B}\mathrm{d}x \mathrm{d}y \mathrm{d}z
+\end{equation*}
+
+\section{Referencias}\label{sec:referencias}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Mathematics}{\emph{LaTeX/Mathematics}
+en WikiBooks}
+
+\href{https://www.sharelatex.com/learn/List_of_Greek_letters_and_math_symbols}{\emph{List
+of Greek letters and math symbols} en ShareLaTeX}
+
+\href{http://latex.wikia.com/wiki/Matrix_environments}{\emph{Matrix
+environments} en LaTeX Wiki}
+
+\href{https://www.sharelatex.com/learn/Brackets_and_Parentheses}{\emph{Brackets
+and Parentheses} en ShareLaTeX}
+
+\href{https://www.sharelatex.com/learn/Operators}{\emph{Operators} en
+ShareLaTeX}
+
+\href{http://tex.stackexchange.com/questions/74353/what-commands-are-there-for-horizontal-spacing\#74354*}{\emph{What
+commands are there for horizontal spacing?} en StackExchange}
+
+\href{http://www.colorado.edu/physics/phys4610/phys4610_sp15/PHYS4610_sp15/Home_files/LaTeXSymbols.pdf}{\emph{Lista
+de símbolos matemáticos} (pdf)}
+
+\href{http://tex.stackexchange.com/questions/32100/what-does-each-ams-package-do}{\emph{What
+does each AMS package do?} en StackExchange}
+
+\href{http://moser-isi.ethz.ch/docs/typeset_equations.pdf}{\emph{How to
+typeset equations in LaTeX} (pdf)}

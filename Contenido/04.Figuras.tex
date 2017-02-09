@@ -1,0 +1,305 @@
+Decíamos que para insertar figuras nos hacían falta dos cosas:
+
+\begin{itemize}
+\item
+  El paquete
+  \href{https://ctan.org/pkg/graphicx}{\lstinline!graphicx!}, que sustituye al paquete 
+  \lstinline!graphics! y los ayuda a la hora de meter las imágenes y compilar.
+\item
+  El comando \lstinline!\includegraphics[opciones]{ruta}!. Aprovechamos
+  para aprender que los parámetros obligatorios van entre llaves y los
+  opcionales entre corchetes.
+\end{itemize}
+
+Vamos a dividir esta entrada en dos partes: insertar una única figura e
+insertar una figura formada por subfiguras.
+
+\subsection{Una sola figura}\label{sec:unaFigura}
+
+Añadir una figura es superfácil. Solo tenemos que hacer:
+
+\begin{lstlisting}[language={[latex]tex}]
+\includegraphics{ruta_a_la_figura} 
+\end{lstlisting}
+
+No hace falta ni siquiera que le pongamos la extensión, él buscará la
+imagen correspondiente. Evidentemente, esto tiene un problema: nos
+pondrá la imagen \emph{ahí mismo} y de su tamaño original. Lo primero
+aun no lo podemos solucionar pero el tamaño podemos ajustarlo con las
+opciones.
+
+\subsubsection{Opciones}\label{opciones}
+
+Las opciones son lo que le pasamos al comando entre los corchetes y nos
+permiten controlar cosas de la imagen. Aquí os recopilo las que yo uso
+más:
+
+\begin{itemize}
+\item
+  \lstinline!height!: la altura que debe tener la figura, escalará el
+  gráfico hasta que tenga esta altura
+\item
+  \lstinline!width!: la anchura que debe tener la figura, escalará el
+  gráfico hasta que tenga esta anchura
+\item
+  \lstinline!scale!: cuánto hay que escalar la figura, sobre 1
+\item
+  \lstinline!angle!: cuánto hay que girar la figura, en grados
+\end{itemize}
+
+Por ejemplo, si queremos reducir la figura a la mitad y girarla 90
+grados hacemos:
+
+\begin{lstlisting}[language={[latex]tex}]
+\includegraphics[angle=90,scale=0.5]{ruta_a_la_figura}
+\end{lstlisting}
+
+Es interesante utilizar \lstinline!height! y \lstinline!width! en
+combinación con las
+\href{https://en.wikibooks.org/wiki/LaTeX/Lengths}{longitudes que define
+LaTeX}, por ejemplo, para que una figura tenga la anchura del texto
+haríamos:
+
+\begin{lstlisting}[language={[latex]tex}]
+\includegraphics[width=\textwidth]{ruta_a_la_figura}
+\end{lstlisting}
+
+Podemos modificar también esta longitud, por ejemplo, para que sea un
+70\% de la anchura del texto:
+
+\begin{lstlisting}[language={[latex]tex}]
+\includegraphics[width=0.7\textwidth]{ruta_a_la_figura}
+\end{lstlisting}
+
+La ventaja de este sistema es que si cambiamos los márgenes la figura se
+adaptará sola. Ahora vamos a ver cómo gestionamos la posición de la
+figura.
+
+\subsubsection{Figuras flotantes}\label{sec:figFlotantes}
+
+En la pasada entrada os hablé de los \emph{objetos flotantes} y de cómo
+convertíamos una figura en flotante al usar el entorno
+\lstinline!figure!. Esto nos permite, aparte de ponerle un pie de figura
+y una referencia, decidir su posición en la hoja. También tenemos la
+opción de
+\href{http://texblog.org/2010/05/13/wrap-text-around-figures-and-tables/}{rodear
+la imagen de texto} con el entorno \lstinline!wrapfigure!, os lo dejo de
+deberes.
+
+\paragraph{Posición}\label{sec:posicion}
+
+Cuando digo decidir no digo \emph{la versión Word} de decidir. LaTeX de
+por sí pone las figuras donde mejor quedan (según él) y nosotros le
+damos sugerencias de lo que preferimos. Podemos obligarle a poner las
+figuras en determinado lugar, pero no suele ser muy buena idea, es mejor
+reservar esta opción para los casos extremos. Esta es la sintaxis:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{figure}[posición]
+  \includegraphics[opciones]{ruta}
+\end{figure}
+\end{lstlisting}
+
+La opción \lstinline!posición! puede tomar estos valores:
+
+\begin{itemize}
+\item
+  \lstinline!h! (\emph{here}), le decimos que ponga la imagen más o
+  menos aquí
+\item
+  \lstinline!t! (\emph{top}), preferiblemente en la parte superior de la
+  página
+\item
+  \lstinline!b! (\emph{bottom}), preferiblemente en la parte inferior de
+  la página
+\item
+  \lstinline!p! (\emph{page}), que junte los objetos flotantes en una
+  página
+\item
+  \lstinline"!" que ignore sus reglas internas de posicionamiento
+\item
+  \lstinline!H! que ponga la imagen \emph{justo aquí}, similar a
+  \lstinline"h!" y con muchas papeletas de hacer cosas rarunas
+\end{itemize}
+
+Estas opciones se pueden combinar, por ejemplo, \lstinline!tb! solo
+probará arriba y abajo. El orden no afecta. Otra cosa a tener en cuenta
+es la alineación de la figura. Por defecto se alinean a la izquierda,
+podemos cambiarla con los siguientes comandos:
+
+\begin{itemize}
+\item
+  \lstinline!\centering!: para centrar
+\item
+  \href{http://printwiki.org/Ragged_Left}{\lstinline!\\raggedleft!}: para
+  alinear a la derecha
+\item
+  \lstinline!\raggedright!: para alinear a la izquierda
+\end{itemize}
+
+que pondríamos dentro del entorno \lstinline!figure! antes de insertar
+la imagen:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{figure}[posición]
+  \centering
+  \includegraphics[opciones]{ruta}
+\end{figure}
+\end{lstlisting}
+
+\paragraph{Pie de figura y referencia}\label{sec:caption}
+
+Como hemos dicho, el entorno \lstinline!figure! nos permite también
+poner un pie de figura y una etiqueta a la figura:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{figure}[posición]
+  \includegraphics[opciones]{ruta}
+  \caption{Pie de figura}
+  \label{etiqueta}
+\end{figure}
+\end{lstlisting}
+
+La etiqueta sirve para hacer referencia a la figura en el texto con el
+comando \lstinline!\ref{etiqueta}!, por ejemplo:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{figure}[h]
+  \includegraphics[scale=0.7]{Figuras/gatos}
+  \caption{Unos gatos molones}
+  \label{fig:gatos}
+\end{figure}
+
+Como se ve en la Figura \ref{fig:gatos}, hay gatos negros y blancos
+\end{lstlisting}
+
+LaTeX nos numerará las figuras correctamente el solito y citará la
+figura correspondiente cuando se lo pidamos. Una idea inteligente es
+etiquetar las cosas de manera que luego no nos volvamos locos porque no
+sabemos si una determinada etiqueta hace referencia a una ecuación, a
+una tabla o a un capítulo. Cada uno aquí tiene sus maneras, una opción
+podría ser:
+
+\begin{itemize}
+\item
+  \lstinline!fig:! para las figuras
+\item
+  \lstinline!eq:! para las ecuaciones
+\item
+  \lstinline!sec:! para las secciones
+\end{itemize}
+
+Tampoco hay que obsesionarse, claro, mientras seamos coherentes.
+
+\subsection{Sobre formatos}\label{sec:formatos}
+
+Una última nota antes de pasar a hablar de múltiples figuras. Cuando
+hablábamos de compiladores dijimos que LaTeX se puede compilar a
+\emph{dvi} y \emph{pdf} dependiendo de si usamos \lstinline!latex! o
+\lstinline!pdflatex! (o las otras opciones con y sin \lstinline!la!).
+Para las imágenes esto es importante: \lstinline!latex! solo compilará
+si las imágenes están en formato \emph{eps}; \lstinline!pdflatex!, en
+cambio, acepta \emph{pdf}, \emph{png} y \emph{jpg}. El caso del formato
+\emph{eps} al compilar a \emph{pdf} es especial, técnicamente no metemos
+la imagen en \emph{eps}, sino que por detrás se llama al programa
+\href{https://www.ctan.org/pkg/epstopdf}{\lstinline!epstopdf!}, se
+convierte a \emph{pdf} y se inserta. En general se hace solo, pero
+depende del programa, Pandoc, por ejemplo,
+\href{https://github.com/jgm/pandoc/commit/a9628d0745784f6f99edfca008d64dcffeb74bc8}{no
+lo hace}. Os lo digo porque tengo compañeros de curro
+\emph{convencidísimos} de que ellos meten las imágenes en \emph{eps} en
+sus documentos a pesar de que tienen una carpeta llena de \emph{pdfs}
+con nombres del tipo \lstinline!figure-eps-converted-to.pdf!. Y les
+gritan a los otros en plan: \emph{¿Pero cómo metes eso en} pdf \emph{?
+¿No ves que pierdes calidad?} Una cosa interesante de
+\lstinline!epstopdf! es que lo podemos usar aparte en la terminal, por
+ejemplo:
+
+\begin{lstlisting}[language=bash]
+epstopdf archivo.eps
+\end{lstlisting}
+
+nos creará \lstinline!archivo.pdf!.
+\href{https://ondahostil.wordpress.com/2016/05/31/lo-que-he-aprendido-bucle-para-pasar-de-eps-a-pdf-en-cmd/}{Aquí}
+hice un bucle y todo que me convertía todas las imágenes de la carpeta.
+
+\subsection{La fiesta de las figuras}\label{sec:fiestaFiguras}
+
+Ahora vamos a ver cómo hay que hacer si queremos incluir una figura
+formada por subfiguras, es decir, que un grupo de figuras que van juntas
+y comparten pie de figura. Para esto se usaba primero el paquete
+\lstinline!subfigure!, luego
+\href{http://www.ctan.org/pkg/subfig}{\lstinline!subfig!} y ahora se
+supone que debe usarse
+\href{https://www.ctan.org/pkg/subcaption}{\lstinline!subcaption!}.
+Resulta que \lstinline!subfig! tiene problemas con \lstinline!hyperref!
+(el paquete de hacer hipervínculos) y \lstinline!subcaption! no. Además,
+\lstinline!subcaption! no es compatible con ninguno de los dos
+anteriores. El paquete \lstinline!subcaption! define el entorno
+\lstinline!subfigure!, que se usa a su vez dentro del entorno
+\lstinline!figure!. Tiene esta pinta:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{subfigure}[posición]{ancho}
+  % Contenido
+\end{subfigure}
+\end{lstlisting}
+
+Dentro del entorno \lstinline!subfigure! escribimos exactamente lo mismo
+que pondríamos dentro del entorno \lstinline!figure!. Por ejemplo, si
+quisiéramos poner dos imágenes en paralelo haríamos algo así:
+
+\begin{lstlisting}[language={[latex]tex}]
+\documentclass{article}
+% Necesitamos los paquetes graphicx, caption y subcaption
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\begin{document}
+  \begin{figure}
+    \centering
+    \begin{subfigure}[h]{0.45\textwidth}
+      \includegraphics\[width=\textwidth\]{figura1}
+      \caption{Pie de figura1}
+      \label{fig:figura1}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{figura2}
+      \caption{Pie de figura2}
+      \label{fig:figura2}
+    \end{subfigure}
+    \caption{Pie general}
+  \end{figure}
+\end{document}
+\end{lstlisting}
+
+Si os fijáis, no hay separación entre el fin del primer entorno
+\lstinline!subfigure! y el inicio del segundo, si ahí dejamos una línea
+en blanco, la siguiente figura en lugar de ponerla en paralelo la pondrá
+debajo. Ahí en medio también podemos decirle cómo de separadas queremos
+las figuras, pero para eso necesitamos aprender primero cómo funciona el
+espacio blanco en LaTeX y eso es tema para otro día. De momento tenéis
+referencias y manuales enlazados para que cambiéis las opciones porque,
+ya sabéis, que si hurgar no se aprende. ¡Espero vuestros comentarios!
+
+\section{Referencias}\label{referencias4}
+
+\href{http://ctan.math.utah.edu/ctan/tex-archive/macros/latex/required/graphics/grfguide.pdf}{\emph{Packages
+in the \lstinline!graphics! bundle} (pdf)}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics}{\emph{LaTeX/Importing
+Graphics} en Wikibooks}
+
+\href{http://tex.stackexchange.com/questions/1072/which-graphics-formats-can-be-included-in-documents-processed-by-latex-or-pdflat}{\emph{Which
+graphics formats can be included in documents processed by latex or
+pdflatex?} en StackExchange}
+
+\href{https://www.sharelatex.com/learn/Inserting_Images}{\emph{Inserting
+Images} en ShareLaTeX}
+
+\href{http://tex.stackexchange.com/questions/39017/how-to-influence-the-position-of-float-environments-like-figure-and-table-in-lat}{\emph{How
+to influence the position of float environments like figure and table in
+LaTeX?} en StackExchange}
+
+\href{http://tex.stackexchange.com/questions/13625/subcaption-vs-subfig-best-package-for-referencing-a-subfigure}{\emph{subcaption
+vs.~subfig: Best package for referencing a subfigure} en StackExchange}

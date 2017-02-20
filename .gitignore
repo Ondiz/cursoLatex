@@ -6,10 +6,10 @@ curso.*
 Ejemplos/ecuaciones.*
 !Ejemplos/ecuaciones.tex
 
-# Ignorar carpeta de Jekyll
-
-_site/*
-
 # Ignorar archivos de Emacs
 
-*\~ 
+*\~
+
+# Ignorar build de Jekyll
+
+docs/_site/

@@ -1,0 +1,390 @@
+---
+layout: default
+title: LaTeX - Documento básico
+---
+
+<h1 id="un-documento-y-sus-partes">Un documento y sus partes</h1>
+<p>Un documento escrito en LaTeX tiene esta pinta<label for="ejemplo"
+  class="margin-toggle
+  sidenote-number"></label></span><input type="checkbox"
+  id="ejemplo" class="margin-toggle"/><span class="sidenote">Este
+  ejemplo está adaptado
+  del <a href="https://github.com/ekaitz-zarraga/programming-notes">repo
+  de apuntes de programación</a> de mi señor hermano y mío. Es una
+  versión simplificada.</span>:</p>
+
+{% highlight latex %}
+
+\documentclass[a4paper,10pt]{article}
+
+%%%%%%%%%%%% PREÁMBULO %%%%%%%%%%%%%%%%%%%%%
+
+% Paquetes
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{listings}
+
+% Comandos
+
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Índice de fragmentos de código fuente}
+
+% Opciones
+
+\title{Python 2.*}
+\author{Ondiz Zarraga}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este documento es una pequeña guía de Python 
+\end{abstract}
+
+\tableofcontents
+
+\section{Sobre el lenguaje}
+
+\begin{itemize}
+    \item Interpretado
+    \item Indentación obligatoria
+    \item Distingue mayúsculas - minúsculas
+    \item No hay declaración de variables (\textit{dynamic typing})
+    \item Orientado a objetos  
+    \item Garbage colector: quita los objetos a los que no haga referencia nada
+\end{itemize}
+
+\end{document}
+{% endhighlight %}
+
+<p>El documento tiene dos cosas llamativas:</p>
+<ul>
+  <li><p>Cosas que empiezan por contrabarra,
+    los <strong>comandos</strong></p></li>
+  <li><p>Cachos que van entre un <code>\begin</code> y
+    un <code>\end</code>, los <strong>entornos</strong><p></li>
+</ul>
+<p>Los comandos son la manera en la que nos comunicamos con LaTeX y un
+  entorno es el pedazo donde se aplica un formato.</p>
+<p>Un entorno superimportante es el entorno <code>document</code>, ahí
+  dentro irá el contenido de nuestro documento. Todo lo que va entre la
+  definición de documento (<code>\documentclass</code>) y el inicio del
+  entorno <code>document</code> se conoce
+  como <strong>preámbulo</strong> y es donde se cargan paquetes
+  (<code>\usepackage</code>), se definen comandos y se establecen
+  opciones.</p>
+
+<h1 id="nuestro-primer-documento">Nuestro primer documento</h1>
+
+<p>Ahora que sabemos cómo es un documento vamos a empezar a escribir
+  uno. El documento más básico que podemos hacer es este:</p>
+
+{% highlight latex %}
+\documentclass{article}
+
+\begin{document}
+    Hola
+\end{document}
+{% endhighlight %}
+
+<p>Esto podemos compilarlo con el botoncillo de compilar de nuestro
+  IDE, en la terminar o con Pandoc.</p>
+<p>Para compilar en la terminal haríamos (imaginemos que nuestro
+  documento se llama <code>hola.tex</code>):</p>
+
+{% highlight bash %}
+pdflatex hola.tex
+{% endhighlight %}
+
+<p>Evidentemente podéis compilar también con <code>xelatex</code> de
+  manera equivalente. Si quisiéramos utilizar Pandoc tendríamos que
+  hacer lo siguiente:</p>
+
+{% highlight bash %}
+pandoc hola.tex -o hola.pdf
+{% endhighlight %}
+
+<p>En los tres casos el resultado es el mismo excepto porque Pandoc no
+  nos
+  deja <a href="https://ondahostil.wordpress.com/2016/11/17/lo-que-he-aprendido-archivos-auxiliares-de-latex/">archivos
+    auxiliares</a> por ahí bailando.</p>
+
+<p>¡Ya hemos escrito un documento! Debo reconocer que no es un
+  documento demasiado interesante, para hacer algo más chulo tenemos que
+  aprender un poco más de sintaxis.</p>
+
+<h1 id="un-poco-de-sintaxis">Un poco de sintaxis</h1>
+
+<p>Para poder escribir un documento un poco más interesante tenemos
+  que aprendernos unos pocos comandos, hoy os voy a hablar de algunos
+  sencillos para que le vayáis cogiendo el truco, en las siguientes
+  entregas entraremos más en detalle.</p>
+
+<p>Antes de nada una cosa, aun no hemos aprendido a establecer las
+  opciones de idioma y por lo tanto tendremos problemas en los idiomas
+  con acentos. Si queréis poneros a jugar ya, ponedme esto en el
+  preámbulo, justo debajo de <code>\documentclass</code>:</p>
+
+{% highlight latex %}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+{% endhighlight %}
+
+<p>En el futuro lo analizaremos de ello mejor, pero si os interesa,
+hablé de
+ello <a href="https://ondahostil.wordpress.com/2016/10/14/lo-que-he-aprendido-idiomas-con-acentos-en-latex/">aquí</a>.</p>
+
+<h2 id="título-capítulos-y-secciones">Título, capítulos y secciones</h2>
+
+<p>Una cosa importante de LaTeX es que nos desacopla el contenido del
+  documento de su formato. Con esto quiero decir que nosotros le diremos
+  cuál es el título del documento y dónde comienzan las secciones y él
+  les dará el formato correspondiente según el tipo de documento y las
+  opciones que hayamos establecido previamente.</p>
+
+<p>Pongamos por ejemplo los tipos de documento <code>article</code>
+  y <code>book</code>. Como su nombre indica, el primero se utiliza para
+  escribir artículos y el segundo libros. Como LaTeX es muy listo,
+  cuando le digamos que escriba el título, para el caso del artículo nos
+  lo escribirá en la parte superior de la página con el texto debajo,
+  pero para el caso del libro nos creará una portada. Para ambos casos
+  la sintaxis es exactamente la misma:</p>
+
+
+{% highlight latex %}
+\documentclass{article} % O book
+
+% Definimos el título
+\title{Título del documento}
+
+\begin{document}
+    \maketitle % Creamos el título
+\end{document}
+{% endhighlight %}
+
+<p>Del mismo modo, nosotros solo le tenemos que decir el título de la
+  sección o el capítulo y él le dará el formato correspondiente. Otra
+  diferencia entre las clases <code>article</code> y <code>book</code>
+  es que <code>article</code> no tiene capítulos, como es lógico.</p>
+
+<p>Para definir capítulos y secciones utilizamos los
+  comandos <code>\chapter</code> y <code>\section</code> en el cuerpo
+  del documento, es decir, después de <code>\begin{document}</code>. Por
+  ejemplo:</p>
+
+{% highlight latex %}
+\chapter{Capítulo numerado}
+\section{Primera sección}
+\subsection{Primera subsección}
+
+\chapter*{Capítulo sin numerar}
+\section*{Sección sin numerar}
+{% endhighlight %}
+
+<p>Como veis, podemos usar los comandos de sección y capítulo con el
+  asterisco para que no nos las numere. Otra cosa interesante es el
+  grado de anidación, tenemos secciones, subsecciones,
+  subsubsecciones, párrafos (<code>\paragraph</code>) y subpárrafos
+  (\subparagraph), cada uno con su formato definido. La
+  clase <code>book</code><label for="book" class="margin-toggle
+  sidenote-number"></label></span><input type="checkbox"
+  id="book" class="margin-toggle"/><span class="sidenote">La
+  clase <code>book</code> no es la única que tiene partes y tal, pero
+  de momento así nos vale.</span> también tiene por encima de las
+  secciones, capítulos y partes (<code>\part</code>). Más adelante
+  aprenderemos a personalizar todos estos formatos porque si hay algo
+  bueno que tiene LaTeX es que nos deja cambiar <em>absolutamente
+  todo</em> y con relativa facilidad (gracias a StackExchange,
+  especialmente).</p>
+
+<h2 id="listas">Listas</h2>
+
+<p>Si sois como yo os gustará especialmente este apartado: las
+  listas. LaTeX tiene dos tipos de listas: las numeradas y las sin
+  numerar. Son respectivamente los entornos <code>enumerate</code>
+  e <code>itemize</code>. Se usan exactamente igual, así que solo pongo
+  el ejemplo de uno de ellos:</p>
+
+{% highlight latex %}
+\begin{itemize}
+    \item Primer ítem
+    \item Segundo ítem
+\end{itemize}
+{% endhighlight %}
+
+<p>Lo mejor es que podemos mezclar y anidar estos dos entornos que el
+  simbolito y la indentación cambiarán solos sin que nos tengamos que
+  preocupar. Por ejemplo,</p>
+
+{% highlight latex %}
+\begin{enumerate}
+    \item Primer ítem
+    \item Segundo ítem con subítems
+    \begin{itemize}
+        \item Ítem sin numerar
+    \end{itemize}
+    \item Tercer ítem
+\end{enumerate}
+{% endhighlight %}
+
+<p>Quedará así:</p>
+
+<hr />
+<ol style="list-style-type: decimal">
+  <li>Primer ítem</li>
+  <li>Segundo ítem con subítems
+    <ul>
+      <li>Ítem sin numerar</li>
+  </ul></li>
+  <li>Tercer ítem</li>
+</ol>
+<hr />
+
+<h2 id="imágenes">Imágenes</h2>
+
+<p>Hoy solo vamos a ver como colocar una única imagen, que lo de las
+  imágenes tiene un poco de lío. Lo que debemos saber es lo
+  siguiente:</p>
+<ul>
+  <li><p>Necesitamos llamar al paquete <code>graphicx</code> en el
+    preámbulo. Para eso
+    escribiremos <code>\usepackage{graphicx}</code>
+    entre <code>\documentclass</code>
+    y <code>\begin{document}</code></p></li>
+  <li><p>Las imágenes se insertan con el
+    comando <code>\includegraphics[opciones]{ruta}</code></p></li>
+  <li><p>Si queremos ponerles un pie de figura y una etiqueta, decidir su
+    posición en la página y demás necesitamos el
+    entorno <code>figure</code></p></li>
+</ul>
+<p>Aquí tenemos un ejemplo de cómo insertar una imagen con en el
+  entorno <code>figure</code>:</p>
+
+{% highlight latex %}
+\begin{figure}[h] % opción de posicionamiento
+    \caption{Pie de imagen}
+    \centering % imagen centrada
+    % Imagen 50% de ancho del texto
+    \includegraphics[width=0.5\textwidth]{ruta_a_la_imagen}
+\end{figure}
+{% endhighlight %}
+
+<p>Una cosa importante de LaTeX son los objetos <em>flotantes</em>, es
+  decir, los que si no les obligamos, se colocan en el hueco que mejor
+  les venga del documento. Esto es lo que nos ocurre con las imágenes al
+  usar el entorno <code>figure</code>. Nos ayuda a que no haya huecos
+  chungos en el documento pero a veces junta todas las imágenes en una
+  misma página o al final del documento. Para evitar esto tenemos las
+  opciones de posicionamiento, de las que hablaremos cuando
+  profundicemos en las imágenes.</p>
+
+<h2 id="tablas">Tablas</h2>
+
+<p>Para mí las tablas son lo peor de todo LaTeX. Son la cosa menos
+  amigable que se puede echar uno a la cara. Con un IDE la cosa mejora,
+  pero imaginaros cómo será el tema que la mitad de las veces las creo
+  online <a href="http://www.tablesgenerator.com/">aquí</a> y luego pego
+  el resultado.</p>
+<p>Lo que debemos de saber de las tablas es lo siguiente:</p>
+<ul>
+  <li><p>El contenido se especifica con el
+    entorno <code>tabular</code>. Separemos las celdas con el ampersand y
+    cambiaremos de línea con dos contrabarras.</p></li>
+  <li><p>Si queremos ponerles un pie de tabla y una etiqueta, decidir su
+    posición en la página y demás necesitamos el
+    entorno <code>table</code></p></li>
+  <li><p>Si utilizamos el entorno <code>table</code> la tabla se
+    volverá <em>flotante</em></p></li>
+</ul>
+<p>Aquí tenemos un ejemplo de tabla sencilla:</p>
+
+{% highlight latex %}
+\begin{table}
+    \begin{tabular}{|ll|}
+      \hline % Separador
+      Columna 1 &amp; Columna 2 \\
+      1         &amp; 2         \\
+      3         &amp; 4         \\
+      \hline
+    \end{tabular}
+    \caption {Pie de tabla}
+\end{table}
+{% endhighlight %}
+
+<p>Al igual que con la imágenes, profundizaremos en las tablas más
+adelante.</p>
+
+<h2 id="ecuaciones">Ecuaciones</h2>
+
+<p>Las ecuaciones son la razón por la que mucha gente se pasa a
+  LaTeX. Son muy cucas y escribirlas, una vez cogido el callo, no es un
+  infierno (de nuevo, ¡hola, Word!). Pero no nos vamos a engañar, al
+  principio es <em>muerte y destrucción</em>. Hay dos tipos de
+  ecuaciones en LaTeX: las que van dentro de la línea y las que tienen
+  línea propia. Las primeras van entre signos de dólar y las segundas
+  dentro del entorno <code>equation</code>. Aquí tenemos un ejemplo:</p>
+
+{% highlight latex %}
+Imaginemos que $a=1$ en la siguiente ecuación:
+\begin{equation}
+    ax^2 + 1 = 0
+\end{equation}
+{% endhighlight %}
+
+<p>Del mismo modo que ocurría con las secciones, si utilizamos el
+  asterisco la ecuación no estará numerada.</p>
+<p>El lío con las ecuaciones es que todo se define con comandos, por
+  ejemplo, <code>\frac{numerador}{denominador}</code> se usa para
+  escribir una fracción y <code>\omega</code> para la letra griega
+  omega. Los que uséis un IDE lo tenéis más fácil porque suelen tener
+  una barrita con los símbolos más usados, a los demás les tocará
+  investigar.</p>
+<p>También tenemos otras herramientas que nos pueden ayudar a escribir
+  ecuaciones:</p>
+<ul>
+  <li><p><strong>Editores online</strong>: son editores con su GUI y tal
+      que nos facilitan la tarea cuando todavía no conocemos los comandos de
+      LaTeX, por ejemplo
+      tenemos <a href="http://www.numberempire.com/texequationeditor/equationeditor.php%22">Latex
+	Equation Editor</a>
+      o <a href="https://www.latex4technics.com/">LaTeX4technics</a>.</p></li>
+  <li><p><a href="http://detexify.kirelabs.org/classify.html"><strong>Detexify</strong></a>:
+      un cacharro que nos busca el símbolo de LaTeX más parecido a algo que
+      le pintemos.</p></li>
+</ul>
+<p>Las ecuaciones se merecen una entrada propia y la tendrán.</p>
+
+<h1 id="bonus-opción-markdown">Bonus: opción Markdown</h1>
+
+<p>Si tenemos instalado Pandoc todo lo que hemos explicado aquí
+  podemos conseguirlo escribiendo en Markdown
+  (<a href="http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html">sabor
+    Pandoc</a>) y convirtiendo a pdf. Por ejemplo, podemos meter una
+  imagen como:</p>
+
+{% highlight markdown %}
+![Pie de imagen](/ruta){width=0.7 #etiqueta}
+{% endhighlight %}
+
+
+<h1 id="referencias">Referencias</h1>
+
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Document_Structure"><em>LaTeX/Document Structure</em> en Wikibooks</a></p>
+<p><a href="https://www.sharelatex.com/learn/Environments"><em>Environments</em> en ShareLaTeX</a></p>
+<p><a href="http://www.personal.ceu.hu/tex/environ.htm"><em>Latex Standard Environments</em></a></p>
+<p><a href="http://texblog.org/2013/02/13/latex-documentclass-options-illustrated/"><em>LaTeX documentclass options illustrated</em></a></p>
+<p><a href="https://www.sharelatex.com/learn/Sections_and_chapters"><em>Sections and chapters</em> en ShareLaTeX</a></p>
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Tables"><em>LaTeX/Tables</em> en Wikibooks</a></p>
+<p><a href="https://www.sharelatex.com/learn/Inserting_Images"><em>Inserting images</em> en ShareLaTeX</a></p>
+<p><a href="http://osl.ugr.es/CTAN/info/symbols/comprehensive/symbols-a4.pdf"><em>The Comprehensive LaTeX Symbol List</em></a></p>
+<p><a href="ftp://ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf"><em>Short Math Guide for LaTeX</em></a></p>
+
+<div>
+<p> Anterior: <a href="{{ site.github.url }}/Contenido/02.QueNecesito.html">Qué necesito</a>, Siguiente: <a href="{{ site.github.url }}/Contenido/04.Imagenes.html">Insertando figuras</a> [<a href="{{ site.github.url }}/">Contenido</a>]</p>
+</div>

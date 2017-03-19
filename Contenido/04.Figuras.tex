@@ -14,7 +14,7 @@ Decíamos que para insertar figuras nos hacían falta dos cosas:
 Vamos a dividir esta entrada en dos partes: insertar una única figura e
 insertar una figura formada por subfiguras.
 
-\subsection{Una sola figura}\label{sec:unaFigura}
+\section{Una sola figura}\label{sec:unaFigura}
 
 Añadir una figura es superfácil. Solo tenemos que hacer:
 
@@ -28,7 +28,7 @@ pondrá la imagen \emph{ahí mismo} y de su tamaño original. Lo primero
 aun no lo podemos solucionar pero el tamaño podemos ajustarlo con las
 opciones.
 
-\subsubsection{Opciones}\label{opciones}
+\subsection{Opciones}\label{opciones}
 
 Las opciones son lo que le pasamos al comando entre los corchetes y nos
 permiten controlar cosas de la imagen. Aquí os recopilo las que yo uso
@@ -75,7 +75,7 @@ La ventaja de este sistema es que si cambiamos los márgenes la figura se
 adaptará sola. Ahora vamos a ver cómo gestionamos la posición de la
 figura.
 
-\subsubsection{Figuras flotantes}\label{sec:figFlotantes}
+\subsection{Figuras flotantes}\label{sec:figFlotantes}
 
 En la pasada entrada os hablé de los \emph{objetos flotantes} y de cómo
 convertíamos una figura en flotante al usar el entorno
@@ -86,7 +86,7 @@ opción de
 la imagen de texto} con el entorno \lstinline!wrapfigure!, os lo dejo de
 deberes.
 
-\paragraph{Posición}\label{sec:posicion}
+\subsubsection{Posición}\label{sec:posicion}
 
 Cuando digo decidir no digo \emph{la versión Word} de decidir. LaTeX de
 por sí pone las figuras donde mejor quedan (según él) y nosotros le
@@ -147,7 +147,7 @@ la imagen:
 \end{figure}
 \end{lstlisting}
 
-\paragraph{Pie de figura y referencia}\label{sec:caption}
+\subsubsection{Pie de figura y referencia}\label{sec:caption}
 
 Como hemos dicho, el entorno \lstinline!figure! nos permite también
 poner un pie de figura y una etiqueta a la figura:
@@ -191,7 +191,7 @@ podría ser:
 
 Tampoco hay que obsesionarse, claro, mientras seamos coherentes.
 
-\subsection{Sobre formatos}\label{sec:formatos}
+\section{Sobre formatos}\label{sec:formatos}
 
 Una última nota antes de pasar a hablar de múltiples figuras. Cuando
 hablábamos de compiladores dijimos que LaTeX se puede compilar a
@@ -223,7 +223,7 @@ nos creará \lstinline!archivo.pdf!.
 \href{https://ondahostil.wordpress.com/2016/05/31/lo-que-he-aprendido-bucle-para-pasar-de-eps-a-pdf-en-cmd/}{Aquí}
 hice un bucle y todo que me convertía todas las imágenes de la carpeta.
 
-\subsection{La fiesta de las figuras}\label{sec:fiestaFiguras}
+\section{La fiesta de las figuras}\label{sec:fiestaFiguras}
 
 Ahora vamos a ver cómo hay que hacer si queremos incluir una figura
 formada por subfiguras, es decir, que un grupo de figuras que van juntas

@@ -1,0 +1,218 @@
+En el capítulo anterior estuvimos hablando de los diferentes estilos que
+le podemos dar al texto, ahora nos centraremos en el formato de la
+propia página. Vamos a ver cómo configurar cuatro cosas que los que
+venimos de editores tipo Libre Office echamos de menos: la alineación,
+el interlineado, los márgenes y la sangría. Va un
+\href{https://www.xkcd.com/378/}{\emph{spoiler}}:
+
+\begin{quote}
+There is a LaTeX package for it
+\end{quote}
+
+\section{Alineación}\label{sec:alineacion}
+
+Os habréis fijado que LaTeX justifica el texto por defecto, algo que a
+mí personalmente me encanta. Para cambiar la alineación tenemos comandos
+y entornos equivalentes, los comandos hacen efecto en el grupo actual y
+los entornos en su contenido. Tanto los unos como los otros valen tanto
+para el texto como para las tablas y figuras:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Para \textbf{alinear a la izquierda} tenemos el entorno
+  \lstinline!flushleft! (\emph{nivelado a la izquierda}) y el comando
+  \lstinline!\raggedright! (\emph{desigual a la derecha})
+\item
+  Para \textbf{alinear a la derecha} podemos elegir entre el entorno
+  \lstinline!flushright! (\emph{nivelado a la derecha}) y el comando
+  \lstinline!\raggedleft! (\emph{desigual a la izquierda})
+\item
+  Para \textbf{centrar} podemos usar el entorno \lstinline!center! o el
+  comando \lstinline!\centering!
+\end{itemize}
+
+Hay dos diferencias entre usar un entorno y un comando para alinear:
+
+\begin{itemize}
+\item
+  El entorno añade espacio blanco adicional delante y detrás de su zona
+  de aplicación
+\item
+  El comando necesita un comando que le diga dónde acaba el párrafo, es
+  por ello que se usa dentro de entornos como \lstinline!figure! o
+  \lstinline!quote!. En un caso general tendremos que añadir una línea
+  en blanco o el comando \lstinline!\par! al final del párrafo.
+\end{itemize}
+
+Los comandos son bastante prácticos cuando ya estamos dentro de un
+entorno porque nos evitamos escribir otro \lstinline!begin! y
+\lstinline!end! y, además, mejoramos la legibilidad.
+
+Van unos ejemplos de texto alineado a la derecha:
+
+\begin{lstlisting}[language={[latex]tex}]
+
+% Texto alineado a la derecha
+
+% Opción 1: entorno flushright
+\begin{flushright}
+  Texto
+\end{flushright}
+
+% Opción 2: \raggedleft + \par
+{\raggedleft Texto\par}
+
+% Opción 3: \raggedleft + línea en blanco
+{\raggedleft Texto
+
+}
+
+% Opción 4: \raggedleft + entorno que indica final de párrafo
+\begin{quote}
+  \raggedleft
+  Texto
+\end{quote}
+\end{lstlisting}
+
+Acabo de descubrir que en español se puede uno referir a la alineación
+como \href{http://glosariografico.com/bandera}{\emph{bandera}}, es
+decir, un texto alineado a la derecha tendrá \emph{bandera a la
+derecha}, porque parece una bandera cuyo mástil está a la derecha. Qué
+cosas que aprendemos, oiga.
+
+\section{Interlineado}\label{sec:interlineado}
+
+Antes de deciros cómo cambiar el interlineado os dejo con este extracto
+del artículo
+\href{http://www.tex.ac.uk/FAQ-linespace.html}{\emph{Double-spaced
+documents in LaTeX}} de \href{http://www.tex.ac.uk/index.html}{la lista
+de preguntas frecuentes de LaTeX\footnote{También os podría contar como
+  tuve que escribir mi Proyecto de Investigación en Arial 12, con
+  interlineado de 1.5 y unos márgenes que daban ganas de llorar a pesar
+  de que estaba usando LaTeX. Todo ello porque había unas
+  \emph{exigencias de formato}, algo muy genial teniendo en cuenta que
+  ese documento pasaba por un supuesto comité en el que nadie se lo
+  leía. \href{http://writer2latex.sourceforge.net/}{Writer2Latex} me
+  salvó la vida ahí. Pero mejor lo dejamos para otro día.}}:
+
+\begin{quote}
+Of course, the real solution (other than for private copy editing) is
+not to use double-spacing at all. Universities, in particular, have no
+excuse for specifying double-spacing in submitted dissertations: LaTeX
+is a typesetting system, not a typewriter-substitute, and can (properly
+used) make single-spaced text even more easily readable than
+double-spaced typewritten text.
+\end{quote}
+
+Se refiere al interlineado doble, pero lo mismo me vale para cualquiera
+que no sea el simple. Pero, como todo en LaTeX, lo podemos cambiar si
+nos da por ahí, qué demonios. Para ello según ese mismo documento, lo
+mejor es usar el paquete
+\href{https://www.ctan.org/pkg/setspace}{\lstinline!setspace!} ya que
+mantiene el interlineado simple en los pies de figura y tabla o en las
+notas al pie, sitios donde no nos aporta nada que las líneas estén más
+separadas.
+
+Simplemente cargamos el paquete y elegimos el interlineado:
+
+\begin{lstlisting}[language={[latex]tex}]
+% Preámbulo
+\usepackage{setspace}
+
+\doublespacing % Interlineado doble
+% \onehalfspacing % Interlineado 1.5
+% \singlespacing % Interlineado simple
+\end{lstlisting}
+
+\section{Márgenes}\label{sec:margenes}
+
+Para los márgenes, como en los demás casos, lo mejor es usar un paquete
+que gestione las cosas por nosotros. Yo uso
+\href{http://ctan.org/pkg/geometry}{\lstinline!geometry!} porque es el
+que usa Pandoc y yo confío ciegamente en él.
+
+Tan fácil de usar como cargar el paquete dándole como argumento opcional
+el tamaño del margen. Para un margen uniforme haríamos:
+
+\begin{lstlisting}[language={[latex]tex}]
+\usepackage[margin=1cm]{geometry}
+\end{lstlisting}
+
+Y para definir cada margen por su lado:
+
+\begin{lstlisting}
+\usepackage[top=1cm, bottom=1cm, right=0.5cm, left=1.5cm]{geometry}
+\end{lstlisting}
+
+Para más detalles siempre está disponible
+\href{http://osl.ugr.es/CTAN/macros/latex/contrib/geometry/geometry.pdf}{el
+manual}
+
+\section{Sangría}\label{sec:sangria}
+
+Las normas tipográficas nos dicen que para separar dos párrafos podemos
+usar una
+\href{http://practicaltypography.com/first-line-indents.html}{línea en
+blanco o sangría},
+\href{https://www.youtube.com/watch?v=LbDMJ5YMaxM}{pero no ambas cosas}.
+Si no le decimos nada, LaTeX se decanta por la segunda opción. Para
+separar los párrafos con líneas en blanco lo más fácil es usar el
+paquete \href{http://ctan.org/pkg/parskip}{\lstinline!parskip!}. También
+podríamos poner \lstinline!\noindent! delante de cada párrafo que no
+queremos que se indente o usar \lstinline!\setlength{\parindent}{0cm}!,
+pero el paquete \lstinline!parskip! afecta al documento completo y nos
+evita problemas con la gestión del espacio.
+
+Lo cargamos en el preámbulo y a correr:
+
+\begin{lstlisting}[language={[latex]tex}]
+\usepackage{parskip}
+\end{lstlisting}
+
+\section{Recapitulemos}\label{sec:recapitulemos}
+
+Como recomendación general a la hora de tocar el formato:
+
+\begin{quote}
+Lo mejor es dejarle siempre a LaTeX las decisiones de estilo. Él sabe de
+tipografía y nosotros no, si hurgamos la probabilidad de convertir el
+documento en una cosa que dé dolor de ojos es muy alta.
+\end{quote}
+
+Y como recapitulación a lo que hemos visto sobre la página:
+
+\begin{itemize}
+\item
+  \textbf{Alineación}: LaTeX justifica por defecto pero podemos cambiar
+  el alineado con entornos y comandos, \lstinline!flushleft! y
+  \lstinline!\raggedright! alinean a la izquierda;
+  \lstinline!flushright! y \lstinline!\raggedleft! a la derecha y
+  \lstinline!center! y \lstinline!\centering! al centro.
+\item
+  \textbf{Interlineado}: de por sí es simple y el paquete
+  \lstinline!setspace! nos ayuda a cambiarlo mediante órdenes como
+  \lstinline!\doublespacing!.
+\item
+  \textbf{Márgenes}: se pueden modificar con el paquete
+  \lstinline!geometry! mandándole los valores de los márgenes al paquete
+  como argumento opcional.
+\item
+  \textbf{Sangría}: LaTeX sangra la primera línea de cada párrafo
+  (excepto el primero) pero podemos modificar este comportamiento con el
+  paquete \lstinline!parskip!.
+\end{itemize}
+
+\section{Referencias}\label{sec:referencias8}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Page_Layout}{\emph{LaTeX/Page
+Layout} en WikiBooks}
+
+\href{http://texblog.org/2011/09/30/quick-note-on-line-spacing/}{\emph{Quick
+note on line spacing}}
+
+\href{https://en.wikibooks.org/wiki/LaTeX/Paragraph_Formatting\#Paragraph_indent_and_break}{\emph{Paragraph
+indent and break} en WikiBooks}
+
+\href{https://www.phy.duke.edu/~rgb/General/latex/ltx-300.html}{\lstinline!\\raggedleft!
+en Hypertext Help with LaTeX}

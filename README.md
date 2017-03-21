@@ -1,6 +1,14 @@
 # Curso no convencional de Latex
 
-Índice preliminar:
+Este repositorio recoge el *Curso no convencional de LaTeX* que he
+estoy publicando por entregas en mi blog
+[*Onda Hostil*][ondahostil]. Consiste en un grupo de artículos
+relativamente independientes entre sí que tratan diferentes aspectos
+del lenguaje de marcado LaTeX.
+
+[ondahostil]: https://ondahostil.wordpress.com/curso-no-convencional-de-latex
+
+## Índice preliminar
 
 1. Introducción
 

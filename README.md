@@ -1,6 +1,6 @@
 # Curso no convencional de Latex
 
-Este repositorio recoge el *Curso no convencional de LaTeX* que he
+Este repositorio recoge el *Curso no convencional de LaTeX* que
 estoy publicando por entregas en mi blog
 [*Onda Hostil*][ondahostil]. Consiste en un grupo de artículos
 relativamente independientes entre sí que tratan diferentes aspectos

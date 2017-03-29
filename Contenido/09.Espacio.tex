@@ -1,0 +1,271 @@
+\section{Espacio en blanco}\label{espacio-en-blanco}
+
+Como hemos visto en anteriores entregas, LaTeX gestiona el espacio en
+blanco él solito. Esto tiene varias implicaciones:
+
+\begin{itemize}
+\item
+  Le da igual que pongamos un espacio o sesenta y cuatro entre dos
+  palabras, para él serán un único espacio.
+\item
+  Partirá las líneas donde mejor le venga a no ser que nosotros le
+  obliguemos a hacerlo en un sitio determinado, dónde hayamos saltado de
+  línea en el editor le da absolutamente igual. Lo mismo puede decirse
+  de las páginas.
+\item
+  Dos trozos de texto que no estén separados por una línea en blanco
+  pertenecerán al mismo párrafo a no ser que le digamos expresamente que
+  no es así.
+\item
+  No pintará una línea en blanco a no ser que le digamos expresamente
+  que lo haga por muchas líneas en blanco que tengamos en el editor.
+\end{itemize}
+
+Así visto parece que es malvado y que le gusta fastidiarnos, pero que él
+tome las decisiones de formato tiene la grandísima ventaja de que
+obtenemos un documento con \emph{pinta profesional} con muy poco
+esfuerzo.
+
+En cualquier caso, como nos gusta cacharrear, vamos a ver cómo menear
+alegremente las cosas por el documento en contra de la lógica interna de
+LaTeX. Aunque en general es mejor y más práctico dejar que LaTeX haga lo
+que le dé la real gana. Avisados estáis.
+
+\subsection{Espacio horizontal}\label{espacio-horizontal}
+
+Hay muchas maneras de generar espacio en blanco en LaTeX, demasiadas
+para mí. Os voy a hablar de las que yo uso, si queréis convertiros en
+expertos en el espacio horizontal tenéis las referencias.
+
+Primero tenemos los dos comandos que ya vimos en el capítulo de
+ecuaciones:
+
+\begin{itemize}
+\item
+  \lstinline!\,! crea un espacio estrecho (\lstinline!\thinspace!). Se
+  usa cuando queremos separar ligeramente dos
+  \href{http://defharo.com/tipografia/glifos/}{glifos} porque
+  interfieren entre sí.
+\item
+  \lstinline!~! crea un \emph{espacio duro}, es decir, un espacio que no
+  se puede partir. Es especialmente útil para las iniciales o casos como
+  \emph{Ejemplo 1} donde no queremos que el uno vaya a otra
+  línea\footnote{¿Recordáis el comando \lstinline!\refeq!? Lo definimos
+    usando un \emph{espacio duro} por este mismo motivo:
+    \lstinline!\newcommand{\refeq}[1]{Ecuación~\ref{#1}}!}.
+\end{itemize}
+
+Hay muchos más comandos de este tipo cada uno con sus reglas de uso pero
+no sé cómo de útil es saberse una pila de ellos sin entender de
+tipografía. Solo voy a citar la pareja \lstinline!\quad! y
+\lstinline!\qquad! que equivalen respectivamente a 1 em\footnote{Un
+  espacio de la anchura de una letra \emph{m} en la fuente actual} y a 2
+em porque aparecen a menudo por ahí.
+
+Por otra parte tenemos un comando que nos permite introducir un espacio
+blanco del tamaño que nosotros queramos:
+
+\begin{lstlisting}
+\hspace{LONGITUD}
+\end{lstlisting}
+
+Esta longitud puede estar definida en cualquiera de las medidas que
+LaTeX entiende: puntos (\emph{pt}), pulgadas (\emph{in}), centímetros
+(\emph{cm}), milímetros (\emph{mm}), \emph{em}, \emph{ex}\footnote{Un
+  espacio de la altura de una letra \emph{x} en la fuente actual
+  {[}pica{]}: https://en.wikipedia.org/wiki/Pica\_(typography)} o
+{[}picas{]}{[}pica{]} (\emph{pc}).
+
+Una cosa a tener en cuenta es que LaTeX ignorará el
+\lstinline!\hspace{}! si viene justo después de un salto de línea ya que
+para él las líneas no pueden empezar con espacio en blanco. Nos ocurre
+exactamente lo mismo al final de las líneas. Podemos obligarle a que
+ponga siempre el espacio con la versión con asterisco
+\lstinline!\hspace*{}!:
+
+\begin{lstlisting}
+% Diferencia entre \hspace y \hspace*
+\hspace{1em}Línea alineada
+
+\hspace*{1em}Línea movida 1 em hacia dentro 
+\end{lstlisting}
+
+Un comando similar a \lstinline!\hspace{}! es \lstinline!\phantom{}!,
+que nos genera un espacio en blanco igual de ancho que su argumento:
+
+\begin{lstlisting}
+% Hueco del tamaño de abc
+\phantom{abc}
+\end{lstlisting}
+
+Finalmente tenemos \lstinline!\hfill!, el \emph{espacio de goma}. Este
+comando crea todo el espacio que puede dentro de una línea y sirve para
+situar cosas espaciadas pero con un cierto orden en la línea:
+
+\begin{lstlisting}
+Texto a la izquierda \hfill Texto a la derecha
+\end{lstlisting}
+
+Todos estos comandos de espacio nos vienen bien a la hora de diseñar una
+portada para nuestro documento o para crear encabezados y pies de página
+personalizados.
+
+\subsection{Espacio vertical}\label{espacio-vertical}
+
+El espacio vertical se gestiona de manera muy similar al horizontal con
+los comandos \lstinline!\vspace{}! y \lstinline!\vfill!. El primero nos
+permite crear espacio vertical del tamaño deseado. Tiene una versión con
+asterisco para que LaTeX no ignore el espacio vertical tras un salto de
+página, es decir, al inicio de la página.
+
+El segundo, \lstinline!\vfill!, nos crea \emph{espacio de goma} vertical
+y es especialmente útil
+\href{http://tex.stackexchange.com/questions/2326/vertically-center-text-on-a-page}{cuando
+queremos alinear texto verticalmente}:
+
+\begin{lstlisting}
+\vfill
+Texto alineado verticalmente
+\vfill
+\end{lstlisting}
+
+\subsection{Párrafos y saltos de
+línea}\label{puxe1rrafos-y-saltos-de-luxednea}
+
+Hemos dicho que para LaTeX un párrafo no acaba hasta que haya una línea
+en blanco o alguna indicación extra. Esta indicación es el comando
+\lstinline!\par!, que apenas se usa a la hora de escribir ya que empeora
+la legibilidad y se suele reservar para definir entornos.
+
+Tenemos que tener en cuenta que solo si estamos usando el paquete
+\lstinline!parskip! pintará una línea entre los párrafos, si no, por
+mucho que en nuestro editor los párrafos estén separados por una o siete
+líneas en blanco veremos dos párrafos juntos con el segundo de ellos
+sangrado.
+
+Para provocar saltos de línea tenemos (entre otros menos usados) dos
+comandos \lstinline!\\! y \lstinline!\newline!, ambos comienzan una
+nueva línea pero no un nuevo párrafo\footnote{Probad a saltar de línea
+  sin usar el paquete \lstinline!parskip! ¿la línea tras el salto está
+  indentada?}. El primero es preferible dejarlo para alinear, ya que
+LaTeX lo redefine según el entorno, por ejemplo en las tablas, para
+organizar ecuaciones con \lstinline!align! o tras un
+\lstinline!centering!. El segundo solo puede usarse en el texto normal y
+a ser posible sin abusar.
+
+\subsection{Saltos de página}\label{saltos-de-puxe1gina}
+
+Lo último que nos queda son los saltos de página. En general uno de
+puede despreocupar porque LaTeX tiene la habilidad de situar las cosas
+más o menos correctamente en la página. En mi opinión saber saltar de
+página es necesario en tres contextos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Queremos una página en blanco al inicio del documento para poner una
+  dedicatoria, un resumen, los agradecimientos o algo similar.
+\item
+  Nos ha empezado una sección muy abajo en la página y no nos gusta cómo
+  queda.
+\item
+  Nos ha almacenado todas las imágenes en una página, la opción H de las
+  figuras nos está haciendo cosas raras y tenemos prisa. Meter unos
+  saltos de página por ahí nos puede solucionar la papeleta
+  momentáneamente.
+\end{enumerate}
+
+Vamos a ver las opciones que tenemos:
+
+\begin{itemize}
+\item
+  \lstinline!\newpage! provoca un salto de página dejando los párrafos
+  que quedan tal cual, es decir, con espacio en la parte inferior como
+  si se acabase el capítulo.
+\item
+  \lstinline!\pagebreak! provoca un salto de página y esparce los
+  párrafos en la página para no dejar hueco blanco.
+\item
+  \lstinline!\clearpage! y \lstinline!\cleardoublepage! provocan un
+  salto de página y hacen que se pinten todos las figuras y tablas
+  definidas hasta ese punto. La diferencia entre ellos es que, como su
+  nombre indica, \lstinline!\clearpage! salta una página y
+  \lstinline!\cleardoublepage! salta dos caras. Si estamos en un
+  documento con diferentes estilos para la página derecha y la izquierda
+  \lstinline!\cleardoublepage! saltará las páginas necesarias para que
+  la siguiente sea impar.
+\end{itemize}
+
+Una vez que hemos identificado los casos posibles y conocemos las
+diferentes opciones vamos a combinar las dos cosas para obtener unas
+\emph{reglas}:
+
+\begin{itemize}
+\item
+  Para organizar secciones o figuras podemos elegir entre
+  \lstinline!\newpage!, \lstinline!\pagebreak! y \lstinline!\clearpage!
+  dependiendo del resultado que queramos conseguir, si es a la mitad de
+  un capítulo igual nos conviene más \lstinline!\pagebreak! pero todo es
+  probar.
+\item
+  Para las dedicatorias, resúmenes y tal de los libros la opción
+  ganadora es \lstinline!\cleardoublepage! ya que nos los va a poner
+  siempre a la derecha como es lo habitual.
+\end{itemize}
+
+\section{El resumen}\label{el-resumen}
+
+Os resumo lo que hemos aprendido en este capítulo incluyendo unas
+\emph{buenas prácticas}:
+
+\begin{itemize}
+\item
+  \textbf{Espacio horizontal}: poner un espacio en blanco o varios entre
+  dos palabras nos da exactamente el mismo resultado. Hay muchos
+  comandos para crear espacio horizontal de mayor o menor tamaño,
+  algunos para el texto, otros para las ecuaciones y algunos de ellos
+  para ambas cosas. Si queremos crear un espacio a nuestro gusto tenemos
+  \lstinline!\hspace{}! y \lstinline!\hspace*{}!, comandos que generan
+  un espacio horizontal del tamaño que les pidamos, siendo el del
+  asterisco imposible de ignorar. Si queremos un espacio que se ajuste
+  solo tenemos \lstinline!\hfill! \emph{que es de goma}.
+\item
+  \textbf{Espacio vertical}: LaTeX no nos va a crear espacio blanco
+  vertical a menos que se lo digamos. Para ello tenemos los comandos
+  \lstinline!\vspace{}! y su versión con asterisco que fabrican espacio
+  vertical del tamaño que les pidamos. Para situar elementos espaciados
+  con cierto equilibrio en la página tenemos el \emph{espacio de goma}
+  \lstinline!\vfill!.
+\item
+  \textbf{Párrafos y saltos de línea}: lo más práctico es separar los
+  párrafos con una línea en blanco y solo usar los saltos de línea en
+  casos especiales, para ello tenemos \lstinline!\newline! para usar en
+  el texto normal y \lstinline!\\! en los entornos especiales.
+\item
+  \textbf{Saltos de página}: para saltar de página tenemos
+  \lstinline!\newpage!, \lstinline!\pagebreak!, \lstinline!\clearpage! y
+  \lstinline!\cleardoublepage!. Los tres primeros saltan a la siguiente
+  página pero difieren en como tratan el texto y los objetos flotantes
+  como las tablas y las figuras. El último salta dos caras y es útil
+  para definir la página de dedicatoria o similares de un libro.
+\end{itemize}
+
+\section{Referencias}\label{referencias}
+
+\href{https://www.sharelatex.com/learn/Line_breaks_and_blank_spaces}{\emph{Line
+breaks and blank spaces}}
+
+\href{http://tex.stackexchange.com/questions/74353/what-commands-are-there-for-horizontal-spacing\#74354}{\emph{What
+commands are there for horizontal spacing?} en TexExchange}
+
+\href{https://en.wikipedia.org/wiki/Whitespace_character}{\emph{Whitespace
+character} en la Wikipedia}
+
+\href{http://tex.stackexchange.com/questions/82664/when-to-use-par-and-when-or-blank-lines\#82666}{\emph{When
+to use \par and when \textbackslash{}, or blank lines} en TexExchange}
+
+\href{http://www.personal.ceu.hu/tex/breaking.htm}{\emph{LaTeX Line and
+Page Breaking}}
+
+\href{http://tex.stackexchange.com/questions/736/pagebreak-vs-newpage}{\emph{\lstinline!\pagebreak!
+vs \lstinline!\newpage!} en TexExchange}

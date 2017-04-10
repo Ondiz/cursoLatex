@@ -1,5 +1,3 @@
-\section{Espacio en blanco}\label{espacio-en-blanco}
-
 Como hemos visto en anteriores entregas, LaTeX gestiona el espacio en
 blanco él solito. Esto tiene varias implicaciones:
 
@@ -31,7 +29,7 @@ alegremente las cosas por el documento en contra de la lógica interna de
 LaTeX. Aunque en general es mejor y más práctico dejar que LaTeX haga lo
 que le dé la real gana. Avisados estáis.
 
-\subsection{Espacio horizontal}\label{espacio-horizontal}
+\section{Espacio horizontal}
 
 Hay muchas maneras de generar espacio en blanco en LaTeX, demasiadas
 para mí. Os voy a hablar de las que yo uso, si queréis convertiros en
@@ -49,10 +47,8 @@ ecuaciones:
 \item
   \lstinline!~! crea un \emph{espacio duro}, es decir, un espacio que no
   se puede partir. Es especialmente útil para las iniciales o casos como
-  \emph{Ejemplo 1} donde no queremos que el uno vaya a otra
-  línea\footnote{¿Recordáis el comando \lstinline!\refeq!? Lo definimos
-    usando un \emph{espacio duro} por este mismo motivo:
-    \lstinline!\newcommand{\refeq}[1]{Ecuación~\ref{#1}}!}.
+  \emph{Ejemplo 1} donde no queremos que el uno vaya a otra línea\footnote{¿Recordáis el comando \lstinline!\\refeq!? Lo definimos usando un
+  \emph{espacio duro} por este mismo motivo.}
 \end{itemize}
 
 Hay muchos más comandos de este tipo cada uno con sus reglas de uso pero
@@ -65,16 +61,14 @@ em porque aparecen a menudo por ahí.
 Por otra parte tenemos un comando que nos permite introducir un espacio
 blanco del tamaño que nosotros queramos:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \hspace{LONGITUD}
 \end{lstlisting}
 
 Esta longitud puede estar definida en cualquiera de las medidas que
 LaTeX entiende: puntos (\emph{pt}), pulgadas (\emph{in}), centímetros
 (\emph{cm}), milímetros (\emph{mm}), \emph{em}, \emph{ex}\footnote{Un
-  espacio de la altura de una letra \emph{x} en la fuente actual
-  {[}pica{]}: https://en.wikipedia.org/wiki/Pica\_(typography)} o
-{[}picas{]}{[}pica{]} (\emph{pc}).
+espacio de la altura de una letra \emph{x} en la fuente actual} o \href{https://en.wikipedia.org/wiki/Pica\_(typography)}{picas} (\emph{pc}).
 
 Una cosa a tener en cuenta es que LaTeX ignorará el
 \lstinline!\hspace{}! si viene justo después de un salto de línea ya que
@@ -83,7 +77,7 @@ exactamente lo mismo al final de las líneas. Podemos obligarle a que
 ponga siempre el espacio con la versión con asterisco
 \lstinline!\hspace*{}!:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 % Diferencia entre \hspace y \hspace*
 \hspace{1em}Línea alineada
 
@@ -93,7 +87,7 @@ ponga siempre el espacio con la versión con asterisco
 Un comando similar a \lstinline!\hspace{}! es \lstinline!\phantom{}!,
 que nos genera un espacio en blanco igual de ancho que su argumento:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 % Hueco del tamaño de abc
 \phantom{abc}
 \end{lstlisting}
@@ -102,7 +96,7 @@ Finalmente tenemos \lstinline!\hfill!, el \emph{espacio de goma}. Este
 comando crea todo el espacio que puede dentro de una línea y sirve para
 situar cosas espaciadas pero con un cierto orden en la línea:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 Texto a la izquierda \hfill Texto a la derecha
 \end{lstlisting}
 
@@ -110,7 +104,7 @@ Todos estos comandos de espacio nos vienen bien a la hora de diseñar una
 portada para nuestro documento o para crear encabezados y pies de página
 personalizados.
 
-\subsection{Espacio vertical}\label{espacio-vertical}
+\section{Espacio vertical}
 
 El espacio vertical se gestiona de manera muy similar al horizontal con
 los comandos \lstinline!\vspace{}! y \lstinline!\vfill!. El primero nos
@@ -123,14 +117,13 @@ y es especialmente útil
 \href{http://tex.stackexchange.com/questions/2326/vertically-center-text-on-a-page}{cuando
 queremos alinear texto verticalmente}:
 
-\begin{lstlisting}
+\begin{lstlisting}[language={[latex]tex}]
 \vfill
 Texto centrado verticalmente
 \vfill
 \end{lstlisting}
 
-\subsection{Párrafos y saltos de
-línea}\label{puxe1rrafos-y-saltos-de-luxednea}
+\section{Párrafos y saltos de línea}
 
 Hemos dicho que para LaTeX un párrafo no acaba hasta que haya una línea
 en blanco o alguna indicación extra. Esta indicación es el comando
@@ -153,7 +146,7 @@ organizar ecuaciones con \lstinline!align! o tras un
 \lstinline!centering!. El segundo solo puede usarse en el texto normal y
 a ser posible sin abusar.
 
-\subsection{Saltos de página}\label{saltos-de-puxe1gina}
+\section{Saltos de página}
 
 Lo último que nos queda son los saltos de página. En general uno de
 puede despreocupar porque LaTeX tiene la habilidad de situar las cosas
@@ -213,7 +206,7 @@ diferentes opciones vamos a combinar las dos cosas para obtener unas
   siempre a la derecha como es lo habitual.
 \end{itemize}
 
-\section{El resumen}\label{el-resumen}
+\section{El resumen}
 
 Os resumo lo que hemos aprendido en este capítulo incluyendo unas
 \emph{buenas prácticas}:
@@ -261,11 +254,9 @@ commands are there for horizontal spacing?} en TexExchange}
 \href{https://en.wikipedia.org/wiki/Whitespace_character}{\emph{Whitespace
 character} en la Wikipedia}
 
-\href{http://tex.stackexchange.com/questions/82664/when-to-use-par-and-when-or-blank-lines\#82666}{\emph{When
-to use \par and when \textbackslash{}, or blank lines} en TexExchange}
+\href{http://tex.stackexchange.com/questions/82664/when-to-use-par-and-when-or-blank-lines\#82666}{\emph{When to use \emph{par} and when \textbackslash{}, or blank lines} en TexExchange}
 
 \href{http://www.personal.ceu.hu/tex/breaking.htm}{\emph{LaTeX Line and
 Page Breaking}}
 
-\href{http://tex.stackexchange.com/questions/736/pagebreak-vs-newpage}{\emph{\lstinline!\pagebreak!
-vs \lstinline!\newpage!} en TexExchange}
+\href{http://tex.stackexchange.com/questions/736/pagebreak-vs-newpage}{\emph{\lstinline!\\pagebreak! vs \lstinline!\\newpage!} en TexExchange}

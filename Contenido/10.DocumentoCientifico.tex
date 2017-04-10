@@ -1,0 +1,668 @@
+Vamos a hablar del caso en el que LaTeX da lo mejor de sí mismo: un
+\textbf{documento científico}. Con esto me refiero a libros técnicos,
+tesis, artículos\ldots{} ya me entendéis. No tienen por qué hablar
+necesariamente de ciencia, si me centro más en ellos es porque es mi
+campo.
+
+La característica esencial de un documento científico es su
+\emph{formato rígido} que en muchas ocasiones nos viene impuesto, ya sea
+por una revista o universidad o por las propias costumbres de nuestra
+disciplina. Por ejemplo, una tesis suele estar dividida en capítulos,
+debe tener referencias bibliográficas con un estilo determinado y se
+inicia con un índice general, uno de tablas y otro de figuras así como
+con un glosario de términos. También suele llevar un resumen del
+contenido al principio y se separa el trabajo adicional en apéndices.
+Todo esto implica diferentes formatos para las partes (numeración de las
+páginas y secciones, estilo de los encabezados\ldots{}) y cierta
+planificación. Sin planificar se puede uno volver completamente tarumba,
+lo digo conocimiento de causa, el control de versiones me salvó más de
+una vez de romper la tesis sin remedio.
+
+Es por ello que primero veremos cómo organizar el documento en cuestión
+y luego haremos un índice, un glosario y hasta unas lista de
+referencias.
+
+\section{División del documento}
+
+Vamos a empezar organizándonos. Lo primero que tenemos que hacer es
+elegir el tipo de documento, empezando por preguntarnos si es un
+documento corto o largo ya que el formato del documento varía en gran
+medida según su longitud:
+
+\begin{itemize}
+\item
+  \textbf{Documentos cortos}: para ellos usaremos la clase
+  \lstinline!article! y sus derivadas, como \lstinline!scrartcl! de las
+  \href{https://www.ctan.org/pkg/koma-script}{clases KOMA}. Como norma
+  general este tipo de documentos tienen 5 niveles de títulos\footnote{Aprendimos
+    a usar los diferentes niveles de título cuando escribimos nuestro
+    \href{https://ondiz.github.io/cursoLatex/Contenido/03.DocumentoBasico.html}{primer
+    documento}.} (\lstinline!section!, \lstinline!subsection!,
+  \lstinline!subsubsection!, \lstinline!paragraph!,
+  \lstinline!subparagraph!), con los tres primeros numerados, y no
+  llevan portada.
+\end{itemize}
+
+\begin{itemize}
+\item
+  \textbf{Documentos largos}: en este caso nos convienen las clases
+  \lstinline!book!, \lstinline!report!\footnote{Estas dos clases sirven
+    para objetivos diferentes: \lstinline!report! está pensado para
+    documentos no muy largos como un trabajo de clase o así y
+    \lstinline!book! para libros verdaderos. Hay varias diferencias
+    entre ellas, por ejemplo, la clase \lstinline!book! le da diferentes
+    estilos a las páginas pares e impares por defecto mientras que
+    \lstinline!report! solo lo hace si se lo pedimos; \lstinline!book!
+    abre los capítulos siempre a la derecha aunque pare ello tenga que
+    dejar una página en blanco, \lstinline!report! simplemente salta de
+    página. Tenéis una comparación mejor
+    \href{http://tex.stackexchange.com/questions/36988/ddg\#36989}{aquí}.}
+  y sus derivadas como \lstinline!memoir!. Estos suelen tener 7 niveles
+  de títulos (\lstinline!part!, \lstinline!chapter!,
+  \lstinline!section!, \lstinline!subsection!,
+  \lstinline!subsubsection!, \lstinline!paragraph!,
+  \lstinline!subparagraph!) de los que se numeran los cuatro primeros.
+  Los demás niveles tienen un estilo pero ni se numeran ni aparecen en
+  el índice. A diferencia de los documentos cortos, estos llevan portada
+  por defecto.
+\end{itemize}
+
+Para el caso de un documento largo, si estamos usando las clases
+\lstinline!book!, \lstinline!memoir! o derivadas\footnote{\lstinline!report!
+  carece de estos comandos el pobrecillo.}, aparte de los diferentes
+niveles de títulos tenemos a nuestra disposición unos comandos para
+identificar las distintas partes del documento y así darles estilos
+específicos. Todos ellos afectan desde que los escribimos hasta que
+aparece el siguiente:
+
+\begin{itemize}
+\item
+  \lstinline!\frontmatter! identifica las páginas preliminares. En esta
+  parte los capítulos no llevan número y las páginas se numeran en
+  romano. Es donde suelen ir el índice o los agradecimientos.
+\item
+  \lstinline!\mainmatter! da inicio al cuerpo del documento. Se numeran
+  los capítulos y las páginas con números arábigos (o como decían mis
+  compañeros de clase \emph{números normales}).
+\item
+  \lstinline!\appendix! como su nombre indica, especifica dónde empiezan
+  los apéndices. Aquí los capítulos se \emph{numeran} con letras pero se
+  mantiene numeración de las páginas.
+\item
+  \lstinline!\backmatter! identifica las páginas finales. En esta parte
+  los capítulos no se numeran y, como en los apéndices, se mantiene la
+  numeración de las páginas. Nos vale, por ejemplo, para las referencias
+  bibliográficas.
+\end{itemize}
+
+Por supuesto, todo lo que he comentado sobre los estilos se puede
+modificar con relativa facilidad, pero sin tocar absolutamente nada
+podemos conseguir un documento con bastante lógica.
+
+Otro tema a tener en cuenta es la \textbf{división del contenido en
+diferentes archivos}. Hasta ahora hemos escrito todo junto, pero cuando
+estamos escribiendo un documento más o menos largo este sistema no es
+muy apropiado. LaTeX nos permite escribir en diferentes archivos que
+luego juntaremos para crear el documento final. De esta manera podemos
+tener un archivo con la definición del documento y el preámbulo desde el
+que llamaremos a otros archivos en los que nos ocuparemos del contenido
+propiamente dicho.
+
+Para ello tenemos dos opciones:
+
+\begin{itemize}
+\item
+  \lstinline!\input{RUTA}! equivale a meter el contenido del archivo ahí
+  mismo. Tiene la ventajas de que se puede usar en cualquier parte
+  (¡incluido el preámbulo!) y que se puede anidar, es decir, el archivo
+  \emph{B} que llamamos desde \emph{A} puede a su vez llamar al archivo
+  \emph{C}.
+\item
+  \lstinline!\include{RUTA}! es un poco más complejo, digamos que nos
+  permite \emph{compilar el documento a trozos} porque mantiene los
+  números de página, secciones y demás como si compilásemos el documento
+  completo aunque solo estemos compilando un pedacito\footnote{Esto
+    ocurre porque escribe archivos auxiliares para cada archivo que
+    llamamos y luego lee de ahí las referencias, números de página y
+    otras cosas que varían. Más adelante hablaremos sobre archivos
+    auxiliares, si tenéis ansias podéis leer
+    \href{https://ondahostil.wordpress.com/2016/11/17/lo-que-he-aprendido-archivos-auxiliares-de-latex/}{esto
+    que escribí hace un tiempo}.}. Es especialmente apropiado para
+  capítulos ya que provoca un salto de página antes y después de incluir
+  el contenido. Sus desventajas son que no se puede anidar y que no se
+  debe usar en el preámbulo.
+\end{itemize}
+
+Vamos a ver un ejemplo de uso para entenderlo mejor:
+
+\begin{lstlisting}[language={[latex]tex}]
+\documentclass[a4paper,11pt]{book}
+
+  % Cargamos el preámbulo que tenemos escrito en otro archivo
+  \input{preámbulo}
+  
+  % Elegimos qué capítulos queremos que se compilen
+  \includeonly{cap1,cap3} % sin espacios!
+
+\begin{document}
+
+  % Cargamos la portada desde la Carpeta contenido
+  \input{Contenido/portada}
+
+  % Cargamos los capítulos desde la carpeta Contenido.
+  % Los capítulos capX.tex no llevan ni preámbulo ni definición del
+  % documento, solo órdenes que irían tras \begin{document}
+  
+  \include{Contenido/cap1} % cargamos cap1.tex
+  \include{Contenido/cap2} % cap2 no aparecerá en el resultado
+  \include{Contenido/cap3} % mantiene la numeración como si cap2.tex estuviera incluido
+
+\end{document}
+\end{lstlisting}
+
+Ya que tenemos comandos que nos permiten incorporar contenido desde
+otros archivos podemos aprovechar para organizar nuestro material en
+carpetas para el contenido, el estilo o las imágenes. Incluso cabe la
+posibilidad de escribir las tablas largas en un archivo aparte y
+llamarlas con \lstinline!\input{}! cuando corresponda. Cuando sepamos
+más sobre los diferentes tipos de archivos os contaré cómo me organizo
+yo.
+
+\section{Índices}
+
+Pasemos a hablar de los índices, uno de los motivos por los que amo
+LaTeX. ¡Los índices de contenido, tablas, figuras o código se hacen
+solos! Solamente tenemos que escribir el comando correspondiente y ya
+está. La única cosa que tenemos que tener en cuenta es que los índices
+no se incluyen por defecto en el índice de contenido, tenemos que
+\emph{exigirle} a LaTeX que los añada.
+
+Os pongo un ejemplo de cómo se crean los índices y cómo se incluyen en
+el índice, creo que el funcionamiento es bastante claro:
+
+\begin{lstlisting}[language={[latex]tex}]
+% Índice de contenido
+\addcontentsline{toc}{chapter}{Índice general}
+\tableofcontents
+
+% Índice de tablas
+\addcontentsline{toc}{chapter}{Índice de tablas}
+\listoftables
+
+% Índice de figuras
+\addcontentsline{toc}{chapter}{Índice de figuras}
+\listoffigures
+\end{lstlisting}
+
+Tenemos que tener en cuenta que hay que compilar el documento dos veces
+para que LaTeX fabrique los índices, la primera de ellas escribe los
+archivos auxiliares necesarios y la segunda los lee y crea el índice en
+concordancia.
+
+Como todo en LaTeX, los índices se pueden personalizar. Por ejemplo,
+para el caso del índice de contenido, se puede cambiar la profundidad de
+los tres niveles que tiene por defecto al número que a nosotros nos
+parezca mejor:
+
+\begin{lstlisting}[language={[latex]tex}]
+\setcounter{tocdepth}{NIVEL}
+% NIVEL -1: part, 0: chapter, 1: section, etc.
+\end{lstlisting}
+
+También es interesante darle un título corto para los índices como
+argumento opcional a \lstinline!\caption!, \lstinline!\chapter! y otros
+comandos, por ejemplo:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{figure}
+  \caption[Título corto para el índice]{Título ultralargo que describe la figura en el documento}
+    \includegraphics{RUTA}
+\end{figure}
+\end{lstlisting}
+
+Para acabar con los índices una cosa bastante chula: si usamos el
+paquete \lstinline!hyperref! los elementos de los índices se vuelven
+\emph{clicables}. Hasta podemos poner los enlaces de colorines, en mi
+tesis, por ejemplo, eran rosas gracias a esta línea:
+
+\begin{lstlisting}[language={[latex]tex}]
+\usepackage[colorlinks=true,linkcolor=magenta]{hyperref}
+\end{lstlisting}
+
+Dicen en el manual de \lstinline!hyperref! que es mejor que sea el
+último paquete que cargamos por si acaso colisiona con algún otro.
+
+\section{Glosario y unidades}
+
+Otro tema que nos interesa a nosotros los científicos es poder hacer una
+lista de símbolos, letras griegas o acrónimos con facilidad. Y facilidad
+no es coger un documento científico de 350 páginas y apuntar en un
+papelito todos los símbolos que hemos utilizado con su respectiva
+definición\footnote{Yo me sé de uno que casi gasta el alfabeto griego en
+  su tesis y tenía subíndices y superíndices simultáneamente para hacer
+  referencia a diferentes variables. Le mando un beso desde aquí.}.
+
+Para el tema de los glosarios, nomenclaturas o listas de
+símbolos\footnote{Voy a usar \emph{lista de símbolos} y \emph{glosario}
+  indistintamente para referirme a \emph{una lista de cosas con su
+  respectiva definición que ponemos al inicio del documento para ayudar
+  al lector a entender lo que hemos escrito}} es muy importante la
+planificación. \emph{Muy importante}. Lo mejor es configurar todo antes
+de empezar a escribir, así aprovechamos las ventajas que tiene usar un
+paquete de este estilo y de paso no nos volvemos locos. Por cierto, digo
+\emph{un paquete} porque hay unos cuantos con este propósito, aunque
+todos ellos tienen dos características en común:
+
+\begin{itemize}
+\item
+  \textbf{Declaramos los símbolos al principio}. De este modo
+  garantizamos la coherencia y no nos llevamos la sorpresa de que le
+  hemos llamado \emph{I} a la corriente en el capítulo 3 y \emph{J} en
+  el 4. Además, al cambiar la declaración se modifican los símbolos
+  correspondientes en todo el documento.
+\item
+  \textbf{La lista de símbolos se crea automáticamente}. Dependiendo del
+  paquete tenemos la opción de crear listas de símbolos, letras griegas
+  y acrónimos separadas o no, pero en todos los casos la lista se genera
+  automáticamente de manera similar al índice de contenido y solo
+  incluye los símbolos que hemos usado en el documento. Esto último
+  igual parece ridículo así a primera vista pero nos permite tener
+  declarados un montón de símbolos en un archivo aparte y tener la
+  certeza de que solo se incluirán los que aparecen en el documento en
+  el que estamos trabajando.
+\end{itemize}
+
+Veamos qué opciones tenemos. Por una parte están los que usan el
+programa
+\href{http://tex.loria.fr/bibdex/makeindex.pdf}{\lstinline!makeindex!}
+lo que implica un paso extra a la hora de compilar:
+\href{http://www.ctan.org/pkg/nomencl}{\lstinline!nomencl!} y
+\href{http://www.ctan.org/tex-archive/macros/latex/contrib/glossaries/}{\lstinline!glossaries!},
+heredero del antiguo
+\href{http://www.ctan.org/pkg/glossary}{\lstinline!glossary!} y que
+tiene un manual de 250 páginas. Por otro, tenemos al mucho más modesto
+\href{https://www.ctan.org/pkg/listofsymbols}{\lstinline!listofsymbols!}
+que tiene menores capacidades pero no nos dificulta la compilación.
+
+Cuando escribí la tesis no tenía ganas de liarme la manta así que me
+quedé con \lstinline!listofsymbols! que era sencillito y eficaz. ¡Al
+final hasta me atreví a \href{https://gitlab.com/Ondiz/los}{añadirle
+funcionalidades} con mis limitadas habilidades! Os dejo un ejemplo de
+uso de \lstinline!listofsymbols! que creo que se entiende por sí solo:
+
+\begin{lstlisting}[language={[latex]tex}]
+\documentclass{article}
+
+  \usepackage[draft]{listofsymbols} % cambiar 'draft' por 'final' en el definitivo
+  \begin{document}
+
+    % Definición de símbolos [Definición]{Nombre que usaremos}[Símbolo]
+    \opensymdef
+    \newsym[Energía]{symE}{E}
+    \newsym[Masa]{symm}{m}
+    \newsym[Velocidad de la luz]{symc}{c}
+    % Hay que usar \ensuremath en los símbolos matemáticos
+    \newsym[Longitud de onda]{symlam}{\ensuremath{\lambda}}
+    \closesymdef
+
+    % Crear lista de símbolos
+    \listofsymbols
+
+    % Uso en ecuaciones
+    \begin{equation}
+      \symE=\symm \symc^2
+    \end{equation}
+
+    % Uso en texto
+    donde \symE es la energía \ldots
+
+\end{document}
+\end{lstlisting}
+
+En lo que respecta a \lstinline!nomencl! y a \lstinline!glossaries!,
+aunque me parecen interesantes nunca los he usado así que poco más os
+puedo decir aparte de este pequeño \emph{estado del arte}. En las
+referencias tenéis más información si os animáis a usarlos.
+
+Algo parecido nos pasa con las unidades, por eso voy a hablar de ellas
+en este mismo apartado. En este caso se une al tema de la coherencia la
+tipografía, una de las mayores preocupaciones de los usuarios de LaTeX
+del mundo\footnote{Hay hasta una
+  \href{https://nickhigham.wordpress.com/2016/01/28/typesetting-mathematics-according-to-the-iso-standard/}{norma
+  ISO} sobre cómo dar formato a las constantes, variables, unidades y
+  demás. Y yo he visto a profesores criticar a gente en defensas de
+  proyectos \emph{porque no han puesto recto el símbolo de la derivada}.
+  Tiene que haber gente para todo.}.
+
+Si nuestro principal problema es que las unidades tengan buena pinta,
+tenemos el paquete
+\href{http://www.ctan.org/tex-archive/macros/latex/contrib/units/}{\lstinline!units!}
+que se ocupa de que nuestras unidades sean tipográficamente correctas.
+Gracias a él las unidades tendrán el mismo estilo que el resto del texto
+en el modo texto y serán rectas en el modo matemático; no habrá nunca un
+salto de línea antes de la unidad, y habrá solo un \emph{espacio
+estrecho} (\lstinline!\,!) entre el valor y la unidad. Incluso nos crea
+una fracciones de lo más cucas gracias al paquete
+\href{http://ctan.org/pkg/nicefrac}{\lstinline!nicefrac!}. Pero la
+verdad es que lo uso porque tiene uno de los
+\href{http://osl.ugr.es/CTAN/macros/latex/contrib/units/units.pdf}{manuales}
+más geniales que he visto yo nunca.
+
+Simplemente lo cargamos en el preámbulo:
+
+\begin{lstlisting}[language={[latex]tex}]
+\usepackage{units} % Opción 'ugly' para fracciones de texto normal
+\end{lstlisting}
+
+Y usamos los comandos \lstinline!\unit[VALOR]{UNIDAD}! y
+\lstinline!\unitfrac[VALOR]{NUM}{DEN}! tanto en el modo texto como
+dentro de ecuaciones:
+
+\begin{lstlisting}[language={[latex]tex}]
+\unit[3]{m}
+
+$\unitfrac[4]{m}{s}$
+\end{lstlisting}
+
+Si aparte de unidades bonitas queremos garantizar la coherencia en todo
+el texto tenemos el mucho más potente (y con manual mucho menos
+gracioso) paquete
+\href{http://ctan.org/pkg/siunitx}{\lstinline!SIunits!}. El enfoque de
+\lstinline!SIunits! para las unidades es similar al de los paquetes para
+hacer glosarios y al que tiene el propio LaTeX para las ecuaciones: usar
+comandos para las unidades en lugar de texto normal. No voy a entrar en
+mucho detalle porque es un paquete bastante complejo, pero básicamente
+nos da unos comandos para dar formato a números, unidades y números con
+unidades:
+
+\begin{lstlisting}[language={[latex]tex}]
+% Formato de número
+\num[OPCIONES]{NÚMERO}
+
+% Formato de unidad
+\si[OPCIONES]{UNIDAD}
+
+% Formato de valor con unidad
+\SI[OPCIONES]{VALOR}{UNIDAD}
+\end{lstlisting}
+
+Podemos o bien escribir las unidades nosotros mismos o utilizar el
+comando correspondiente:
+
+\begin{lstlisting}[language={[latex]tex}]
+\si{kg}
+
+\si{\kilogram}
+\end{lstlisting}
+
+Es interesante porque nos permite representar las fracciones como
+exponentes negativos y los prefijos como \emph{kilo} o \emph{mili} como
+potencias de 10:
+
+\begin{lstlisting}[language={[latex]tex}]
+\SI{10}{\kilo\metre\per\hour} % 10 km h^{-1}
+\SI[per-mode = fraction]{10}{\kilo\metre\per\hour} % 10 km/h
+\SI[prefixes-as-symbols=false]{10}{\kilo\metre\per\hour}  % 10 10^3 m h^{-1}
+\end{lstlisting}
+
+Todo esto lo podemos configurar en el preámbulo para no tener que
+escribir tantísimo, claro. Muchas de las unidades tienen además nombres
+cortos para que no sean tan cansinas de definir.
+
+\section{Referencias bibliográficas}
+
+Ahora toca mi parte favorita en lo que respecta a LaTeX y los documentos
+científicos: el manejo de las referencias bibliográficas. Para ello
+usaremos un programa diferente pero que va integrado en las
+distribuciones de LaTeX: el gestor de referencias bibliográficas
+\href{http://www.bibtex.org/}{BibTeX}.
+
+BibTeX nos permite tener una base de datos de documentos diversos que
+podemos citar en el texto y que luego muy amablemente nos listará donde
+le pidamos con nuestro estilo favorito. Lo mejor es que en esa lista
+solo aparecerán los elementos que hemos citado y en el orden que
+queramos independientemente del orden en el que aparezcan en la base de
+datos.
+
+Además, como no era suficientemente genial, tiene dos ventajas extra:
+todo va en texto plano y se pueden usar programas libres para generar la
+base de datos.
+
+Antes de nada una cosilla, usar BibTeX como yo lo uso es la manera más
+sencilla pero también hay otros paquetes más avanzados como
+\href{http://ctan.org/pkg/natbib}{\lstinline!natbib!} y
+\href{http://ctan.org/pkg/biblatex}{\lstinline!biblatex!} e incluso
+otros programas como
+\href{http://biblatex-biber.sourceforge.net/}{Biber}, especialmente
+desarrollado para trabajar con \lstinline!biblatex!. Aquí me pasa como
+con \lstinline!makeindex!, se que existen y poco más. En cualquier caso
+os dejo algunos enlaces en las referencias para que os modernicéis, yo
+ya no puedo que soy vieja.
+
+Yendo al grano, para mi manera de gestionar la bibliografía necesitamos
+lo siguiente:
+
+\begin{itemize}
+\item
+  \textbf{Una bibliografía}, evidentemente, o bien la tenemos en un
+  archivo \lstinline!.bib! o la definimos en el propio documento.
+\item
+  \textbf{Un estilo de cita} que vendrá definido en un archivo
+  \lstinline!.bst!, la propia distribución de
+  \href{https://www.sharelatex.com/learn/Bibtex_bibliography_styles}{LaTeX
+  trae unos pocos} pero podemos descargarnos uno que nos interese de por
+  ahí (por ejemplo, cuando una revista científica nos exige citar de una
+  manera determinada) e incluso
+  \href{http://ctan.org/pkg/custom-bib}{crear uno nosotros}.
+\item
+  Si vamos a tener nuestra base de datos en un \lstinline!.bib! nos
+  vendrá bien \textbf{programa de gestión bibliográfica}. Puede ser un
+  programa específico como los libres
+  \href{http://www.jabref.org/}{Jabref} o
+  \href{https://www.zotero.org/}{Zotero} o un editor de uso general como
+  \href{https://nickhigham.wordpress.com/2016/01/06/managing-bibtex-files-with-emacs/}{Emacs}.
+\item
+  \textbf{Compilar 4 veces} en una secuencia \lstinline!pdflatex!,
+  \lstinline!bibtex!, \lstinline!pdflatex!,
+  \lstinline!pdflatex!\footnote{El proceso que se sigue es algo así: el
+    primer comando escribe las claves de las referencias en el archivo
+    auxiliar. A continuación \lstinline!bibtex! lee esas claves junto
+    con el \lstinline!.bib! y el \lstinline!.bst! y crea la bibliografía
+    en un archivo \lstinline!.bbl!. El segundo \lstinline!latex! escribe
+    las referencias cruzadas en el \lstinline!aux!. Por fin, el último
+    escribe las referencias cruzadas en el archivo final.}. He puesto
+  \lstinline!pdflatex! pero ya sabemos que puede ser perfectamente
+  \lstinline!xelatex! o simplemente \lstinline!latex!. Si estamos usando
+  un IDE se hará automáticamente.
+\end{itemize}
+
+Vamos a hablar un poco sobre la base de datos bibliográfica. Para mí lo
+más simple es usar un programa con su GUI y guardar todo un
+\lstinline!.bib!. Este archivo no deja de ser texto plano, de hecho, si
+lo abrimos con un editor de texto normal veremos que cada una de las
+entradas de nuestra base de datos tiene una pinta como esta:
+
+\begin{lstlisting}[language={[latex]tex}]
+@Book{Zarraga2017,
+  title={Curso no convencional de LaTeX},
+  author={Zarraga, Ondiz},
+  year={2017},
+  note=\url{https://ondiz.github.io/cursoLatex/}
+}
+\end{lstlisting}
+
+No voy a hablar sobre ninguno de estos programas aquí por dos motivos:
+ya he escrito suficiente tocho y sus manuales están muy bien.
+
+Si no nos gusta usar otro programa, siempre podemos definir la
+bibliografía directamente en LaTeX:
+
+\begin{lstlisting}[language={[latex]tex}]
+\begin{thebibliography}{9} % Menos de 9 entradas
+
+\bibitem{Zarraga2017}
+  Ondiz Zarraga,
+  \emph{Curso no convencional de LaTeX},
+  2017.
+
+\end{thebibliography}
+\end{lstlisting}
+
+En estos dos ejemplos \lstinline!Zarraga2017! es la \emph{clave} de la
+entrada bibliográfica y es lo que usaremos para citar ese trabajo en
+nuestro documento mediante el comando \lstinline!\cite{CLAVE}!:
+
+\begin{lstlisting}[language={[latex]tex}]
+Tal y como dice \cite{Zarraga2017}
+\end{lstlisting}
+
+Si hemos escrito nosotros la bibliografía a mano con
+\lstinline!thebibliography!, en el documento nos sustituirá
+\lstinline!\cite{Zarraga2017}! por un número. Si estamos usando un
+archivo \lstinline!.bib!, en cambio, tenemos ventajas añadidas ya que
+podemos pedir un estilo de cita y de referencia bibliográfica concreto.
+Este estilo está definido en un archivo \lstinline!.bst!, tenéis
+explicados los que BibTeX tiene por defecto
+\href{https://www.sharelatex.com/learn/Bibtex_bibliography_styles}{aquí}.
+En definitiva, necesitamos estas dos líneas:
+
+\begin{lstlisting}[language={[latex]tex}]
+% Definimos el estilo bibliográfico
+\bibliographystyle{plain} 
+
+% Creamos bibliografía a partir de referencias.bib 
+\bibliography{referencias}
+\end{lstlisting}
+
+Vamos a dejar aquí la bibliografía, es un tema que da para mucho. Espero
+que esto os sirva como introducción, hay más información en las
+referencias.
+
+\section{Recapitulación}
+
+Hemos visto que la planificación es fundamental a la hora de escribir un
+documento científico. La planificación se extiende tanto a la
+organización de los ficheros como a la propia escritura del documento,
+ya que elegir una manera de hacer las cosas antes de hacerlas nos ayuda
+luego a la hora de trabajar. Por eso yo me haría unas pocas preguntas
+antes de escribir la primera letra:
+
+\begin{itemize}
+\item
+  ¿Qué tipo de documento nos conviene? ¿Hay alguna clase que nos
+  facilite la labor?
+\item
+  ¿Necesitamos crear una lista de símbolos? ¿Vamos a hacerla a mano o es
+  preferible usar un paquete? En este último caso, ¿usamos uno
+  sencillito o incluimos una etapa extra de compilación para ganar en
+  funcionalidad?
+\item
+  ¿Podría ser interesante un paquete para tratar las unidades? ¿Queremos
+  solo que sean bonitas o también cierta coherencia?
+\item
+  Si nuestro documento tiene referencias bibliográficas ¿cómo vamos a
+  crear la base de datos? ¿Qué programa vamos a utilizar?
+\end{itemize}
+
+También hemos aprendido que una buena idea para escribir un documento
+largo es dividirlo en un archivo en el que se define su esqueleto y
+otros en los que está el contenido propiamente dicho. El esqueleto
+tendrá una pinta similar a esta:
+
+\begin{lstlisting}[language={[latex]tex}]
+% Definición del documento
+\documentclass[opciones]{tipo}
+
+% Paquetes
+\usepackage[opc]{paquete}
+
+% Datos
+\title{título}
+\author{autor}
+\includeonly{cap1}
+
+% Inicio
+\begin{document}
+  % Título e índices
+  \maketitle
+
+  \frontmatter
+  \tableofcontents
+  \listoftables
+  \listoffigures
+
+  % Contenido
+  \mainmatter
+  \include{cap1}
+  \include{cap2}
+
+  % Apéndices
+  \appendix
+  \include{ap1}
+
+  % Referencias bibliográficas
+  \backmatter
+  \bibliographystyle{plain}
+  \bibliography{referencias}
+  % Fin
+\end{document}
+\end{lstlisting}
+
+En definitiva, con este fascículo del curso he intentado hablar un poco
+de diferentes paquetes y herramientas que tenemos a nuestra disposición
+a la hora de escribir un documento científico. Me habré dejado cosas en
+el tintero que espero recuperar en el futuro próximo. De momento ahí
+están las referencias.
+
+\section{Referencias}\label{referencias}
+
+\href{http://texblog.org/2007/07/09/documentclassbook-report-article-or-letter/}{\emph{\lstinline!\\documentclass\{book, report, 
+article or letter\}!} en texblog}
+
+\href{http://tex.stackexchange.com/questions/36988/regarding-the-book-report-and-article-document-classes-what-are-the-mai\#36989}{\emph{Regarding
+the \lstinline!book!, \lstinline!report!, and \lstinline!article!
+document classes: what are the main differences?} en TexExchange}
+
+\href{http://web.science.mq.edu.au/~rdale/resources/writingnotes/latexstruct.html}{\emph{LaTeX
+Notes: Structuring Large Documents}}
+
+\href{http://tex.stackexchange.com/questions/20538/what-is-the-right-order-when-using-frontmatter-tableofcontents-mainmatter\#20547}{\emph{What
+is the right order when using \lstinline!\\frontmatter!,
+\lstinline!\\tableofcontents!, \lstinline!\\mainmatter!,
+\lstinline!\\part!, \lstinline!\\chapter!, \lstinline!\\backmatter!,\lstinline!\\appendix! etc?} en TexExchange}
+
+\href{http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include\#250}{\emph{When
+should I use \lstinline!\\input! vs. \lstinline!\\include!?} en TexExchange}
+
+\href{http://texblog.org/2011/09/09/10-ways-to-customize-tocloflot/}{\emph{10
+ways to customize toc/lof/lot}}
+
+\href{http://get-software.net/macros/latex/contrib/glossaries/glossariesbegin.pdf}{\emph{The
+glossaries package v4.25: a guide for beginners} (pdf)}
+
+\href{http://texblog.org/2014/01/15/glossary-and-list-of-acronyms-with-latex/}{\emph{LaTeX
+glossary and list of acronyms}}
+
+\href{https://www.sharelatex.com/learn/Nomenclatures}{\emph{Nomenclatures}
+en ShareLaTeX}
+
+\href{http://www.math.illinois.edu/~ajh/tex/bibliographies.html}{\emph{LaTeX
+tips: Bibliographies}}
+
+\href{https://www.latex-tutorial.com/tutorials/beginners/latex-bibtex/}{\emph{Bibliography
+in LaTeX with Bibtex/Biblatex}}
+
+\href{ftp://ftp.dante.de/tex-archive/info/bibtex/tamethebeast/ttb_en.pdf}{\emph{Tame
+the BeaST} (pdf)}
+
+\href{https://www.sharelatex.com/learn/Bibliography_management_with_natbib}{\emph{Bibliography
+management with \lstinline!natbib!} en ShareLaTeX}
+
+\href{http://tex.stackexchange.com/questions/13509/biblatex-in-a-nutshell-for-beginners}{\emph{\lstinline!biblatex!
+in a nutshell (for beginners)} en TeXExchange}
+
+\href{http://www.colorado.edu/physics/phys4610/phys4610_sp13/bibtex_guide.pdf}{\emph{A
+BibTeX Guide via Examples} (pdf)}
+
+\href{http://debibify.dorian-depriester.fr/}{\emph{Debibify}, un
+colección de estilos de cita}

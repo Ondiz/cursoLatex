@@ -1,0 +1,12 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{listings}
+
+\begin{document}
+
+  \begin{lstlisting}[language=haskell]
+    -- Fibonacci!
+    fib = 0 : 1 : zipWith (+) fib (tail fib)
+  \end{lstlisting}
+  
+\end{document}

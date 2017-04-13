@@ -1,12 +1,23 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,11pt]{article}
 
+\usepackage{xcolor}
 \usepackage{listings}
+
+\usepackage{minted}
 
 \begin{document}
 
   \begin{lstlisting}[language=haskell]
-    -- Fibonacci!
-    fib = 0 : 1 : zipWith (+) fib (tail fib)
+   -- Fibonacci!
+   fib = 0 : 1 : zipWith (+) fib (tail fib)
   \end{lstlisting}
   
+  \begin{minted}{clojure}
+  ;; Fibonacci por cortesía de Ekaitz
+  (defn fibo
+      ([] (fibo 0 1))
+      ([one two]
+          (lazy-seq (cons one (fibo two (+ one two))))))
+  \end{minted}
+
 \end{document}

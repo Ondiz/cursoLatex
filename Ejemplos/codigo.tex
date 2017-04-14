@@ -1,23 +1,35 @@
 \documentclass[a4paper,11pt]{article}
+\usepackage{polyglossia}
 
 \usepackage{xcolor}
 \usepackage{listings}
 
 \usepackage{minted}
+\usepackage[colorlinks]{hyperref}
+
+\renewcommand{\listingscaption}{Listado}
 
 \begin{document}
 
-  \begin{lstlisting}[language=haskell]
+  \listoflistings
+  
+  \begin{lstlisting}[language=haskell, caption=Código con Listings, captionpos=b]
    -- Fibonacci!
    fib = 0 : 1 : zipWith (+) fib (tail fib)
   \end{lstlisting}
   
-  \begin{minted}{clojure}
-  ;; Fibonacci por cortesía de Ekaitz
-  (defn fibo
-      ([] (fibo 0 1))
-      ([one two]
-          (lazy-seq (cons one (fibo two (+ one two))))))
-  \end{minted}
-
+  \begin{listing}
+   \begin{minted}[linenos,mathescape,texcl]{clojure}
+   ;; Fibonacci por cortesía de \href{https://pfctelepathy.wordpress.com/}{Ekaitz}
+   ;; $F_n = F_{n-1} + F_{n-2} \,/\, F_0 = 0 \wedge F_1 = 1$
+   
+   (defn fibo
+       ([] (fibo 0 1))
+       ([one two]
+           (lazy-seq (cons one (fibo two (+ one two))))))
+   \end{minted}
+   \label{lst:fibo}
+   \caption{Código con Minted}
+  \end{listing}
+  
 \end{document}

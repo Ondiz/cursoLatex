@@ -8,6 +8,8 @@
 \usepackage[colorlinks]{hyperref}
 
 \renewcommand{\listingscaption}{Listado}
+\usemintedstyle{vim}
+\newmint[py]{python}{bgcolor=black}
 
 \begin{document}
 
@@ -30,6 +32,10 @@
    \end{minted}
    \label{lst:fibo}
    \caption{Código con Minted}
-  \end{listing}
+  \end{listing}  
+  
+  \py|print [n for n in range(10) if n%2]|
+  
+  \inputminted{python}{fibonacci.py}
   
 \end{document}

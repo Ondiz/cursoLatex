@@ -13,9 +13,26 @@
 
 \begin{document}
 
+\lstset{
+        tabsize=2, % tab = 2 espacios
+        backgroundcolor=\color[HTML]{F0F0F0}, % color de fondo
+        basicstyle=\ttfamily, % estilo de letra general
+        columns=fixed, % columnas alineadas
+        extendedchars=true, % ASCII extendido
+        breaklines=true, % partir líneas
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}}, % marcar final de línea con flecha
+        showtabs=false, % no marcar tabulación
+        showspaces=false, % no marcar espacios
+        keywordstyle=\bfseries\color[HTML]{007020}, % estilo de palabras clave
+        commentstyle=\itshape\color[HTML]{60A0B0}, % estilo de comentarios
+        stringstyle=\color[HTML]{4070A0}, % estilo de strings
+}
+
   \listoflistings
+
+  En el Listado \ref{lst:fiboHaskell} podemos ver cómo crear una secuencia de Fibonacci en Haskell.
   
-  \begin{lstlisting}[language=haskell, caption=Código con Listings, captionpos=b]
+  \begin{lstlisting}[language=haskell, caption=Código con Listings, captionpos=b, label=lst:fiboHaskell]
    -- Fibonacci!
    fib = 0 : 1 : zipWith (+) fib (tail fib)
   \end{lstlisting}

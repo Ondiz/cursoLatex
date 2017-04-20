@@ -6,3 +6,7 @@
 * Main
 * Edición + colaboración: latexdiff, control de versiones
 * Compilación: IDE + manual, personalización
+
+# Referencias
+
+[*git + LaTeX workflow* en StackOverflow](http://stackoverflow.com/questions/6188780/git-latex-workflow)

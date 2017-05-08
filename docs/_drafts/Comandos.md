@@ -1,5 +1,10 @@
 # Nuestros propios comandos
 
+Dos opciones:
+
+* Pisar un entorno o comando existente
+* Crear uno desde cero
+
 Veamos un ejemplo
 
 ```latex

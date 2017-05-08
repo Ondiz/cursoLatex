@@ -10,3 +10,5 @@
 # Referencias
 
 [*git + LaTeX workflow* en StackOverflow](http://stackoverflow.com/questions/6188780/git-latex-workflow)
+
+[*El formato de una publicación: cuello de botella en la edición*](http://marianaeguaras.com/el-formato-de-una-publicacion-cuello-de-botella-en-la-edicion/)

@@ -3,11 +3,8 @@
 curso.*
 !curso.tex
 
-Ejemplos/ecuaciones.*
-!Ejemplos/ecuaciones.tex
-
-Ejemplos/codigo.*
-!Ejemplos/codigo.tex
+Ejemplos/*
+!Ejemplos/*.tex
 
 # Ignorar archivos de Emacs
 

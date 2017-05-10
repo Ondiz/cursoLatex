@@ -1,0 +1,92 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{fontenc}
+
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen=right} % Notas + diapositivas
+
+\usepackage{graphicx}
+
+\title{Presentaciones en \LaTeX}
+\author{Ondiz}
+\institute{Home, sweet home}
+\date{\today}
+
+\usetheme{Bergen}
+\usefonttheme{serif}
+\usecolortheme{rose}
+
+% Título de la presentación en negrita
+\setbeamerfont{title}{series=\bfseries}
+
+% Todos los títulos en rosa con el fondo blanco
+\setbeamercolor{title}{fg=magenta, bg=white}
+\setbeamercolor{titlelike}{fg=magenta, bg=white}
+
+% Sin símbolos de navegación
+\setbeamertemplate{navigation symbols}{}
+
+% Flechas para indicar ítems en listas 
+\setbeamertemplate{itemize item}{$\Rightarrow$}
+
+\AtBeginSubsection
+{   \begin{frame}
+        \frametitle{Índice}
+        \tableofcontents[currentsection,
+        currentsubsection,
+        sectionstyle=show/hide,
+        subsectionstyle=show/shaded/hide] 
+    \end{frame}
+}
+
+% Índice en la diapositiva
+
+\def\insertauthorindicator{}% Default is "Who?"
+\def\insertinstituteindicator{}% Default is "From?"
+\def\insertdateindicator{}% Default is "When?"
+
+\usepackage{media9}
+\usepackage{multimedia}
+
+\usepackage{hyperref}
+
+\begin{document}
+ 
+ \begin{frame}
+  \maketitle
+  \note{Notas}
+ \end{frame}
+ 
+ \begin{frame}{Índice}
+  \tableofcontents
+  \note{Más notas}
+ \end{frame}
+ 
+ \section{Introducción}
+ \subsection{Primera parte}
+
+ \begin{frame}{Introducción}
+  \begin{itemize}
+   \item<1-> Ítem 1
+   \item<2-> Ítem 2
+  \end{itemize}
+ \end{frame}
+ 
+ \subsection{Segunda parte}
+ 
+   \begin{frame}{Introducción}
+     \begin{block}{Vídeos}
+      % Vídeo con multimedia
+      \movie{\includegraphics[width=0.45\textwidth]{poster}}{popeye.mp4}
+      % Vídeo con media9
+      \includemedia{\includegraphics[width=0.45\textwidth]{poster}}{popeye.mp4}
+      
+      % Vídeo con href
+      \href{run:popeye.mp4}{Vídeo}
+     \end{block}
+
+   \end{frame}
+ 
+\end{document}

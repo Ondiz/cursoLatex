@@ -1,10 +1,16 @@
 # Ignorar archivos auxiliares de Latex
 
-curso.*
-!curso.tex
-
-Ejemplos/*
-!Ejemplos/*.tex
+*.log
+*.aux
+*.out
+*.nav
+*.toc
+*.pdf
+*.snm
+*.lof
+*.lot
+*.lol
+*.backup
 
 # Ignorar archivos de Emacs
 

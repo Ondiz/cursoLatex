@@ -31,9 +31,23 @@
 % Flechas para indicar ítems en listas 
 \setbeamertemplate{itemize item}{$\Rightarrow$}
 
+% Diapositiva con el título de sección al iniciar sección
+\AtBeginSection{
+  \begin{frame}
+  \vfill
+  % Caja con colores de título
+  \begin{beamercolorbox}[center]{title}
+    \usebeamerfont{title} % Fuente de título
+    \insertsectionhead % Nombre de sección
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+% Índice mostrando subsección actual al iniciar subsección
 \AtBeginSubsection
-{   \begin{frame}
-        \frametitle{Índice}
+{   \begin{frame}{Índice}
         \tableofcontents[currentsection,
         currentsubsection,
         sectionstyle=show/hide,
@@ -68,10 +82,12 @@
  \subsection{Primera parte}
 
  \begin{frame}{Introducción}
-  \begin{itemize}
-   \item<1-> Ítem 1
-   \item<2-> Ítem 2
+  \begin{itemize}[<+->]
+   \item Ítem 1
+   \item Ítem 2
   \end{itemize}
+  \note<1>{Notas para el ítem 1}
+  \note<2>{Notas para el ítem 2}
  \end{frame}
  
  \subsection{Segunda parte}

@@ -1,4 +1,4 @@
-# Curso no convencional de Latex
+# Curso no convencional de LaTeX
 
 Este repositorio recoge el *Curso no convencional de LaTeX* que
 estoy publicando por entregas en mi blog
@@ -113,10 +113,10 @@ Apéndice 2. Hablemos de paquetes
 ## Agradecimientos
 
 Hay que agradecer el nacimiento de este curso a tres personas: los dos
-profesores que me dieron clase de Latex, que han sido los peores
+profesores que me dieron clase de LaTeX, que han sido los peores
 profesores que yo he tenido jamás (y he tenido muchos profesores
 malos, creedme) y al genio entre los genios que hizo el mismo
-documento desde cero en Latex y Word porque no sabía que se podía
+documento desde cero en LaTeX y Word porque no sabía que se podía
 pasar de uno a otro (y tampoco sabía buscar en Internet, entiendo) y
 se siente tan orgulloso de sí mismo por ello que lo va pregonando por
 ahí.

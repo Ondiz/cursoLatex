@@ -8,56 +8,119 @@ del lenguaje de marcado LaTeX.
 
 [ondahostil]: https://ondahostil.wordpress.com/curso-no-convencional-de-latex
 
-## Índice preliminar
+## El porqué del curso
 
-1. Introducción
+Publiqué la idea de escribir un cursete de LaTeX el
+[13 de noviembre del año pasado][idea], un mes después de terminar de
+escribir la tesis y un mes antes de defenderla. Fue un tiempo muy raro
+ese, estaba preparando la presentación, el ambiente en el trabajo era
+horrible y no sabía qué iba a hacer con mi vida. Es fácil entender que
+muy motivada no estaba.
 
-    - ¿Qué es LaTeX?
-    - Ventajas e inconvenientes
-    - ¿Es para mí?: comparación con otros lenguajes de marcado (Markdown...), Lyx, Word/Writer
+[idea]: https://ondahostil.wordpress.com/2016/11/13/proyecto-curso-no-convencional-de-latex/
 
-2. ¿Cómo funciona?
+La cuestión es que estaba haciendo la presentación con una mezcla de
+Markdown, Beamer y Pandoc, siguiendo con la estela de la tesis, con la
+idea de tener que aprender algo nuevo y así llevarlo mejor. Y me di
+cuenta de una cosa: estaba entendiendo LaTeX. Quiero decir con esto
+que podía abrir el manual de un paquete, leerlo y entenderlo.
 
-    - El editor y el compilador
-    - Ventajas y desventajas de una IDE: el proceso de generar un documento (índice, referencias ...)
-    - La opción Pandoc
-    - Usando un Makefile
+Ya había sentido esto mismo cuando truqué un paquete para que hiciera
+lo que yo necesitaba, pero ahora estaba casi convencida de
+ello. Además, había logrado llegar a ese nivel de entendimiento yo
+sola, ya que en el curso de LaTeX que tuve al inicio de la tesis no
+aprendí absolutamente nada gracias a los magníficos profesores que lo
+impartían.
 
-3. Un documento básico: sintaxis en Latex y opción Markdown
+Para que os hagáis una idea lo que suponía para mí entender LaTeX,
+antes lo que hacía era buscar en DuckDuckGo mi problema, ir a las
+respuestas de StackOverflow e ir probando hasta que se solucionaba el
+asunto. Tristemente no estaba sola, el resto de los doctorandos que
+usaban LaTeX hacían exactamente lo mismo, precisamente porque los
+magníficos profesores alentaban dicho comportamiento1. El resto usaba
+Word porque nadie había sido capaz de explicarles por qué LaTeX era
+interesante.
 
-    - Listas
-    - Imágenes
-    - Tablas
-    - Código
-    - Ecuaciones
-    - Referencias bibliográficas
-    - Referencias cruzadas
+Me planteé por lo tanto crear el documento que me hubiera gustado
+tener a mí para aprender, esa cosa intermedia entre lo más básico y
+leerte el manual de 250 páginas de Beamer. Hay claramente un vacío
+ahí. Por eso quería que el curso fuera relativamente ameno aunque
+riguroso, que hablase de conceptos y no solo de lo que hay que poner
+en el .tex.. Ese fue el motivo de que lo bautizase como no
+convencional.
 
-4. El caso de un documento científico
+## Contenido
 
-    - Planificación
-    - Glosarios
-    - Unidades
+1. **Introducción**: donde cuento qué es LaTeX y hablo de sus ventajas
+   e inconvenientes.
 
-5. Sobre el formato
+2. **¿Qué necesito?**: sobre las herramientas necesaria para escribir
+   un documento. Cosas sobre editores, compiladores y una pequeña
+   intro a Pandoc.
 
-    - El tema del idioma
-    - Busca una plantilla: Overleaf, ...
+3. **Un documento básico**: escribimos juntos nuestro primer
+   documento y aprendemos sobre sintaxis.
 
-6. Una presentación básica
+4. **Insertando figuras**: sobre cómo insertar imágenes en un
+   documento, objetos flotantes, formatos y posicionamiento.
 
-    - La clase Beamer
-    - Powerdot
-    - Notas
-    - Pdfpc
+5. **LaTeX y las ecuaciones**: uno de los motivos por los que la gente
+   se pasa a LaTeX son las ecuaciones. Aquí hay una introducción sobre
+   símbolos, comandos y demás parafernalia. Aprovecho para hablar un
+   poco de la gestión del espacio y las referencias cruzadas.
 
-7. Personalización
+6. **A vueltas con el idioma**: sobre paquetes de idioma y
+   codificación de entrada y de fuente. Diferencias según el
+   compilador que estemos usando.
 
-    - Una clase propia
-    - Comandos propios
+7. **Formas, tamaños y colores**: hablamos del formato, en particular
+   de cómo cambiar el tamaño, el estilo y el color del
+   texto.
+   
+8. **La página**: sobre la posición de los elementos dentro de la
+   página. Nos centramos en los márgenes, el interlineado y la
+   alineación.
 
-8. Herramientas
+9. **Espacio en blanco**: sobre la gestión del espacio vertical y
+   horizontal. Hablamos de párrafos, salto de línea y página
+   y de cómo los trata LaTeX.
 
-    - Latexdiff
-    - Ortografía
-    - ¿Otras?
+10. **Un documento científico**: vemos cuáles sonlas partes de un
+    documento largo y su formato. Información sobre las unidades, el
+    glosario y la bibliografía.
+
+11. **Píntame ese código**: sobre resaltado de sintaxis. Hablamos de
+    los paquetes `listings` y `minted`.
+
+12. **También podemos presentar**: vemos que se pueden hacer
+    presentaciones en LaTeX. Hablamos de las diferentes opciones y de
+    programas compatibles. 
+
+Y muy pronto:
+
+13.Nuestras propias macros
+
+14.Herramientas útiles
+
+15.La opción Pandoc
+
+16.Mi proceso de escritura
+
+Apéndice 1. Una nota sobre los archivos auxiliares
+
+Apéndice 2. Hablemos de paquetes
+
+## Agradecimientos
+
+Hay que agradecer el nacimiento de este curso a tres personas: los dos
+profesores que me dieron clase de Latex, que han sido los peores
+profesores que yo he tenido jamás (y he tenido muchos profesores
+malos, creedme) y al genio entre los genios que hizo el mismo
+documento desde cero en Latex y Word porque no sabía que se podía
+pasar de uno a otro (y tampoco sabía buscar en Internet, entiendo) y
+se siente tan orgulloso de sí mismo por ello que lo va pregonando por
+ahí.
+
+Aparte, y ahora ya en serio, gracias a todos los que habéis leído cada
+capítulo de este curso, habéis comentado y aportado y me habéis
+animado a seguir.

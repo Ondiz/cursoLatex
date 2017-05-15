@@ -1,0 +1,63 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{fontenc}
+
+\usepackage{parskip}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% Comando nuevo
+\newcommand{\figref}[1]{\figurename~\ref{#1}}
+
+% Comando con argumentos opcionales
+\newcommand{\plusbinomial}[3][2]{(#2 + #3)^#1}
+
+% Redefinir comando
+\let\oldfrac=\frac
+\renewcommand{\frac}[2]{\ensuremath{\oldfrac{#1}{#2}}}
+
+\usepackage{framed}
+
+% Redefinir leftbar
+\renewenvironment{leftbar}[1][\hsize]
+  { \color{gray}
+      \def\FrameCommand
+      {{\color{lightgray}\vrule width 3pt}}
+      \MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}
+  }
+  {\endMakeFramed}
+  
+% Guardar entorno quote
+\let\oldquote=\quote
+\let\oldendquote=\endquote
+
+% Barra vertical a la izquierda de la cita
+\renewenvironment{quote}
+    {\vspace{10pt}\leftbar\vspace*{-6pt}\oldquote}
+    {\oldendquote\endleftbar\vspace{10pt}}
+
+\begin{document}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.3\textwidth]{example-image-a} 
+    \caption{Figura de prueba A}
+    \label{figura}
+  \end{figure}
+  
+  En la Figura \ref{figura} \\
+  En la \figref{figura}
+  
+  $\plusbinomial[4]{x}{y}$
+  
+  \frac{1}{2}
+  $\oldfrac{1}{2}$
+  
+  \begin{quote}
+   Si buscas una mano que te ayude la encontrarás al final de tu brazo.
+  \end{quote}
+  
+\end{document}

@@ -19,6 +19,18 @@
 \let\oldfrac=\frac
 \renewcommand{\frac}[2]{\ensuremath{\oldfrac{#1}{#2}}}
 
+% Entorno nuevo
+\newenvironment{nota}[1]
+  {\vspace{1ex}\hrule\textbf{#1}}
+  {\vspace{1ex}\hrule}
+
+% Entorno numerado nuevo
+\newcounter{ejemplo}[section]
+\newenvironment{ejemplo}
+  {\refstepcounter{ejemplo}\vspace{1ex}\hrule\textbf{Ejemplo~\thesection.\theejemplo}}
+  {\vspace{1ex}\hrule}
+
+% Redefinir entorno
 \usepackage{framed}
 
 % Redefinir leftbar
@@ -55,6 +67,21 @@
   
   \frac{1}{2}
   $\oldfrac{1}{2}$
+  
+  \begin{nota}{¡Cuidado!}
+   Hay que tener en cuenta que \ldots
+  \end{nota}
+
+  Texto normal
+  
+  \section{Entorno numerado}
+  \begin{ejemplo}
+   Un primer ejemplo
+  \end{ejemplo}
+
+  \begin{ejemplo}
+   Un segundo ejemplo
+  \end{ejemplo}
   
   \begin{quote}
    Si buscas una mano que te ayude la encontrarás al final de tu brazo.

@@ -17,15 +17,24 @@
 \newcommand{\figref}[1]{\figurename~\ref{#1}}
 
 % Comando con argumentos opcionales
-\newcommand{\planoR}[1][2]{\mathbb{R}^{#1}}
+\newcommand{\R}[1][2]{\mathbb{R}^{#1}}
 
 % Redefinir comando
 \let\oldfrac=\frac
 \renewcommand{\frac}[2]{\ensuremath{\oldfrac{#1}{#2}}}
 
-% Nuevo entorno
+% Entorno nuevo
+\newenvironment{nota}[1]
+  {\vspace{1ex}\hrule\textbf{#1}}
+  {\vspace{1ex}\hrule}
 
+% Entorno numerado nuevo
+\newcounter{ejemplo}[section]
+\newenvironment{ejemplo}
+  {\refstepcounter{ejemplo}\vspace{1ex}\hrule\textbf{Ejemplo~\thesection.\theejemplo}}
+  {\vspace{1ex}\hrule}
 
+% Redefinir entorno
 \usepackage{framed}
 
 % Redefinir leftbar
@@ -58,10 +67,30 @@
   En la Figura \ref{figura} \\
   En la \figref{figura}
   
-  $\planoR, \planoR[3]$
+  $\R, \R[3]$
   
   \frac{1}{2}
   $\oldfrac{1}{2}$
+  
+  \begin{nota}{¡Cuidado!}
+   Hay que tener en cuenta que \ldots
+  \end{nota}
+
+  Texto normal
+  
+  \section{Entorno numerado}
+  \begin{ejemplo}
+   Un primer ejemplo
+  \end{ejemplo}
+
+  \begin{ejemplo}
+   Un segundo ejemplo
+  \end{ejemplo}
+  
+  % Entorno como comando inicial + final
+  \equation
+  a^2 x + b x + c = 0  
+  \endequation
   
   \begin{quote}
    Si buscas una mano que te ayude la encontrarás al final de tu brazo.

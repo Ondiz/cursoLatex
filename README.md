@@ -94,11 +94,12 @@ convencional.
 
 12. **También podemos presentar**: vemos que se pueden hacer
     presentaciones en LaTeX. Hablamos de las diferentes opciones y de
-    programas compatibles. 
+    programas compatibles.
+
+13. **Nuestras propias macros**: creamos nuestros propios comandos y
+	entornos y modificamos los que ya existen.
 
 Y muy pronto:
-
-13.Nuestras propias macros
 
 14.Herramientas útiles
 

@@ -4,6 +4,10 @@
 \usepackage[spanish]{babel}
 \usepackage{fontenc}
 
+% Paquetes matemáticos
+\usepackage{amsmath}
+\usepackage{amssymb}
+
 \usepackage{parskip}
 
 \usepackage{graphicx}
@@ -13,7 +17,7 @@
 \newcommand{\figref}[1]{\figurename~\ref{#1}}
 
 % Comando con argumentos opcionales
-\newcommand{\plusbinomial}[3][2]{(#2 + #3)^#1}
+\newcommand{\R}[1][2]{\mathbb{R}^{#1}}
 
 % Redefinir comando
 \let\oldfrac=\frac
@@ -63,7 +67,7 @@
   En la Figura \ref{figura} \\
   En la \figref{figura}
   
-  $\plusbinomial[4]{x}{y}$
+  $\R, \R[3]$
   
   \frac{1}{2}
   $\oldfrac{1}{2}$

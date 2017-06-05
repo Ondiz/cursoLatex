@@ -92,6 +92,13 @@ gusta que os deje cosas por ahí tenéis varias opciones:
   fácilmente en el IDE donde aparecen las órdenes. Esta es la opción
   que yo suelo usar (ahora que la he descubierto).
 
+- Compilar con la opción `--jobname=CARPETA/OUTPUT INPUT.tex`, así
+  guardará el *pdf* y los archivos auxiliares en la carpeta que
+  nosotros queramos<label for="shevek" class="margin-toggle
+  sidenote-number"></label><input type="checkbox" id="shevek"
+  class="margin-toggle"/><span class="sidenote">¡Gracias Shevek por
+  hablarme de esta opción!</span>.
+
 - Usar *Pandoc*. Esto nos hace cambiar nuestra forma de trabajar
   radicalmente, pero no nos quedan sobras por ahí.
 
@@ -100,7 +107,7 @@ gusta que os deje cosas por ahí tenéis varias opciones:
 
 [*Auxiliary Files* en Dickimaw Books](http://www.dickimaw-books.com/latex/novices/html/auxiliary.html)
 
-[*Prevent pdflatex from writing a bunch of files* en Stack Exchange]( http://tex.stackexchange.com/questions/11123/prevent-pdflatex-from-writing-a-bunch-of-files)
+[*Prevent pdflatex from writing a bunch of files* en TeXExchange]( http://tex.stackexchange.com/questions/11123/prevent-pdflatex-from-writing-a-bunch-of-files)
 
 [*I don’t want the .aux, .log and .synctex.gz files when using pdflatex* en StackOverflow](http://stackoverflow.com/questions/3745908/i-dont-want-the-aux-log-and-synctex-gz-files-when-using-pdflatex)
 

@@ -116,7 +116,9 @@ gusta que os deje cosas por ahí tenéis varias opciones:
 ***
 
 <div>
-<p> Anterior: <a href="{{ site.github.url
-}}/Contenido/Ap2.X.html">AP2</a>,
+<p>Anterior: <a href="{{ site.github.url
+}}/Contenido/16.X.html">WIP</a>,
+Siguiente: <a href="{{ site.github.url
+}}/Contenido/Ap2.Paquetes.html">Hablemos de paquetes</a>,
 [<a href="{{ site.github.url }}/">Contenido</a>]</p>
 </div>

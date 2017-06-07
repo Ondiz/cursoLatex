@@ -107,9 +107,13 @@ Y muy pronto:
 
 16.Mi proceso de escritura
 
-Apéndice 1. Una nota sobre los archivos auxiliares
+### Apéndices
 
-Apéndice 2. Hablemos de paquetes
+1. **Una nota sobre los archivos auxiliares**: vemos para qué sirven
+   todos esos archivos que LaTeX nos deja bailando por ahí.
+
+2. **Hablemos de paquetes**: unas notas sobre la instalación de
+   paquetes, especialmente centradas en GNU/Linux.
 
 ## Agradecimientos
 

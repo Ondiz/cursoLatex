@@ -1,5 +1,7 @@
 # Curso no convencional de LaTeX
 
+[![Puedes donarme pasta en Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Ondiz/donate)
+
 Este repositorio recoge el *Curso no convencional de LaTeX* que
 estoy publicando por entregas en mi blog
 [*Onda Hostil*][ondahostil]. Consiste en un grupo de artículos

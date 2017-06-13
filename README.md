@@ -39,7 +39,7 @@ antes lo que hacía era buscar en DuckDuckGo mi problema, ir a las
 respuestas de StackOverflow e ir probando hasta que se solucionaba el
 asunto. Tristemente no estaba sola, el resto de los doctorandos que
 usaban LaTeX hacían exactamente lo mismo, precisamente porque los
-magníficos profesores alentaban dicho comportamiento1. El resto usaba
+magníficos profesores alentaban dicho comportamiento. El resto usaba
 Word porque nadie había sido capaz de explicarles por qué LaTeX era
 interesante.
 

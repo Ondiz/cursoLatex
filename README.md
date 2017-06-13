@@ -101,9 +101,12 @@ convencional.
 13. **Nuestras propias macros**: creamos nuestros propios comandos y
 	entornos y modificamos los que ya existen.
 
-Y muy pronto:
+14. **Abramos la caja de herramientas**: hablamos de herramientas
+    variadas que nos ayudan en nuestro proceso de escritura. Tratamos
+    los borradores, las plantillas, el control de versiones y otras
+    herramientas externas interesantes.
 
-14.Herramientas útiles
+Y muy pronto
 
 15.La opción Pandoc
 

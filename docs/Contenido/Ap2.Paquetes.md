@@ -154,5 +154,7 @@ GNU/Linux.
 
 <div> <p> Anterior: <a href="{{ site.github.url
 }}/Contenido/Ap1.Auxiliares.html">Una nota sobre los archivos
-auxiliares</a>
+auxiliares</a>,
+Siguiente: <a href="{{ site.github.url
+}}/Contenido/Ap3.Enlaces.html">Enlaces de interés</a>,
 [<a href="{{ site.github.url }}/">Contenido</a>]</p> </div>

@@ -107,11 +107,19 @@
 
 \begin{document}
 
+\frontmatter
 \maketitle
 
 \tableofcontents
-\listoftables
-\listoffigures
+%\listoftables
+%\listoffigures
+
+\chapter*{Prefacio}
+\chaptermark{Prefacio} % marcar como capítulo para que cambie encabezado
+\addcontentsline{toc}{chapter}{Prefacio}
+\input{Contenido/Prefacio}
+
+\mainmatter
 
 \chapter{Introducción}
 \input{Contenido/01.Introduccion}
@@ -142,6 +150,8 @@
 
 \chapter{Un documento científico}
 \input{Contenido/10.DocumentoCientifico}
+
+\backmatter
 
 % Bibliografía
 

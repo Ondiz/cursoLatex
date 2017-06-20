@@ -1,0 +1,122 @@
+Os habréis fijado como yo en que cuando compilamos LaTeX desde un IDE se
+generan miles y miles de archivos auxiliares al darle a que genere el
+documento. Vamos a ver si conseguimos clarificar un poco que para qué
+sirven algunos de ellos.
+
+Aquí tenemos un lista de los archivos auxiliares más típicos, lo mejor
+de todo es que todos ellos son texto plano así que podemos abrirlos y
+mirar qué contienen:
+
+\begin{itemize}
+\item
+  \lstinline!aux!: sirve para gestionar las referencias cruzadas
+  (\lstinline!\ref!) y las citas bibliográficas (\lstinline!\cite!),
+  entre otras cosas. En general, guarda la información que ha de pasarse
+  de un proceso de compilación a otro.
+\item
+  \lstinline!log!: aquí se guarda la información sobre el proceso de
+  compilación, las advertencias, los errores, los paquetes utilizados
+  con su respectiva versión y tal. Es especialmente útil si nos falla al
+  crear el documento y no sabemos por qué.
+\item
+  \lstinline!synctex!: sincroniza nuestro código fuente con el documento
+  de salida en el IDE, es decir, al movernos por el código fuente vemos
+  al lado la parte correspondiente del \emph{pdf}. Podemos borrarlo
+  alegremente, simplemente se creará otro.
+\item
+  \lstinline!toc!, \lstinline!lof!, \lstinline!lot! \ldots{} : sirven
+  para crear el índice, la lista de figuras, la lista de tablas \ldots{}
+\item
+  \lstinline!out!: lo genera \lstinline!hyperref! y vale para crear los
+  enlaces que nos llevan de un lado a otro en el \emph{pdf}.
+\item
+  \lstinline!bbl!: es el archivo de bibliografía creado por BibTeX.
+\item
+  \emph{Otros}: otros paquetes crean archivos auxiliares para gestionar
+  sus cosas, por ejemplo, el paquete
+  \href{http://ctan.org/pkg/listofsymbols}{\lstinline!listofsymbols!}
+  crea un \lstinline!sub! y un \lstinline!sym! para gestionar la lista
+  de subíndices y de símbolos respectivamente. Otro ejemplo son los
+  archivos \lstinline!idx! que sirven para hacer el índice por palabras
+  con
+  \href{https://en.wikibooks.org/wiki/LaTeX/Indexing}{\lstinline!makeindex!}.
+\end{itemize}
+
+Para el caso de Beamer se crean además estos otros:
+
+\begin{itemize}
+\item
+  \lstinline!snm!: ayuda en el proceso de insertar imágenes en el tipo
+  \lstinline!article!
+\item
+  \lstinline!nav!: sirve para crear la barra de navegación en la
+  presentación
+\end{itemize}
+
+Todos estos archivos aparecen porque cuando nosotros le damos al
+botoncillo para que nos cree el documento por dentro en realidad se
+invocan un montón de procesos. Tomando como ejemplo un caso en el que
+usemos \lstinline!pdflatex! y tengamos referencias se haría algo así:
+
+\begin{lstlisting}[language=bash]
+pdflatex fuente.tex  # primera compilación
+bibtex fuente.aux    # la bibliografía
+pdflatex fuente.tex  # para referencias 
+pdflatex fuente.tex  # para referencias 
+\end{lstlisting}
+
+Como veis, necesitamos compilar tres veces para tener las referencias
+correctamente. A este proceso se le pueden añadir otros pasos como
+\lstinline!makeindex!, para el índice por palabras, o
+\lstinline!makeglossaries!, para crear el glosario. Es por esta ristra
+de procesos que nosotros no vemos que se escriben todos los archivos
+auxiliares.
+
+Os preguntaréis: \emph{¿estas mierdas para qué las va dejando por ahí?
+¿no las puede crear y luego borrarlas?} Podría hacerlo, sí, Pandoc lo
+hace de hecho, crea una carpeta temporal con las basuras y luego la
+borra. Esto es como todo en la vida, tiene sus ventajas y sus
+inconvenientes. Tener esos archivos auxiliares nos permite hurgar y
+trucar cosas y es útil para ver dónde falla al compilar. Pero si no os
+gusta que os deje cosas por ahí tenéis varias opciones:
+
+\begin{itemize}
+\item
+  Si usáis un IDE tipo Kile, tendréis un botón para eliminar los
+  archivos auxiliares.
+\item
+  Si el documento no tiene referencias cruzadas, ni citas
+  bibliográficas, ni ninguna cosa que necesite archivos auxiliares
+  podemos usar \lstinline!\nofiles! en el preámbulo y solo nos creará el
+  \lstinline!pdf!y el \lstinline!log!. También se creará el
+  \lstinline!synctex! si compilamos desde un IDE. Tampoco nos ahorramos
+  mucha cosas como veis.
+\item
+  Añadir \lstinline!--aux-directory=CARPETA! a la orden de compilar. Así
+  meterá todos los archivos auxiliares en la carpeta que le hemos dicho
+  y buscará también ahí cuando los necesite. Lo podemos cambiar
+  fácilmente en el IDE donde aparecen las órdenes. Esta es la opción que
+  yo suelo usar (ahora que la he descubierto).
+\item
+  Compilar con la opción \lstinline!--jobname=CARPETA/OUTPUT INPUT.tex!,
+  así guardará el \emph{pdf} y los archivos auxiliares en la carpeta que
+  nosotros queramos\footnote{¡Gracias Shevek por hablarme de esta
+    opción!}.
+\item
+  Usar \emph{Pandoc}. Esto nos hace cambiar nuestra forma de trabajar
+  radicalmente, pero no nos quedan sobras por ahí.
+\end{itemize}
+
+\section{Referencias}
+
+\href{http://www.dickimaw-books.com/latex/novices/html/auxiliary.html}{\emph{Auxiliary
+Files} en Dickimaw Books}
+
+\href{http://tex.stackexchange.com/questions/11123/prevent-pdflatex-from-writing-a-bunch-of-files}{\emph{Prevent
+pdflatex from writing a bunch of files} en TeXExchange}
+
+\href{http://stackoverflow.com/questions/3745908/i-dont-want-the-aux-log-and-synctex-gz-files-when-using-pdflatex}{\emph{I
+don't want the .aux, .log and .synctex.gz files when using pdflatex} en
+StackOverflow}
+
+\href{http://latex-mk.sourceforge.net/}{\lstinline!latex-mk!}

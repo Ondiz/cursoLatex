@@ -44,9 +44,9 @@ opción:
 
 Si hemos instalado la versión sencilla de TeXLive y añadimos esa línea
 a nuestro *tex* nos dará error al compilar porque nos falta el paquete
-de español. Para buscarlo hacemos[^distro]:
+de español. Para buscarlo hacemos[^distroCom]:
 
-[^distro]: Para ver cuál es el comando para buscar paquetes
+[^distroCom]: Para ver cuál es el comando para buscar paquetes
 equivalente a `apt-cache search` en otras distros podéis usar
 [esta tabla][tabla] de los *compis* de [Colaboratorio].
 

@@ -52,26 +52,19 @@
 
 \usepackage{listings}
 
-% Definiciones de color de http://latexcolor.com/
-
-\definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
-\definecolor{viridian}{rgb}{0.25, 0.51, 0.43}
-\definecolor{midnightblue}{rgb}{0.1, 0.1, 0.44}
-\definecolor{ballblue}{rgb}{0.13, 0.67, 0.8}
-\definecolor{frenchblue}{rgb}{0.0, 0.45, 0.73}
-
-\lstset{	
+\lstset{
+	tabsize=2,
 	basicstyle=\small\ttfamily,
         breaklines=true,
         columns=fixed,
         extendedchars=true,
         prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
         tabsize=2,
-        backgroundcolor=\color{whitesmoke},
-        keywordstyle=\bfseries\color{viridian},
-        identifierstyle=\ttfamily\color{midnightblue},
-        commentstyle=\itshape\color{ballblue},
-        stringstyle=\color{frenchblue},        
+        backgroundcolor=\color[HTML]{F0F0F0},
+        identifierstyle=\ttfamily\color[HTML]{06287E},
+        keywordstyle=\bfseries\color[HTML]{007020},
+        commentstyle=\itshape\color[HTML]{60A0B0},
+        stringstyle=\color[HTML]{4070A0},      
 	}
 
 % Listings no acepta UTF8        
@@ -99,6 +92,15 @@
 
 \usepackage{parskip}
 
+% Márgenes
+\usepackage[top=1in,
+            bottom=1in,
+            left=1.8in,
+            right=1.2in,
+            headheight=30pt,
+            includeheadfoot=true]{geometry}
+
+
 \title{Curso no convencional de \LaTeX}
 
 \author{Ondiz Zarraga}
@@ -109,6 +111,7 @@
 
 \frontmatter
 \maketitle
+\thispagestyle{empty}
 
 \tableofcontents
 %\listoftables
@@ -151,10 +154,30 @@
 \chapter{Un documento científico}
 \input{Contenido/10.DocumentoCientifico}
 
-\backmatter
+\chapter{Píntame ese código}
+\input{Contenido/11.Codigo}
+
+\chapter{También podemos presentar}
+\input{Contenido/12.Presentacion}
+
+\chapter{Nuestras propias macros}
+\input{Contenido/13.Comandos}
+
+\chapter{Abramos la caja de herramientas}
+\input{Contenido/14.Herramientas}
+
+\appendix
+\chapter{Una nota sobre los archivos auxiliares}
+\input{Contenido/Ap1.Auxiliares}
+
+\chapter{Hablemos de paquetes}
+\input{Contenido/Ap2.Paquetes}
+
+\chapter{Enlaces de interés}
+\input{Contenido/Ap3.Enlaces}
 
 % Bibliografía
-
+\backmatter
 % \bibliographystyle{plain}
 %\bibliography{bib}
 

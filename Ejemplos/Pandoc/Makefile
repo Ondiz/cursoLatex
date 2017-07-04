@@ -8,7 +8,8 @@ all:
 	--filter pandoc-citeproc \
 	--template=./plantilla.latex \
 	-N \
-	--chapters $(FILES) metadatos.yaml \
+	-V documentclass=book \
+	$(FILES) metadatos.yaml \
 	-f markdown -o output.pdf
 
 # Eliminar output

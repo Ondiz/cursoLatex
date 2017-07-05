@@ -106,9 +106,12 @@ convencional.
     los borradores, las plantillas, el control de versiones y otras
     herramientas externas interesantes.
 
-Y muy pronto
+15. **La opción Pandoc**: vemos que Pandoc nos permite escribir en
+	Markdown y obtener un documento *pdf* gracias a que utiliza LaTeX
+	en el proceso. De esta manera podemos conseguir documentos
+	elegantes manteniendo una sintaxis simple.
 
-15.La opción Pandoc
+Y muy pronto:
 
 16.Mi proceso de escritura
 

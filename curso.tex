@@ -21,7 +21,7 @@
   \usepackage[spanish,es-tabla]{babel}
   \usepackage[utf8]{inputenc} 
   \usepackage[T1]{fontenc}
-  \usepackage{lmodern}
+  \usepackage{DejaVuSerif}
 \fi
 
 \usepackage{amsmath, amsthm, amssymb}
@@ -111,12 +111,21 @@
 
 \frontmatter
 \maketitle
+
+\newpage % Página en blanco
+ 
+\null % Porque \vfill necesita algo delante para funcionar
+\vfill % Para que lo escriba al final de la página
+ 
+\includegraphics[width=0.3\textwidth]{docs/Figuras/by-sa}\\
+Este trabajo se comparte bajo una licencia
+\href{https://creativecommons.org/licenses/by-sa/4.0/}
+{Creative Commons Atribución - Compartir igual}.
+
+
 \thispagestyle{empty}
 
-% Para que números de página hagan columna desactivar protrusión
-\microtypesetup{protrusion=false}
 \tableofcontents
-\microtypesetup{protrusion=true}
 
 %\listoftables
 %\listoffigures

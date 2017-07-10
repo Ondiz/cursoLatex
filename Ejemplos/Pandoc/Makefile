@@ -11,6 +11,7 @@ all:
 	-V documentclass=book \
 	$(FILES) metadatos.yaml \
 	-f markdown -o output.pdf
+	xdg-open output.pdf
 
 # Eliminar output
 

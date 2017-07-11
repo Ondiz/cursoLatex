@@ -1,0 +1,193 @@
+Hemos aprendido a crear documentos y presentaciones en LaTeX, sabemos
+escribir macros propias y convertir archivos de un tipo a otro. Os
+podría contar cómo cambiar la fuente del texto o hablar de diferentes
+paquetes para modificar la apariencia de nuestro documento, pero creo
+con lo que ya sabéis sois muy capaces de entender por vosotros mismos
+cualquier paquete leyendo el manual. Así que en este último capítulo voy
+a hablar de algo que desde mi punto de vista no se trata lo suficiente:
+\textbf{cómo trabajo con LaTeX} en, por llamarlo de algún modo, un
+entorno de producción. Veremos cómo organizo los archivos, qué software
+y paquetes utilizo y algunas cosillas sobre compilación y colaboración.
+
+\section{¿Cómo me organizo?}
+
+Como he dicho montones de veces \emph{la organización es fundamental},
+aunque no igual para todo el mundo. Cuando el documento es corto solo
+separo las imágenes en una carpeta propia y escribo el contenido en el
+mismo archivo en el que defino el estilo. Si, por el contrario, se trata
+de un documento más extenso, como un libro, creo un archivo de LaTeX
+principal desde el que llamo a las diferentes secciones o capítulos con
+\lstinline!\include{}! o \lstinline!\input{}!.
+
+A la hora de separar los archivos, tiendo a separarlos por tipo, lo que
+me facilita aplicarles a todos ellos una misma acción\footnote{Pensad en
+  cambiar el formato de todas las imágenes o buscar una palabra en el
+  contenido.}. En ocasiones hago una segunda clasificación por capítulos
+si tengo muchas figuras o extractos de código, por ejemplo.
+
+\begin{lstlisting}
+├── principal.tex
+├── estilo.bst
+├── referencias.bib
+│
+├── Contenido
+│   ├── 1.Intro.tex
+│   ├── 2.Segundo.tex
+│   └── ...
+│
+├── Código
+│   ├── listing.py
+│   └── ...
+│
+└── Figuras
+    ├── fig.eps
+    └── ...
+\end{lstlisting}
+
+Si la definición del estilo es muy larga o estoy usando una clase que he
+descargado por ahí, añado una carpeta extra para meter todo eso y no
+volverme loca.
+
+En cuanto al \textbf{software}, suelo escribir en Kile con el corrector
+ortográfico activado, el ancho de línea fijado a 80 caracteres\footnote{Reducir
+  el ancho de línea resulta útil a la hora de ver los cambios que hemos
+  llevado a cabo en determinado archivo, \lstinline!git! nos pinta la
+  línea modificada entera, si es gigante será más difícil encontrar la
+  palabra exacta que hemos cambiado.} y una orden personalizada para
+compilar que genera el documento con referencias cruzadas y
+bibliográficas en un solo click. Además, uso \lstinline!Jabref! para
+gestionar la bibliografía y \lstinline!git! para tener todo bajo control
+de versiones.
+
+Cuando escribo en \textbf{Markdown para posteriormente compilar con
+Pandoc} uso el modo Markdown de Emacs junto con unos atajos de teclado
+que ejecutan \lstinline!make! que tengo definidos. Si añadimos además
+una línea al Makefile para que nos abra directamente el
+\emph{pdf}\footnote{\lstinline!xdg-open PDF! en escritorios que cumplan
+  con Freedesktop y \lstinline!explorer.exe PDF &! en Windows.} tenemos
+un entorno de edición que no tiene nada que envidiarle a ningún IDE.
+
+\section{¿Qué paquetes uso?}
+
+Aparte de los típicos paquetes de idioma (\lstinline!babel! o
+\lstinline!polyglossia!) o de matemática (\lstinline!amsmath!,
+\lstinline!amsthm!, \lstinline!amssymb!) de los que ya hemos hablado y
+los básicos como \lstinline!xcolor! y \lstinline!graphicx!,
+habitualmente utilizo los siguientes paquetes:
+
+\begin{itemize}
+\item
+  \href{https://ctan.org/pkg/parskip}{\lstinline!parskip!} para separar
+  los párrafos mediante una línea blanca en lugar de sangrarlos.
+\item
+  \href{https://www.ctan.org/pkg/listings}{\lstinline!listings!} para
+  resaltar la sintaxis de los extractos de código.
+\item
+  \href{https://www.ctan.org/pkg/blindtext}{\lstinline!blindtext!} para
+  generar documentos de prueba y testar el formato.
+\item
+  \href{https://ctan.org/pkg/hyperref}{\lstinline!hyperref!} para
+  producir hipervínculos para las referencias cruzadas y bibliográficas
+  así como incluir enlaces en el documento. Suele ser preferible
+  cargarlo el último.
+\item
+  \href{https://ctan.org/pkg/fontspec}{\lstinline!fontspec!} para
+  establecer la fuente del documento (para \lstinline!xelatex!).
+\item
+  \href{https://www.ctan.org/pkg/fancyhdr}{\lstinline!fancyhdr!} para
+  personalizar los encabezados y pies de página.
+\item
+  \href{https://www.ctan.org/pkg/titlesec}{\lstinline!titlesec!} para
+  modificar el estilo de los título de secciones y capítulos.
+\item
+  \href{https://ctan.org/tex-archive/macros/latex/contrib/booktabs/}{\lstinline!booktabs!}
+  para tener más opciones para personalizar las tablas y que en general
+  queden mejor.
+\item
+  \href{https://ctan.org/tex-archive/macros/latex/contrib/microtype/}{\lstinline!microtype!}
+  para ajustar las opciones
+  \href{https://en.wikipedia.org/wiki/Microtypography}{\emph{microtipográficas}}
+  y que el documento tenga
+  \href{http://www.khirevich.com/latex/microtype/Microtype_example_blurred_text_ani.gif}{mejor
+  aspecto}.
+\end{itemize}
+
+\section{¿Cómo compilo?}
+
+Suelo compilar con \lstinline!xelatex! porque, aunque es más pesado y
+lento, me evita tener que configurar la codificación y es mucho más
+sencillo cambiar de fuente. Si me temo que es posible que un documento
+vaya a ser compilado con \lstinline!xelatex! y \lstinline!pdflatex! me
+curo en salud, uso el paquete \lstinline!ifxetex! y defino las cosas
+problemáticas, principalmente el idioma y la fuente, para ambos
+compiladores:
+
+\begin{lstlisting}[language={[latex]tex}]
+\usepackage{ifxetex}
+
+\ifxetex
+  % Si se usa xelatex
+  \usepackage{polyglossia}
+  \setmainlanguage{spanish}
+  
+  % Fuente
+  \usepackage{fontspec}
+  \setmainfont{DejaVu Serif}
+  
+  % Tabla en lugar de cuadro
+  \gappto\captionsspanish{
+  \renewcommand{\tablename}{Tabla}%
+  \renewcommand{\listtablename}{Índice de tablas}%
+  }
+  
+\else
+  % Si se usa pdflatex
+  \usepackage[spanish,es-tabla]{babel}
+  \usepackage[utf8]{inputenc} 
+  \usepackage[T1]{fontenc}
+  \usepackage{DejaVuSerif}
+\fi
+\end{lstlisting}
+
+\section{¿Y para colaborar?}
+
+Usando \lstinline!git!, evidentemente. Los que no sepan \lstinline!git!
+que aprendan y los que no quieran aprender que se vayan a vivir a una
+torre en el medio de la nada. El hecho de tener bajo control todos los
+cambios, trabajar en paralelo sin pisarnos los unos a los otros y poder
+probar cosas nuevas sin destruir lo que ya tenemos bien merece el
+esfuerzo. Si además tenemos una copia de seguridad de nuestro trabajo en
+un repositorio en la red y podemos comentar los cambios de los demás con
+facilidad ni os cuento.
+
+A los tengáis a alguien que os exige que cambiéis cosas y que luego se
+lo demostréis os vendrá bien
+\href{https://www.ctan.org/pkg/latexdiff?lang=en}{\lstinline!latexdiff!},
+que genera un documento legible para los \emph{no iniciados} y no nos
+cuesta un trabajo adicional.
+
+\section{Conclusión final}
+
+¡Hemos llegado al final! ¿Os dais cuenta de todo lo que sabemos ya?
+Somos capaces de crear un documento profesional con sus referencias y su
+código colorinesco que no haga que le sangren los ojos a las personas
+con cierta \emph{educación tipográfica}. Y todo usando un par de
+programas, unos paquetes exquisitamente escogidos y nuestras manitas.
+Cómo molamos.
+
+En definitiva, LaTeX no es tan fiero como lo pintan y cualquiera (¡hasta
+yo!) puede aprender a usarlo si le dedica un poco de tiempo y ganas. Así
+que ¡ahora mismo todos a generar documentos elegantes!
+
+\section{Referencias}
+
+\href{http://stackoverflow.com/questions/6188780/git-latex-workflow}{\emph{\lstinline!git!
++ LaTeX workflow} en StackOverflow}
+
+\href{http://marianaeguaras.com/el-formato-de-una-publicacion-cuello-de-botella-en-la-edicion/}{\emph{El
+formato de una publicación: cuello de botella en la edición}}
+
+\href{http://www.khirevich.com/latex/microtype/}{\emph{Tips on Writing a
+Thesis in LaTeX}}
+
+\href{https://git-scm.com/book/en/v2}{\emph{Pro \lstinline!git!}}

@@ -111,9 +111,9 @@ convencional.
 	en el proceso. De esta manera podemos conseguir documentos
 	elegantes manteniendo una sintaxis simple.
 
-Y muy pronto:
-
-16.Mi proceso de escritura
+16. **Mi proceso de escritura**: donde cuento cómo trabajo con LaTeX
+    en mi día a día. Hablo de software, configuraciones, orden y
+    paquetes que uso.
 
 ### Apéndices
 
@@ -122,6 +122,9 @@ Y muy pronto:
 
 2. **Hablemos de paquetes**: unas notas sobre la instalación de
    paquetes, especialmente centradas en GNU/Linux.
+
+3. **Enlaces de interés**: enlaces interesantes que me he ido
+   encontrando durante la redacción de este curso.
 
 ## Agradecimientos
 

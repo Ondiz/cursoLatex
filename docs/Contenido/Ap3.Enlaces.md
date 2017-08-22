@@ -21,12 +21,17 @@ title: LaTeX - Enlaces
 - [*TeX Users Group*][tug]: una web de usuarios de LaTeX creada en
   1980 con cosas sobre instalación y tipografía.
 
+- [*CervanTeX*][cervantex]: la página del grupo de usuarios de TeX
+  hispanohablantes, algo desactualizada pero con material interesante
+  en español.
+
 [resources]: http://www.dickimaw-books.com/latexresources.html
 [books]: http://www.dickimaw-books.com/latex/index.html
 [dickimaw]: http://www.dickimaw-books.com/
 [faq]: http://www.tex.ac.uk/faq/
 [proj]: http://www.latex-project.org/
 [tug]: http://tug.org/
+[cervantex]: http://www.cervantex.es/node/51
 
 ## Blogs
 

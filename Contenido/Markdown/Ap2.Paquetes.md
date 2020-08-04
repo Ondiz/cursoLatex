@@ -117,7 +117,7 @@ estarán actualizados, aparte de que tendremos acceso a paquetes que
 todavía no son parte de los repositorios de nuestra distribución de
 GNU/Linux.
 
-# Referencias
+## Referencias
 
 [*Best way to install packages for TeXLive in Ubuntu?* en TeXExchange](http://tex.stackexchange.com/questions/28528/best-way-to-install-packages-for-texlive-in-ubuntu)
 

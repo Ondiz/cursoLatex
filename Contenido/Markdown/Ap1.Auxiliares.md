@@ -1,3 +1,5 @@
+{{appendix}}
+
 # Una nota sobre los archivos auxiliares
 
 Os habréis fijado como yo en que cuando compilamos LaTeX desde un IDE
@@ -97,7 +99,7 @@ gusta que os deje cosas por ahí tenéis varias opciones:
 
 [^shevek]: ¡Gracias Shevek por hablarme de esta opción!
 
-# Referencias
+## Referencias
 
 [*Auxiliary Files* en Dickimaw Books](http://www.dickimaw-books.com/latex/novices/html/auxiliary.html)
 

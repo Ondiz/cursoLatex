@@ -202,7 +202,7 @@ Tabla
 ------------
   x      y
 ----- ------
- 0.1   1.3 
+ 0.1   1.3
 ------------
 
 Table: Aquí va el pie de tabla
@@ -215,7 +215,8 @@ $$Ecuación con línea propia$$
 
 Bloque de código
 
-```haskell
+```
+haskell
 -- Fibonacci!
   fib = 0 : 1 : zipWith (+) fib (tail fib)
 ```
@@ -268,7 +269,7 @@ Un bloque YAML real tiene una pinta como esta:
 \begin{lstlisting}
 ---
 # Datos
-title: Título 
+title: Título
 author: Nombre
 lang: es
 
@@ -334,11 +335,11 @@ gente que sabe de ordenadores lo hará mucho mejor}:
 FILES = INPUT_1.md INPUT_2.md
 
 # Creación de pdf
-# - La barra sirve para partir la orden 
+# - La barra sirve para partir la orden
 # - El filtro crossref debe ir antes de citeproc
 # - Opción -N para numerar secciones
 
-all: 
+all:
     pandoc \
     --filter pandoc-crossref \
     --filter pandoc-citeproc \
@@ -354,7 +355,7 @@ clean:
 
 # Por si hay algún archivo que se llame clean
 
-.PHONY: clean 
+.PHONY: clean
 \end{lstlisting}
 
 Ahora solo nos hace falta llamar a \lstinline!make!:

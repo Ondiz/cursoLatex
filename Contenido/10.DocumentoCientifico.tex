@@ -15,11 +15,11 @@ contenido al principio y se separa el trabajo adicional en apéndices.
 Todo esto implica diferentes formatos para las partes (numeración de las
 páginas y secciones, estilo de los encabezados\ldots{}) y cierta
 planificación. Sin planificar se puede uno volver completamente tarumba,
-lo digo conocimiento de causa, el control de versiones me salvó más de
+lo digo con conocimiento de causa, el control de versiones me salvó más de
 una vez de romper la tesis sin remedio.
 
 Es por ello que primero veremos cómo organizar el documento en cuestión
-y luego haremos un índice, un glosario y hasta unas lista de
+y luego haremos un índice, un glosario y hasta una lista de
 referencias.
 
 \section{División del documento}
@@ -140,7 +140,7 @@ Vamos a ver un ejemplo de uso para entenderlo mejor:
 
   % Cargamos el preámbulo que tenemos escrito en otro archivo
   \input{preámbulo}
-  
+
   % Elegimos qué capítulos queremos que se compilen
   \includeonly{cap1,cap3} % sin espacios!
 
@@ -152,7 +152,7 @@ Vamos a ver un ejemplo de uso para entenderlo mejor:
   % Cargamos los capítulos desde la carpeta Contenido.
   % Los capítulos capX.tex no llevan ni preámbulo ni definición del
   % documento, solo órdenes que irían tras \begin{document}
-  
+
   \include{Contenido/cap1} % cargamos cap1.tex
   \include{Contenido/cap2} % cap2 no aparecerá en el resultado
   \include{Contenido/cap3} % mantiene la numeración como si cap2.tex estuviera incluido
@@ -528,9 +528,9 @@ En definitiva, necesitamos estas dos líneas:
 
 \begin{lstlisting}[language={[latex]tex}]
 % Definimos el estilo bibliográfico
-\bibliographystyle{plain} 
+\bibliographystyle{plain}
 
-% Creamos bibliografía a partir de referencias.bib 
+% Creamos bibliografía a partir de referencias.bib
 \bibliography{referencias}
 \end{lstlisting}
 
@@ -616,7 +616,7 @@ están las referencias.
 
 \section{Referencias}\label{referencias}
 
-\href{http://texblog.org/2007/07/09/documentclassbook-report-article-or-letter/}{\emph{\lstinline!\\documentclass\{book, report, 
+\href{http://texblog.org/2007/07/09/documentclassbook-report-article-or-letter/}{\emph{\lstinline!\\documentclass\{book, report,
 article or letter\}!} en texblog}
 
 \href{http://tex.stackexchange.com/questions/36988/regarding-the-book-report-and-article-document-classes-what-are-the-mai\#36989}{\emph{Regarding
